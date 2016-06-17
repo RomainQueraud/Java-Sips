@@ -66,6 +66,7 @@ public class Configuration {
 
 	public Resource toResource(Model model){
 		Resource configurationResource = model.createResource(URI.baseURI+this.provider.name+"/"+this.id+"/")
+				.addProperty(ResourceFactory.createProperty(URI.baseURI, "id"), ""+this.id)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "providerName"), ""+this.provider.name)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "configName"), ""+this.configName)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "cpu"), ""+this.cpu)
@@ -84,6 +85,7 @@ public class Configuration {
 	public static void main(String[] args) {
 		Model model = ModelFactory.createDefaultModel();
 		Configuration config = new Configuration("S server Linux", 1, 1, 40, -1, 3000, URI.linux, URI.euro, "", "", 9.93);
+		@SuppressWarnings("unused")
 		Resource resource = config.toResource(model);
 		model.write(System.out);
 	}

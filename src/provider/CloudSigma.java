@@ -9,4 +9,10 @@ public class CloudSigma extends Provider{
 	private CloudSigma() {
 		this.name = "CloudSigma";
 	}
+
+	@Override
+	public void crawlAndFillConfigurations() throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
 }

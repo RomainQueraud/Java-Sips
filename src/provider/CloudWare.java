@@ -1,7 +1,5 @@
 package provider;
 
-import java.util.ArrayList;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -151,14 +149,6 @@ public class CloudWare extends Provider{
 			}
 		}
 		System.out.println("Ok");
-	}
-	
-	public ArrayList<String[]> getConfigurationsLines(){
-		ArrayList<String[]> lines = new ArrayList<String[]>();
-		for(Configuration configuration : this.configurations){
-			lines.add(configuration.getLine());
-		}
-		return lines;
 	}
 
 	public static void main(String[] args){

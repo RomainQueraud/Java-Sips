@@ -134,6 +134,7 @@ public class SipsRdf {
 		sips.addProvider(atlantic);
 		sips.addProvider(cloudSigma);
 		
+		@SuppressWarnings("unused")
 		Bag bag= sips.toBag(model);
 		
 		model.write(System.out);
@@ -170,6 +171,7 @@ public class SipsRdf {
 		
 		SipsRdf.singleton.loadConfigurationsFromCsv("resources/datas.csv");
 		
+		@SuppressWarnings("unused")
 		Bag bag = SipsRdf.singleton.toBag(model);
 		
 		/* Push to the server */

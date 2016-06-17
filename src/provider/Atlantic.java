@@ -9,4 +9,10 @@ public class Atlantic extends Provider {
 	private Atlantic() {
 		this.name = "Atlantic";
 	}
+
+	@Override
+	public void crawlAndFillConfigurations() throws InterruptedException {
+		// TODO Auto-generated method stub
+		
+	}
 }
