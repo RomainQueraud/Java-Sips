@@ -22,6 +22,54 @@ public class Configuration {
 	String comment;
 	double price;
 	
+	public Configuration(){
+		this("", -1, -1, -1, -1, -1, "", "", "", "", -1);
+	}
+	
+	public void setConfigName(String configName) {
+		this.configName = configName;
+	}
+
+	public void setCpu(int cpu) {
+		this.cpu = cpu;
+	}
+
+	public void setRam(int ram) {
+		this.ram = ram;
+	}
+
+	public void setHdd(int hdd) {
+		this.hdd = hdd;
+	}
+
+	public void setSsd(int ssd) {
+		this.ssd = ssd;
+	}
+
+	public void setTransferSpeed(int transferSpeed) {
+		this.transferSpeed = transferSpeed;
+	}
+
+	public void setOsUri(String osUri) {
+		this.osUri = osUri;
+	}
+
+	public void setCurrencyUri(String currencyUri) {
+		this.currencyUri = currencyUri;
+	}
+
+	public void setCountryUri(String countryUri) {
+		this.countryUri = countryUri;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
 	public Configuration(String configName, int cpu, int ram, int hdd, int ssd, int transferSpeed,
 			String osUri, String currencyUri, String countryUri, String comment, double price) {
 		super();
@@ -30,7 +78,8 @@ public class Configuration {
 			break;
 			case "linux" : osUri = URI.linux;
 			break;
-			default : break;
+			default : osUri = "";
+			break;
 		}
 		this.id = Counter.getConfigurationCounter(); //Unique id
 		this.configName = configName;
@@ -74,11 +123,16 @@ public class Configuration {
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "hdd"), ""+this.hdd)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "ssd"), ""+this.ssd)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "transferSpeed"), ""+this.transferSpeed)
-				.addProperty(ResourceFactory.createProperty(URI.baseURI, "os"), ""+this.osUri)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "currency"), ""+this.currencyUri)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "country"), ""+this.countryUri)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "comment"), ""+this.comment)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "price"), ""+this.price);
+		if(this.osUri!=""){
+			configurationResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "os"), model.createResource(this.osUri));
+		}
+		else{
+			configurationResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "os"), "");
+		}
 		return configurationResource;
 	}
 	

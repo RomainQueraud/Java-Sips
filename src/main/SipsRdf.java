@@ -21,6 +21,7 @@ import provider.Atlantic;
 import provider.CloudSigma;
 import provider.CloudWare;
 import provider.Provider;
+import provider.VirtualServer;
 
 public class SipsRdf {
 	public static SipsRdf singleton = new SipsRdf();
@@ -58,6 +59,7 @@ public class SipsRdf {
 		this.providers.add(Atlantic.singleton);
 		this.providers.add(CloudSigma.singleton);
 		this.providers.add(CloudWare.singleton);
+		this.providers.add(VirtualServer.singleton);
 	}
 	
 	private void setProvidersCrawlSpeed(double crawlSpeed) {
@@ -82,6 +84,8 @@ public class SipsRdf {
 		    	case "CloudSigma" : CloudSigma.singleton.addConfiguration(configuration);
 		    	break;
 		    	case "CloudWare" : CloudWare.singleton.addConfiguration(configuration);
+		    	break;
+		    	case "VirtualServer" : VirtualServer.singleton.addConfiguration(configuration);
 		    	break;
 		    	default : throw new Exception("CSV file error : unknown provider "+line[0]);
 		    	}

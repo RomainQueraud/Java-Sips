@@ -15,7 +15,7 @@ public interface IProvider {
 	public void loadWebpage();
 	public void setCrawlSpeed(double crawlSpeed);
 	
-	public void crawlAndFillConfigurations() throws InterruptedException;
+	public void crawlAndFillConfigurations() throws InterruptedException, Exception;
 	
 	public void addConfiguration(Configuration configuration);
 	public Bag toBag(Model model);
