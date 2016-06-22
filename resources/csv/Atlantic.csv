@@ -1,4 +1,3 @@
-Provider,name,cpu,ram,hdd,ssd,transferSpeed,osUri,currencyUri,countryUri,comment,price
 Atlantic,S server Linux,1,1,-1,40,3,linux,dollar,,,9.93
 Atlantic,M server Linux,2,2,-1,80,4,linux,dollar,,,19.94
 Atlantic,L server Linux,2,4,-1,100,5,linux,dollar,,,39.95
@@ -13,11 +12,3 @@ Atlantic,XL server Windows,4,8,-1,160,6,windows,dollar,,,119.99
 Atlantic,2XL server Windows,8,16,-1,200,7,windows,dollar,,,239.98
 Atlantic,3XL server Windows,12,32,-1,350,8,windows,dollar,,,479.97
 Atlantic,4XL server Windows,20,64,-1,650,9,windows,dollar,,,959.93
-CloudSigma,Small-2,1,1,-1,50,5,,dollar,,Unlimited IPs,14
-CloudSigma,Small-3,1,2,-1,50,5,,dollar,,Unlimited IPs,20
-CloudSigma,Medium-1,2,2,-1,50,5,,dollar,,Unlimited IPs,34
-CloudSigma,Medium-3,4,8,-1,80,5,,dollar,,Unlimited IPs,96
-CloudSigma,Large-1,8,16,-1,160,5,,dollar,,Unlimited IPs,203
-CloudSigma,Large-2,12,32,-1,320,5,,dollar,,Unlimited IPs,361
-CloudSigma,Large-3,16,48,-1,480,5,,dollar,,Unlimited IPs,519
-CloudSigma,XLarge,20,64,-1,640,5,,dollar,,Unlimited IPs,677

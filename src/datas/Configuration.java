@@ -8,19 +8,19 @@ import org.apache.jena.rdf.model.ResourceFactory;
 import provider.Provider;
 
 public class Configuration {
-	int id;
-	String configName;
-	Provider provider;
-	int cpu;
-	int ram;
-	int hdd;
-	int ssd;
-	int transferSpeed;
-	String osUri;
-	String currencyUri;
-	String countryUri;
-	String comment;
-	double price;
+	public int id;
+	public String configName;
+	public Provider provider;
+	public int cpu;
+	public int ram;
+	public int hdd;
+	public int ssd;
+	public int transferSpeed;
+	public String osUri;
+	public String currencyUri;
+	public String countryUri;
+	public String comment;
+	public double price;
 	
 	public Configuration(){
 		this("", -1, -1, -1, -1, -1, "", "", "", "", -1);

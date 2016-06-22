@@ -1,5 +1,7 @@
 package provider;
 
+import java.io.IOException;
+
 public class CloudSigma extends Provider{
 	public static CloudSigma singleton = new CloudSigma(); 
 	/*
@@ -11,7 +13,7 @@ public class CloudSigma extends Provider{
 	}
 
 	@Override
-	public void crawlAndFillConfigurations() throws InterruptedException {
+	public void crawlFillWriteConfigurations() throws InterruptedException, IOException{
 		// TODO Auto-generated method stub
 		
 	}

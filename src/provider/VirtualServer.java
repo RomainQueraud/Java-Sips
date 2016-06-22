@@ -1,5 +1,6 @@
 package provider;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -18,17 +19,6 @@ public class VirtualServer extends Provider {
 		this.name = "VirtualServer";
 		this.baseUrl = "https://www.virtual-server.net/home/";
 		this.crawl = true;
-	}
-	
-	public double extractNumber(String text) throws Exception{
-		Pattern p = Pattern.compile("\\d+");
-		Matcher m = p.matcher(text);
-		if(m.find()){
-			return Double.parseDouble(m.group());
-		}
-		else{
-			throw new Exception("No number found");
-		}
 	}
 	
 	public Configuration getConfiguration(String id) throws Exception{
@@ -64,7 +54,7 @@ public class VirtualServer extends Provider {
 	}
 	
 	@Override
-	public void crawlAndFillConfigurations() throws InterruptedException {
+	public void crawlFillWriteConfigurations() throws InterruptedException, IOException{
 		this.openFirefox();
 		this.loadWebpage();
 		System.out.print("Starting VirtualServer crawl...");
@@ -80,5 +70,6 @@ public class VirtualServer extends Provider {
 		}
 		this.closeFirefox();
 		System.out.println("Ok");
+		this.writeConfigurationsInCsv();
 	}
 }

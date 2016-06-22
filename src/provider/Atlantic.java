@@ -1,5 +1,7 @@
 package provider;
 
+import java.io.IOException;
+
 public class Atlantic extends Provider {
 	public static Atlantic singleton = new Atlantic(); 
 	/*
@@ -11,7 +13,7 @@ public class Atlantic extends Provider {
 	}
 
 	@Override
-	public void crawlAndFillConfigurations() throws InterruptedException {
+	public void crawlFillWriteConfigurations() throws InterruptedException, IOException{
 		// TODO Auto-generated method stub
 		
 	}

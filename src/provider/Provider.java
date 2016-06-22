@@ -1,6 +1,13 @@
 package provider;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.jena.rdf.model.Bag;
 import org.apache.jena.rdf.model.Model;
@@ -9,6 +16,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
 import datas.Configuration;
@@ -44,20 +52,15 @@ public abstract class Provider implements IProvider {
 		System.out.println("Ok");
 	}
 	
-	/*
-	 * if close to 1, speed is maximum
-	 * if close to 0, speed is minimum
-	 */
-	public void setCrawlSpeed(double crawlSpeed){
-		//TODO if crawlSpeed is too close to 0, there will be to many configurations, so we need to warn the user
-		if(crawlSpeed<=0){
-			crawlSpeed = 0.01;
+	public double extractNumber(String text) throws Exception{
+		Pattern p = Pattern.compile("\\d+(\\.\\d+)?");
+		Matcher m = p.matcher(text);
+		if(m.find()){
+			return Double.parseDouble(m.group());
 		}
-		if(crawlSpeed>=1){
-			crawlSpeed = 1;
+		else{
+			throw new Exception("No number found");
 		}
-		int step = (int) (this.maxOffset*crawlSpeed);
-		this.offset.setStep(step);
 	}
 	/*********************************/
 	
@@ -69,17 +72,38 @@ public abstract class Provider implements IProvider {
 	
 	public Bag toBag(Model model){
 		Bag providerBag = model.createBag();
+		System.out.print(this.name+" to bag : ("+this.configurations.size()+") ");
 		for(int i=0 ; i<this.configurations.size() ; i++){
+			if(i%1000 == 0){
+				System.out.print("."); //print one dot every thousand configs
+			}
 			providerBag.add(this.configurations.get(i).toResource(model));
 		}
+		System.out.println("");
 		return providerBag;
 	}
 	
-	public void writeConfigurationInCsv(CSVWriter writer){
+	public void loadConfigurationsFromCsv() throws IOException{
+		CSVReader reader = new CSVReader(new FileReader("resources/csv/"+this.name+".csv"));
+	    List<String[]> myEntries = reader.readAll();
+	    
+	    for(String[] line : myEntries){
+	    	if(!line[0].equals("Provider")){ //First line are the titles
+		    	Configuration configuration = new Configuration(line);
+		    	this.addConfiguration(configuration);
+	    	}
+	    }
+	    
+	    reader.close();
+	}
+	
+	public void writeConfigurationsInCsv() throws IOException{
+		CSVWriter writer = new CSVWriter(new FileWriter("resources/csv/"+this.name+".csv"), ',');
 		for(Configuration configuration:this.configurations){
 			String[] line = configuration.getLine();
 	    	writer.writeNext(line);
 		}
+		writer.close();
 	}
 	
 	public ArrayList<String[]> getConfigurationsLines(){

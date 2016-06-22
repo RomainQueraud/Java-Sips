@@ -1,5 +1,7 @@
 package provider;
 
+import java.io.IOException;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -19,6 +21,9 @@ public class CloudWare extends Provider{
 		this.crawl = true;
 		this.maxOffset = 320;
 		this.offset = new Offset(0,0,0,0); //step, cpu, ram, disk, transfer
+		double crawlSpeed = 0.3;
+		int step = (int) (this.maxOffset*crawlSpeed);
+		this.offset.setStep(step);
 	}
 	
 	public void removeAnnoyingElements(){
@@ -130,7 +135,7 @@ public class CloudWare extends Provider{
 	}
 	
 	/* Fill the configuration ArrayList with the datas obtained from the website */
-	public void crawlAndFillConfigurations() throws InterruptedException{
+	public void crawlFillWriteConfigurations() throws InterruptedException, IOException{
 		this.openFirefox();
 		this.loadWebpage();
 		this.removeAnnoyingElements();
@@ -160,6 +165,7 @@ public class CloudWare extends Provider{
 		}
 		
 		this.closeFirefox();
+		this.writeConfigurationsInCsv();
 	}
 	
 	public void waitForPriceChange(double oldPrice) throws InterruptedException{
@@ -176,15 +182,5 @@ public class CloudWare extends Provider{
 			}
 		}
 		System.out.println("Ok");
-	}
-
-	public static void main(String[] args){
-		try {
-			CloudWare.singleton.crawlAndFillConfigurations();
-		} catch (InterruptedException e) {
-			System.out.println("Error crawling");
-			e.printStackTrace();
-		}
-		System.exit(0);
 	}
 }

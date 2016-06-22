@@ -20,7 +20,9 @@ import datas.URI;
 import provider.Atlantic;
 import provider.CloudSigma;
 import provider.CloudWare;
+import provider.EApps;
 import provider.Provider;
+import provider.SecureRack;
 import provider.VirtualServer;
 
 public class SipsRdf {
@@ -56,92 +58,34 @@ public class SipsRdf {
 	 * Add the providers in the providerList
 	 */
 	public void loadProvidersInSipsRdf(){
-		this.providers.add(Atlantic.singleton);
-		this.providers.add(CloudSigma.singleton);
-		this.providers.add(CloudWare.singleton);
-		this.providers.add(VirtualServer.singleton);
+		this.loadProviderInSipsRdf(Atlantic.singleton, false);
+		this.loadProviderInSipsRdf(CloudSigma.singleton, false);
+		this.loadProviderInSipsRdf(CloudWare.singleton, false);
+		this.loadProviderInSipsRdf(VirtualServer.singleton, false);
+		this.loadProviderInSipsRdf(SecureRack.singleton, false); //long to getBag if too many elements
+		this.loadProviderInSipsRdf(EApps.singleton, false);
 	}
 	
-	private void setProvidersCrawlSpeed(double crawlSpeed) {
-		for(Provider provider : this.providers){
-			provider.setCrawlSpeed(crawlSpeed);
-		}
+	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
+		provider.crawl = crawl;
+		this.providers.add(provider);
 	}
 	
 	/*
 	 * Fill the providers singletons with configurations from the given CSV file
 	 */
-	public void loadConfigurationsFromCsv(String csvLocation) throws Exception{
-		CSVReader reader = new CSVReader(new FileReader(csvLocation));
-	    List<String[]> myEntries = reader.readAll();
-	    
-	    for(String[] line : myEntries){
-	    	if(!line[0].equals("Provider")){ //First line are the titles
-		    	Configuration configuration = new Configuration(line);
-		    	switch(line[0]){
-		    	case "Atlantic" : Atlantic.singleton.addConfiguration(configuration);
-		    	break;
-		    	case "CloudSigma" : CloudSigma.singleton.addConfiguration(configuration);
-		    	break;
-		    	case "CloudWare" : CloudWare.singleton.addConfiguration(configuration);
-		    	break;
-		    	case "VirtualServer" : VirtualServer.singleton.addConfiguration(configuration);
-		    	break;
-		    	default : throw new Exception("CSV file error : unknown provider "+line[0]);
-		    	}
-	    	}
-	    }
-	    
-		reader.close();
-	}
-	
-	
-	public void writeConfigurationsInCsv(String csvLocation) throws IOException{
-		this.writeConfigurationsInCsv(csvLocation, false);
+	public void loadConfigurationsFromCsv() throws Exception{
+		for(Provider provider : this.providers){
+			provider.loadConfigurationsFromCsv();
+		}
 	}
 	
 	/* Erase the csv and write configurations in it
 	 * If crawlOnly is selected, only Providers with crawl boolean will be written */
-	public void writeConfigurationsInCsv(String csvLocation, boolean crawlOnly) throws IOException{
-		CSVWriter writer = new CSVWriter(new FileWriter(csvLocation), ',');
+	public void writeConfigurationsInCsv() throws IOException{
 		for(Provider provider:this.providers){
-			if(!crawlOnly || provider.crawl){
-				provider.writeConfigurationInCsv(writer);
-			}
+				provider.writeConfigurationsInCsv();
 		}
-		writer.close();
-	}
-	
-	public static void test(){
-		Model model = ModelFactory.createDefaultModel();
-		
-		/****** Provider part ******/
-		Provider atlantic = Atlantic.singleton;
-		
-		Configuration configuration = new Configuration("S server Linux", 1, 1, 40, -1, 3000, URI.linux, URI.euro, "", "", 9.93);
-		atlantic.addConfiguration(configuration);
-		
-		Configuration configuration2 = new Configuration("fake server", 1, 1, 50, 3, 2000, URI.windows, URI.euro, "", "", 14);
-		atlantic.addConfiguration(configuration2);
-		/***************************/
-		/****** Provider2 part ******/
-		Provider cloudSigma = CloudSigma.singleton;
-		
-		Configuration configuration3 = new Configuration("S server Linux", 1, 1, 40, -1, 3000, URI.linux, URI.euro, "", "", 9.93);
-		cloudSigma.addConfiguration(configuration3);
-		
-		Configuration configuration4 = new Configuration("fake server", 1, 1, 50, 3, 2000, URI.windows, URI.euro, "", "", 14);
-		cloudSigma.addConfiguration(configuration4);
-		/***************************/
-		
-		SipsRdf sips = new SipsRdf();
-		sips.addProvider(atlantic);
-		sips.addProvider(cloudSigma);
-		
-		@SuppressWarnings("unused")
-		Bag bag= sips.toBag(model);
-		
-		model.write(System.out);
 	}
 	
 	/*
@@ -149,39 +93,28 @@ public class SipsRdf {
 	 * args[1] : double to know the speed of the crawl (1 = fast and un-precise, 0.10 = slow and precise) 
 	 */
 	public static void main(String[] args) throws Exception {
-		boolean crawl = Boolean.parseBoolean(args[0]); 
-		System.out.println("arg[0] crawl : "+crawl);
-		double crawlSpeed = Double.parseDouble(args[1]);
-		System.out.println("arg[1] crawlSpeed : "+crawlSpeed);
-		
+
 		Model model = ModelFactory.createDefaultModel();
 		SipsRdf.singleton.loadProvidersInSipsRdf();
-		SipsRdf.singleton.setProvidersCrawlSpeed(crawlSpeed);
 		
-		if(crawl){
-			for(Provider provider:SipsRdf.singleton.providers){
-				if(provider.crawl){
-					provider.crawlAndFillConfigurations();
-				}
+		System.out.println("Start Crawling and loading configurations");
+		for(Provider provider:SipsRdf.singleton.providers){
+			if(provider.crawl){
+				provider.crawlFillWriteConfigurations();
 			}
-			/*
-			 * writeConfigurationsInCsv(..., true) because we want only crawled configurations to be written
-			 */
-			SipsRdf.singleton.writeConfigurationsInCsv("resources/datasCrawl.csv", true);
-		}
-		else{
-			SipsRdf.singleton.loadConfigurationsFromCsv("resources/datasCrawl.csv");
+			else{
+				provider.loadConfigurationsFromCsv();
+			}
 		}
 		
-		SipsRdf.singleton.loadConfigurationsFromCsv("resources/datas.csv");
-		
+		System.out.println("Creating bag");
 		@SuppressWarnings("unused")
 		Bag bag = SipsRdf.singleton.toBag(model);
 		
 		/* Push to the server */
+		System.out.println("Sending rdf to server");
 		SipsRdf.singleton.pushModelToServer(model, "http://localhost:3030/ds/data");
-		System.out.println("Rdf sent to server");
 		
-		model.write(System.out);
+		//model.write(System.out);
 	}
 }
