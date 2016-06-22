@@ -1,6 +1,5 @@
 package provider;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,10 +11,11 @@ import java.util.regex.Pattern;
 import org.apache.jena.rdf.model.Bag;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.Resource;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.sparql.pfunction.library.str;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
@@ -27,6 +27,7 @@ public abstract class Provider implements IProvider {
 	public String name = "Provider";
 	public boolean crawl = false;
 	ArrayList<Configuration> configurations = new ArrayList<Configuration>();
+	ArrayList<String> continentUris = new ArrayList<String>();
 	
 	WebDriver driver;
 	Offset offset = new Offset(0,0,0,0); //step, cpu, ram, disk, transfer
@@ -53,10 +54,10 @@ public abstract class Provider implements IProvider {
 	}
 	
 	public double extractNumber(String text) throws Exception{
-		Pattern p = Pattern.compile("\\d+(\\.\\d+)?");
+		Pattern p = Pattern.compile("\\d+((\\.|\\,)\\d+)?");
 		Matcher m = p.matcher(text);
 		if(m.find()){
-			return Double.parseDouble(m.group());
+			return Double.parseDouble(m.group().replace(',', '.'));
 		}
 		else{
 			throw new Exception("No number found");
@@ -70,7 +71,10 @@ public abstract class Provider implements IProvider {
 		this.configurations.add(configuration);
 	}
 	
-	public Bag toBag(Model model){
+	/*
+	 * @Deprecated Use the toResource function instead.
+	 */
+	@Deprecated public Bag toBag(Model model){
 		Bag providerBag = model.createBag();
 		System.out.print(this.name+" to bag : ("+this.configurations.size()+") ");
 		for(int i=0 ; i<this.configurations.size() ; i++){
@@ -81,6 +85,29 @@ public abstract class Provider implements IProvider {
 		}
 		System.out.println("");
 		return providerBag;
+	}
+	
+	public Resource toResource(Model model){
+		Resource providerResource = model.createResource(URI.baseURI+this.name+"/");
+		System.out.print(this.name+" to resource : ("+this.configurations.size()+") ");
+		for(int i=0 ; i<this.configurations.size() ; i++){
+			if(i%1000 == 0){
+				System.out.print("."); //print one dot every thousand configs
+			}
+			providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "config"),this.configurations.get(i).toResource(model));
+		}
+		System.out.println("");
+
+		if(this.continentUris.size()!=0){
+			for(int i=0 ; i<this.continentUris.size() ; i++){
+				providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "continent"), model.createResource(this.continentUris.get(i)));
+			}
+		}
+		else{
+			providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "continent"), "");
+		}
+		
+		return providerResource;
 	}
 	
 	public void loadConfigurationsFromCsv() throws IOException{

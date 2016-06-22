@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import datas.Configuration;
+import datas.URI;
 
 public class EApps extends Provider{
 	
@@ -19,6 +20,7 @@ public class EApps extends Provider{
 		this.name = "EApps";
 		this.baseUrl = "https://portal.eapps.com/order/index.php?pid=74&skip=true";
 		this.crawl = true;
+		this.continentUris.add(URI.northAmerica);
 	}
 	
 	public Configuration getConfiguration(String className) throws Exception{

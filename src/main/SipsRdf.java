@@ -1,29 +1,15 @@
 package main;
 
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.jena.query.DatasetAccessor;
 import org.apache.jena.query.DatasetAccessorFactory;
 import org.apache.jena.rdf.model.Bag;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 
-import com.opencsv.CSVReader;
-import com.opencsv.CSVWriter;
-
-import datas.Configuration;
-import datas.URI;
-import provider.Atlantic;
-import provider.CloudSigma;
-import provider.CloudWare;
-import provider.EApps;
+import provider.E24Cloud;
 import provider.Provider;
-import provider.SecureRack;
-import provider.VirtualServer;
 
 public class SipsRdf {
 	public static SipsRdf singleton = new SipsRdf();
@@ -39,7 +25,7 @@ public class SipsRdf {
 	public Bag toBag(Model model){
 		Bag sipsBag = model.createBag();
 		for(Provider provider : providers){
-			sipsBag.add(provider.toBag(model));
+			sipsBag.add(provider.toResource(model));
 		}
 		return sipsBag;
 	}
@@ -58,12 +44,13 @@ public class SipsRdf {
 	 * Add the providers in the providerList
 	 */
 	public void loadProvidersInSipsRdf(){
-		this.loadProviderInSipsRdf(Atlantic.singleton, false);
-		this.loadProviderInSipsRdf(CloudSigma.singleton, false);
-		this.loadProviderInSipsRdf(CloudWare.singleton, false);
-		this.loadProviderInSipsRdf(VirtualServer.singleton, false);
-		this.loadProviderInSipsRdf(SecureRack.singleton, false); //long to getBag if too many elements
-		this.loadProviderInSipsRdf(EApps.singleton, false);
+		//this.loadProviderInSipsRdf(Atlantic.singleton, false);
+		//this.loadProviderInSipsRdf(CloudSigma.singleton, false);
+		//this.loadProviderInSipsRdf(CloudWare.singleton, false);
+		//this.loadProviderInSipsRdf(VirtualServer.singleton, false);
+		//this.loadProviderInSipsRdf(SecureRack.singleton, false); //long to getBag if too many elements
+		//this.loadProviderInSipsRdf(EApps.singleton, false);
+		this.loadProviderInSipsRdf(E24Cloud.singleton, true);
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){

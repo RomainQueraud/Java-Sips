@@ -2,6 +2,8 @@ package provider;
 
 import java.io.IOException;
 
+import datas.URI;
+
 public class CloudSigma extends Provider{
 	public static CloudSigma singleton = new CloudSigma(); 
 	/*
@@ -10,6 +12,10 @@ public class CloudSigma extends Provider{
 
 	private CloudSigma() {
 		this.name = "CloudSigma";
+		this.continentUris.add(URI.europe);
+		this.continentUris.add(URI.northAmerica);
+		this.continentUris.add(URI.asia);
+		this.continentUris.add(URI.australia);
 	}
 
 	@Override

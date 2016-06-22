@@ -19,6 +19,7 @@ public class VirtualServer extends Provider {
 		this.name = "VirtualServer";
 		this.baseUrl = "https://www.virtual-server.net/home/";
 		this.crawl = true;
+		this.continentUris.add(URI.europe);
 	}
 	
 	public Configuration getConfiguration(String id) throws Exception{

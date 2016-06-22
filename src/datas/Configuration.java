@@ -78,7 +78,17 @@ public class Configuration {
 			break;
 			case "linux" : osUri = URI.linux;
 			break;
-			default : osUri = "";
+			case "" : osUri = "";
+			break;
+			case "http://dbpedia.org/page/Linux" : osUri = URI.linux;
+			break;
+			case "http://dbpedia.org/page/Microsoft_Windows" : osUri = URI.windows;
+			break;
+			default : try {
+				throw new Exception("Problem with osURI");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			break;
 		}
 		this.id = Counter.getConfigurationCounter(); //Unique id
@@ -124,7 +134,6 @@ public class Configuration {
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "ssd"), ""+this.ssd)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "transferSpeed"), ""+this.transferSpeed)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "currency"), ""+this.currencyUri)
-				.addProperty(ResourceFactory.createProperty(URI.baseURI, "country"), ""+this.countryUri)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "comment"), ""+this.comment)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "price"), ""+this.price);
 		if(this.osUri!=""){
