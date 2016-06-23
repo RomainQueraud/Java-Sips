@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import datas.Configuration;
+import datas.Euro;
 import datas.URI;
 
 public class VirtualServer extends Provider {
@@ -19,7 +20,9 @@ public class VirtualServer extends Provider {
 		this.name = "VirtualServer";
 		this.baseUrl = "https://www.virtual-server.net/home/";
 		this.crawl = true;
-		this.continentUris.add(URI.europe);
+		this.continents.add(URI.europe);
+		this.billing = URI.month;
+		this.currency = new Euro();
 	}
 	
 	public Configuration getConfiguration(String id) throws Exception{

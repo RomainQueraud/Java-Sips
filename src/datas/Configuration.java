@@ -11,16 +11,16 @@ public class Configuration {
 	public int id;
 	public String configName;
 	public Provider provider;
-	public int cpu;
-	public int ram;
+	public int cpu; 
+	public int ram; /* Gb */
 	public int hdd;
-	public int ssd;
-	public int transferSpeed;
+	public int ssd; /* Gb */
+	public int transferSpeed; /* Tb */
 	public String osUri;
 	public String currencyUri;
 	public String countryUri;
 	public String comment;
-	public double price;
+	public double price; /* Monthly */ /* $Dollar */
 	
 	public Configuration(){
 		this("", -1, -1, -1, -1, -1, "", "", "", "", -1);
@@ -122,6 +122,10 @@ public class Configuration {
 	public void setProvider(Provider provider){
 		this.provider = provider;
 	}
+	
+	public double roundPrice(double price){
+		return ((int)(price*100))/100.0;
+	}
 
 	public Resource toResource(Model model){
 		Resource configurationResource = model.createResource(URI.baseURI+this.provider.name+"/"+this.id+"/")
@@ -135,7 +139,8 @@ public class Configuration {
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "transferSpeed"), ""+this.transferSpeed)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "currency"), ""+this.currencyUri)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "comment"), ""+this.comment)
-				.addProperty(ResourceFactory.createProperty(URI.baseURI, "price"), ""+this.price);
+				.addProperty(ResourceFactory.createProperty(URI.baseURI, "priceEuro"), ""+this.roundPrice(this.provider.currency.toEuro(this.price)))
+				.addProperty(ResourceFactory.createProperty(URI.baseURI, "price"), ""+this.roundPrice(this.provider.currency.toDollar(this.price)));
 		if(this.osUri!=""){
 			configurationResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "os"), model.createResource(this.osUri));
 		}

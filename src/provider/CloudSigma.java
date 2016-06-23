@@ -2,6 +2,7 @@ package provider;
 
 import java.io.IOException;
 
+import datas.Dollar;
 import datas.URI;
 
 public class CloudSigma extends Provider{
@@ -12,10 +13,12 @@ public class CloudSigma extends Provider{
 
 	private CloudSigma() {
 		this.name = "CloudSigma";
-		this.continentUris.add(URI.europe);
-		this.continentUris.add(URI.northAmerica);
-		this.continentUris.add(URI.asia);
-		this.continentUris.add(URI.australia);
+		this.continents.add(URI.europe);
+		this.continents.add(URI.northAmerica);
+		this.continents.add(URI.asia);
+		this.continents.add(URI.australia);
+		this.billing = URI.month;
+		this.currency = new Dollar();
 	}
 
 	@Override

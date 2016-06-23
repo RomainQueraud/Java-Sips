@@ -8,11 +8,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
+
+import datas.BulgarianLev;
 import datas.Configuration;
 import datas.Offset;
+import datas.URI;
 
 public class CloudWare extends Provider{
-	public static CloudWare singleton = new CloudWare(); 
+	public static CloudWare singleton = new CloudWare();
 
 	private CloudWare() {
 		this.name = "CloudWare";
@@ -24,6 +27,8 @@ public class CloudWare extends Provider{
 		double crawlSpeed = 0.3;
 		int step = (int) (this.maxOffset*crawlSpeed);
 		this.offset.setStep(step);
+		this.billing = URI.month;
+		this.currency = new BulgarianLev();
 	}
 	
 	public void removeAnnoyingElements(){

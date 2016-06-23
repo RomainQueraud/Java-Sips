@@ -20,14 +20,17 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 
 import datas.Configuration;
+import datas.Currency;
 import datas.Offset;
 import datas.URI;
 
 public abstract class Provider implements IProvider {
 	public String name = "Provider";
 	public boolean crawl = false;
+	public Currency currency;
 	ArrayList<Configuration> configurations = new ArrayList<Configuration>();
-	ArrayList<String> continentUris = new ArrayList<String>();
+	ArrayList<String> continents = new ArrayList<String>();
+	String billing = URI.nothing; /* minimum time required to purchase the service */
 	
 	WebDriver driver;
 	Offset offset = new Offset(0,0,0,0); //step, cpu, ram, disk, transfer
@@ -87,7 +90,7 @@ public abstract class Provider implements IProvider {
 		return providerBag;
 	}
 	
-	public Resource toResource(Model model){
+	public Resource toResource(Model model) throws Exception{
 		Resource providerResource = model.createResource(URI.baseURI+this.name+"/");
 		System.out.print(this.name+" to resource : ("+this.configurations.size()+") ");
 		for(int i=0 ; i<this.configurations.size() ; i++){
@@ -98,14 +101,17 @@ public abstract class Provider implements IProvider {
 		}
 		System.out.println("");
 
-		if(this.continentUris.size()!=0){
-			for(int i=0 ; i<this.continentUris.size() ; i++){
-				providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "continent"), model.createResource(this.continentUris.get(i)));
+		if(this.continents.size()!=0){
+			for(int i=0 ; i<this.continents.size() ; i++){
+				providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "continent"), model.createResource(this.continents.get(i)));
 			}
 		}
 		else{
 			providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "continent"), "");
 		}
+		
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "billing"), model.createResource(this.billing));
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "billingDuration"), ""+URI.getBillingDuration(this.billing));
 		
 		return providerResource;
 	}

@@ -2,6 +2,7 @@ package provider;
 
 import java.io.IOException;
 
+import datas.Dollar;
 import datas.URI;
 
 public class Atlantic extends Provider {
@@ -12,9 +13,11 @@ public class Atlantic extends Provider {
 
 	private Atlantic() {
 		this.name = "Atlantic";
-		this.continentUris.add(URI.northAmerica);
-		this.continentUris.add(URI.europe);
-		this.continentUris.add(URI.asia);
+		this.continents.add(URI.northAmerica);
+		this.continents.add(URI.europe);
+		this.continents.add(URI.asia);
+		this.billing = URI.second;
+		this.currency = new Dollar();
 	}
 
 	@Override

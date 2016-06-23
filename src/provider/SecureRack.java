@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import datas.Configuration;
+import datas.Euro;
+import datas.URI;
 
 /*
  * Crawl the Cpu, Ram and Disk price. The IP price is entered manually in the getIpPrice() function.
@@ -32,6 +34,8 @@ public class SecureRack extends Provider {
 		this.name = "SecureRack";
 		this.baseUrl = "https://my.securerack.com/index.php?/cart/vdatacenter/";
 		this.crawl = true;
+		this.billing = URI.month;
+		this.currency = new Euro();
 	}
 	
 	public double getCpuPrice() throws Exception{
