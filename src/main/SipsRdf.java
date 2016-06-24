@@ -13,10 +13,12 @@ import provider.CloudSigma;
 import provider.CloudWare;
 import provider.E24Cloud;
 import provider.EApps;
+import provider.ExoScale;
 import provider.Provider;
 import provider.SecureRack;
 import provider.VirtualServer;
 import provider.VpsNet;
+import provider.ZippyCloud;
 
 public class SipsRdf {
 	public static SipsRdf singleton = new SipsRdf();
@@ -59,6 +61,8 @@ public class SipsRdf {
 		this.loadProviderInSipsRdf(EApps.singleton, false);
 		this.loadProviderInSipsRdf(E24Cloud.singleton, false);
 		this.loadProviderInSipsRdf(VpsNet.singleton, false);
+		this.loadProviderInSipsRdf(ExoScale.singleton, false);
+		this.loadProviderInSipsRdf(ZippyCloud.singleton, true);
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
