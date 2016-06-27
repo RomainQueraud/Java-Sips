@@ -150,6 +150,17 @@ public class Configuration {
 		return configurationResource;
 	}
 	
+	public String toString(){
+		String ret = "------\n";
+		ret+="Cpu : "+this.cpu+" --- ";
+		ret+="Ram : "+this.ram+" --- ";
+		ret+="Disk : "+this.ssd+" --- ";
+		ret+="Transfer : "+this.transferSpeed+" --- ";
+		ret+="Price : "+this.price+" --- ";
+		ret += "------";
+		return ret;
+	}
+	
 	public static void main(String[] args) {
 		Model model = ModelFactory.createDefaultModel();
 		Configuration config = new Configuration("S server Linux", 1, 1, 40, -1, 3000, URI.linux, URI.euro, "", "", 9.93);

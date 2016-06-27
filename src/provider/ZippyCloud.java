@@ -3,6 +3,8 @@ package provider;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,6 +23,23 @@ public class ZippyCloud extends Provider {
 		this.billing = URI.month;
 		this.currency = new Dollar();
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see provider.Provider#extractNumber(java.lang.String)
+	 * Necessity to override, because of the presence of the ',' between the thousands and the hundreds
+	 */
+	@Override
+	public double extractNumber(String text) throws Exception{
+		Pattern p = Pattern.compile("\\d+((\\.|\\,)\\d+)?");
+		Matcher m = p.matcher(text);
+		if(m.find()){
+			return Double.parseDouble(m.group().replace(",", ""));
+		}
+		else{
+			throw new Exception("No number found");
+		}
+	}
 
 	@Override
 	public void crawlFillWriteConfigurations() throws InterruptedException, IOException, Exception {
@@ -29,19 +48,21 @@ public class ZippyCloud extends Provider {
 		Thread.sleep(3000);
 		
 		List<WebElement> boxs = driver.findElements(By.className("pricing-box"));
+		//System.out.println("boxs Size : "+boxs.size());
 		for(WebElement box : boxs){
 			Configuration config = new Configuration();
 			config.setProvider(this);
-			System.out.println(box.getText());
 			
+			box.click(); //otherwise, elements don't load
 			List<WebElement> lis = box.findElements(By.tagName("li"));
+			//System.out.println("lis Size : "+lis.size());
+			System.out.println("------------------------");
 			for(WebElement li : lis){
-				//li = li.findElement(By.xpath(".//*")); //direct child
-				//System.out.println(li.getTagName());
+				//System.out.println("li text : "+li.getText());
 				if(li.getText().contains("Core")){
 					double cpu = this.extractNumber(li.getText());
 					System.out.println("cpu : "+cpu);
-					config.setPrice((int)cpu);
+					config.setCpu((int)cpu);
 				}
 				else if(li.getText().contains("month")){
 					double price = this.extractNumber(li.getText());
