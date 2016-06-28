@@ -11,7 +11,8 @@ public class Configuration {
 	public int id;
 	public String configName;
 	public Provider provider;
-	public int cpu; 
+	public int cpu;
+	public double cpuSpeed;
 	public int ram; /* Gb */
 	public int hdd;
 	public int ssd; /* Gb */
@@ -32,6 +33,10 @@ public class Configuration {
 
 	public void setCpu(int cpu) {
 		this.cpu = cpu;
+	}
+	
+	public void setCpuSpeed(double cpuSpeed) {
+		this.cpuSpeed = cpuSpeed;
 	}
 
 	public void setRam(int ram) {
@@ -94,6 +99,7 @@ public class Configuration {
 		this.id = Counter.getConfigurationCounter(); //Unique id
 		this.configName = configName;
 		this.cpu = cpu;
+		this.cpuSpeed = -1;
 		this.ram = ram; //Gb
 		this.hdd = hdd; //Gb
 		this.ssd = ssd; //Gb
