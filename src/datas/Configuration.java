@@ -151,13 +151,12 @@ public class Configuration {
 	}
 	
 	public String toString(){
-		String ret = "------\n";
+		String ret = "";
 		ret+="Cpu : "+this.cpu+" --- ";
 		ret+="Ram : "+this.ram+" --- ";
 		ret+="Disk : "+this.ssd+" --- ";
 		ret+="Transfer : "+this.transferSpeed+" --- ";
 		ret+="Price : "+this.price+" --- ";
-		ret += "------";
 		return ret;
 	}
 	

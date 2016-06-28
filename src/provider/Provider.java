@@ -63,7 +63,7 @@ public abstract class Provider implements IProvider {
 			return Double.parseDouble(m.group().replace(',', '.'));
 		}
 		else{
-			System.out.println("No number found on text : "+text);
+			//System.out.println("No number found on text : "+text);
 			return 0;
 		}
 	}
