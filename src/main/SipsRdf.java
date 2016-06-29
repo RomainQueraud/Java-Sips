@@ -9,8 +9,12 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 
 import provider.Atlantic;
+import provider.CityCloud;
+import provider.CloudAndHeat;
 import provider.CloudSigma;
 import provider.CloudWare;
+import provider.CloudWatt;
+import provider.DreamHost;
 import provider.E24Cloud;
 import provider.EApps;
 import provider.ElasticHosts;
@@ -71,6 +75,10 @@ public class SipsRdf {
 		this.loadProviderInSipsRdf(RackSpace.singleton, false);
 		this.loadProviderInSipsRdf(ElasticHosts.singleton, false);
 		this.loadProviderInSipsRdf(Storm.singleton, false);
+		this.loadProviderInSipsRdf(CityCloud.singleton, false);
+		this.loadProviderInSipsRdf(DreamHost.singleton, false);
+		this.loadProviderInSipsRdf(CloudWatt.singleton, false);
+		this.loadProviderInSipsRdf(CloudAndHeat.singleton, false);
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){

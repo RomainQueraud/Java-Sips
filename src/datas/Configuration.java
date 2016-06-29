@@ -74,6 +74,14 @@ public class Configuration {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	/*
+	 * Deep copy
+	 */
+	public Configuration(Configuration config){
+		this(config.configName, config.cpu, config.ram, config.hdd, config.ssd, config.transferSpeed,
+				config.osUri, config.currencyUri, config.countryUri, config.comment, config.price);
+	}
 
 	public Configuration(String configName, int cpu, int ram, int hdd, int ssd, int transferSpeed,
 			String osUri, String currencyUri, String countryUri, String comment, double price) {
@@ -160,7 +168,8 @@ public class Configuration {
 		String ret = "";
 		ret+="Cpu : "+this.cpu+" --- ";
 		ret+="Ram : "+this.ram+" --- ";
-		ret+="Disk : "+this.ssd+" --- ";
+		ret+="Ssd : "+this.ssd+" --- ";
+		ret+="Hdd : "+this.hdd+" --- ";
 		ret+="Transfer : "+this.transferSpeed+" --- ";
 		ret+="Price : "+this.price+" --- ";
 		return ret;
