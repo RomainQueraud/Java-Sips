@@ -56,6 +56,7 @@ public class CloudAndHeat extends Provider {
 					//TODO be carefull because it can take the upper 2...
 				}
 			}
+			config.setOsUri(URI.linux);
 			this.configurations.add(config);
 			System.out.println(config);
 		}

@@ -23,6 +23,7 @@ import provider.Provider;
 import provider.RackSpace;
 import provider.SecureRack;
 import provider.Storm;
+import provider.VexxHost;
 import provider.VirtualServer;
 import provider.VpsNet;
 import provider.ZettaGrid;
@@ -79,6 +80,7 @@ public class SipsRdf {
 		this.loadProviderInSipsRdf(DreamHost.singleton, false);
 		this.loadProviderInSipsRdf(CloudWatt.singleton, false);
 		this.loadProviderInSipsRdf(CloudAndHeat.singleton, false);
+		this.loadProviderInSipsRdf(VexxHost.singleton, false);
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
