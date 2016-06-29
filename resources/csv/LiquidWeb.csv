@@ -1,0 +1,12 @@
+"LiquidWeb","Intel Xeon E3-1271 v3, 4-core","4","16","-1","250","5","","","","","199.0"
+"LiquidWeb","Intel Xeon E5-1650 v3, 6-core","6","16","-1","250","5","","","","","289.0"
+"LiquidWeb","Intel Xeon E5-2620 v3, 6-core","12","32","-1","250","5","","","","","349.0"
+"LiquidWeb","Intel Xeon E5-2650 v3, 10-core","20","32","-1","250","5","","","","","549.0"
+"LiquidWeb","Single Processor
+Intel Xeon E3-1271 v3, 4-core","4","32","4000","250","10","","","","","299.0"
+"LiquidWeb","Single Processor
+Intel Xeon E5-1650 v3, 6-core","6","32","2000","1000","10","","","","","409.0"
+"LiquidWeb","Dual Processors
+Intel Xeon E5-2620 v3, 6-core","12","64","3000","500","10","","","","","589.0"
+"LiquidWeb","Dual Processors
+Intel Xeon E5-2650 v3, 10-core","20","64","2000","1000","10","","","","","799.0"
