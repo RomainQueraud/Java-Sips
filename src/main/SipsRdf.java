@@ -14,6 +14,7 @@ import provider.CloudAndHeat;
 import provider.CloudSigma;
 import provider.CloudWare;
 import provider.CloudWatt;
+import provider.DimensionData;
 import provider.DreamHost;
 import provider.E24Cloud;
 import provider.EApps;
@@ -23,6 +24,7 @@ import provider.Gigenet;
 import provider.Joyent;
 import provider.Linode;
 import provider.LiquidWeb;
+import provider.MicrosoftAzure;
 import provider.Provider;
 import provider.RackSpace;
 import provider.SecureRack;
@@ -89,6 +91,8 @@ public class SipsRdf {
 		this.loadProviderInSipsRdf(Linode.singleton, false);
 		this.loadProviderInSipsRdf(Joyent.singleton, false);
 		this.loadProviderInSipsRdf(Gigenet.singleton, false);
+		this.loadProviderInSipsRdf(MicrosoftAzure.singleton, false);
+		this.loadProviderInSipsRdf(DimensionData.singleton, false);
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
