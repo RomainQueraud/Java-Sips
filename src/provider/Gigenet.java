@@ -1,0 +1,63 @@
+package provider;
+
+import java.io.IOException;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
+import datas.Configuration;
+import datas.Dollar;
+import datas.URI;
+
+public class Gigenet extends Provider {
+
+	public static Gigenet singleton = new Gigenet();
+
+	private Gigenet() {
+		this.name = "Gigenet";
+		this.baseUrl = "http://gigenet.com/dedicated-servers/all-servers/";
+		this.continents.add(URI.northAmerica);
+		this.billing = URI.month; 
+		this.currency = new Dollar();
+	}
+	
+	@Override
+	public void crawlFillWriteConfigurations() throws InterruptedException, IOException, Exception {
+		this.openFirefox();
+		this.loadWebpage();
+		Thread.sleep(3000);
+		
+		Select select = new Select(driver.findElement(By.id("tablepress-4_length")).findElement(By.tagName("select")));
+		select.selectByVisibleText("100");
+		Thread.sleep(2000);
+		
+		WebElement table = driver.findElement(By.id("tablepress-4"));
+		List<WebElement> trs = table.findElement(By.tagName("tbody")).findElements(By.tagName("tr"));
+		for(WebElement tr : trs){
+			Configuration config = new Configuration();
+			config.setProvider(this);
+			
+			List<WebElement> tds = tr.findElements(By.tagName("td"));
+			config.setConfigName(tds.get(0).getText());
+			config.setCpu((int)this.extractNumber(tds.get(2).getText()));
+			config.setRam((int)this.extractNumber(tds.get(3).getText()));
+			if(tds.get(4).getText().contains("TB")){
+				config.setHdd((int)this.extractNumber(tds.get(4).getText())*1000); //Given in TB
+			}
+			else{
+				config.setHdd((int)this.extractNumber(tds.get(4).getText()));
+			}
+			config.setTransferSpeed((int)this.extractNumber(tds.get(5).getText()));
+			config.setPrice((int)this.extractNumber(tds.get(6).getText()));
+			
+			this.configurations.add(config);
+			System.out.println(config);
+		}
+		
+		this.closeFirefox();
+		this.writeConfigurationsInCsv();
+	}
+
+}

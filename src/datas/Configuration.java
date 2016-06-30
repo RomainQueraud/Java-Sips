@@ -81,6 +81,7 @@ public class Configuration {
 	public Configuration(Configuration config){
 		this(config.configName, config.cpu, config.ram, config.hdd, config.ssd, config.transferSpeed,
 				config.osUri, config.currencyUri, config.countryUri, config.comment, config.price);
+		this.setProvider(config.provider);
 	}
 
 	public Configuration(String configName, int cpu, int ram, int hdd, int ssd, int transferSpeed,
@@ -171,6 +172,15 @@ public class Configuration {
 		ret+="Ssd : "+this.ssd+" --- ";
 		ret+="Hdd : "+this.hdd+" --- ";
 		ret+="Transfer : "+this.transferSpeed+" --- ";
+		if(this.osUri.equals(URI.windows)){
+			ret+="Os : Windows --- ";
+		}
+		else if(this.osUri.equals(URI.linux)){
+			ret+="Os : Linux --- ";
+		}
+		else{
+			ret+="Os : Unknown --- ";
+		}
 		ret+="Price : "+this.price+" --- ";
 		return ret;
 	}

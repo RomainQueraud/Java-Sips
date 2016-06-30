@@ -19,6 +19,8 @@ import provider.E24Cloud;
 import provider.EApps;
 import provider.ElasticHosts;
 import provider.ExoScale;
+import provider.Gigenet;
+import provider.Joyent;
 import provider.Linode;
 import provider.LiquidWeb;
 import provider.Provider;
@@ -85,6 +87,8 @@ public class SipsRdf {
 		this.loadProviderInSipsRdf(VexxHost.singleton, false);
 		this.loadProviderInSipsRdf(LiquidWeb.singleton, false);
 		this.loadProviderInSipsRdf(Linode.singleton, false);
+		this.loadProviderInSipsRdf(Joyent.singleton, false);
+		this.loadProviderInSipsRdf(Gigenet.singleton, false);
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
