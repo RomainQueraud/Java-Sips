@@ -25,6 +25,7 @@ import provider.Joyent;
 import provider.Linode;
 import provider.LiquidWeb;
 import provider.MicrosoftAzure;
+import provider.Numergy;
 import provider.Provider;
 import provider.RackSpace;
 import provider.SecureRack;
@@ -95,6 +96,7 @@ public class SipsRdf {
 		this.loadProviderInSipsRdf(MicrosoftAzure.singleton, false);
 		this.loadProviderInSipsRdf(DimensionData.singleton, false);
 		this.loadProviderInSipsRdf(UnitedStack.singleton, false);
+		this.loadProviderInSipsRdf(Numergy.singleton, false);
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
