@@ -29,6 +29,7 @@ import provider.Provider;
 import provider.RackSpace;
 import provider.SecureRack;
 import provider.Storm;
+import provider.UnitedStack;
 import provider.VexxHost;
 import provider.VirtualServer;
 import provider.VpsNet;
@@ -93,6 +94,7 @@ public class SipsRdf {
 		this.loadProviderInSipsRdf(Gigenet.singleton, false);
 		this.loadProviderInSipsRdf(MicrosoftAzure.singleton, false);
 		this.loadProviderInSipsRdf(DimensionData.singleton, false);
+		this.loadProviderInSipsRdf(UnitedStack.singleton, false);
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
