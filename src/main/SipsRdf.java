@@ -21,6 +21,7 @@ import provider.EApps;
 import provider.ElasticHosts;
 import provider.ExoScale;
 import provider.Gigenet;
+import provider.Google;
 import provider.Joyent;
 import provider.Linode;
 import provider.LiquidWeb;
@@ -97,6 +98,7 @@ public class SipsRdf {
 		this.loadProviderInSipsRdf(DimensionData.singleton, false);
 		this.loadProviderInSipsRdf(UnitedStack.singleton, false);
 		this.loadProviderInSipsRdf(Numergy.singleton, false);
+		this.loadProviderInSipsRdf(Google.singleton, false);
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
