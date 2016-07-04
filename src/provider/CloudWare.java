@@ -37,7 +37,7 @@ public class CloudWare extends Provider{
 	}
 	
 	public double getPrice(){
-		WebElement price = driver.findElement(By.className("total-price"));
+		WebElement price = driver.findElement(By.className("total-price")); //TODO real line
 		double priceDouble = Double.parseDouble(price.getText());
 		return priceDouble;
 	}

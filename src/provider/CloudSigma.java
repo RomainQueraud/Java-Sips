@@ -1,18 +1,21 @@
 package provider;
 
 import java.io.IOException;
+import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
 
 public class CloudSigma extends Provider{
 	public static CloudSigma singleton = new CloudSigma(); 
-	/*
-	 * TODO (10/06/16) here will be the instructions for the dedicated crawler ?
-	 */
 
 	private CloudSigma() {
 		this.name = "CloudSigma";
+		this.baseUrl = "https://www.cloudsigma.com/pricing/";
 		this.continents.add(URI.europe);
 		this.continents.add(URI.northAmerica);
 		this.continents.add(URI.asia);
@@ -20,10 +23,48 @@ public class CloudSigma extends Provider{
 		this.billing = URI.month;
 		this.currency = new Dollar();
 	}
+	
+	public String getComment(){
+		return "Unlimited IOPS";
+	}
 
 	@Override
-	public void crawlFillWriteConfigurations() throws InterruptedException, IOException{
-		// TODO Auto-generated method stub
+	public void crawlFillWriteConfigurations() throws Exception{
+		this.openFirefox();
+		this.loadWebpage();
+		Thread.sleep(3000);
 		
+		List<WebElement> divs = driver.findElements(By.className("x-pricing-column"));
+		for(WebElement div : divs){
+			Configuration config = new Configuration();
+			config.setProvider(this);
+			
+			WebElement price = div.findElement(By.className("x-price"));
+			config.setPrice(this.extractNumber(price.getText()));
+			
+			config.setComment(this.getComment());
+			
+			List<WebElement> lis = div.findElements(By.tagName("li"));
+			for(WebElement li : lis){
+				if(li.getText().contains("CPU")){
+					config.setCpu(this.extractNumber(li.getText()));
+				}
+				else if(li.getText().contains("RAM")){
+					config.setRam(this.extractNumber(li.getText()));
+				}
+				else if(li.getText().contains("SSD")){
+					config.setSsd(this.extractNumber(li.getText()));
+				}
+				else if(li.getText().contains("Data")){
+					config.setTransferSpeed(this.extractNumber(li.getText()));
+				}
+			}
+			
+			this.configurations.add(config);
+			System.out.println(config);
+		}
+		
+		this.closeFirefox();
+		this.writeConfigurationsInCsv();
 	}
 }

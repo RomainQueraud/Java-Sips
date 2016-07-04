@@ -41,7 +41,7 @@ public abstract class Provider implements IProvider {
 	/***********Selenium**************/
 	/* Open Firefox*/
 	public void openFirefox(){
-		System.out.print("Opening Firefox...");
+		System.out.print("Opening Firefox for "+this.name+"...");
 		driver = new FirefoxDriver();
 		System.out.println("Ok");
 	}
@@ -146,6 +146,11 @@ public abstract class Provider implements IProvider {
 			lines.add(configuration.getLine());
 		}
 		return lines;
+	}
+	
+	@Override
+	public String toString(){
+		return this.name;
 	}
 	/********************************/
 	

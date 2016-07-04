@@ -141,6 +141,14 @@ public class Configuration {
 	public double roundPrice(double price){
 		return ((int)(price*100))/100.0;
 	}
+	
+	/*
+	public void addCommentProperty(Resource resource){
+		if(this.comment!=""){
+			resource.addProperty(ResourceFactory.createProperty(URI.baseURI, "comment"), ""+this.comment);
+		}
+	}
+	*/
 
 	public Resource toResource(Model model){
 		Resource configurationResource = model.createResource(URI.baseURI+this.provider.name+"/"+this.id+"/")
