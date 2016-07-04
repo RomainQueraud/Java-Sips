@@ -42,10 +42,10 @@ public class CloudWatt extends Provider {
 						config.setProvider(this);
 						
 						config.setConfigName(tds.get(0).getText());
-						config.setCpu((int)this.extractNumber(tds.get(1).getText()));
-						config.setRam((int)this.extractNumber(tds.get(2).getText()));
-						config.setSsd((int)this.extractNumber(tds.get(3).getText())); //System storage ?
-						config.setHdd((int)this.extractNumber(tds.get(4).getText())); //Data storage ?
+						config.setCpu(this.extractNumber(tds.get(1).getText()));
+						config.setRam(this.extractNumber(tds.get(2).getText()));
+						config.setSsd(this.extractNumber(tds.get(3).getText())); //System storage ?
+						config.setHdd(this.extractNumber(tds.get(4).getText())); //Data storage ?
 						if(tds.get(6).getText() != ""){
 							Configuration configLinux = new Configuration(config);
 							configLinux.setProvider(this);

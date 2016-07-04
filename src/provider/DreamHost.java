@@ -70,13 +70,13 @@ public class DreamHost extends Provider {
 								Configuration config = new Configuration();
 								config.setProvider(this);
 								
-								config.setCpu((int)this.extractNumber(cpuLi.getText()));
-								config.setRam((int)this.extractNumber(ramLi.getText()));
+								config.setCpu(this.extractNumber(cpuLi.getText()));
+								config.setRam(this.extractNumber(ramLi.getText()));
 								if(diskLi.getText().contains("SSD")){
-									config.setSsd((int)this.extractNumber(diskLi.getText()));
+									config.setSsd(this.extractNumber(diskLi.getText()));
 								}
 								else{
-									config.setHdd((int)this.extractNumber(diskLi.getText())*1000); //Given in TB
+									config.setHdd(this.extractNumber(diskLi.getText())*1000); //Given in TB
 								}
 								config.setComment(this.getComment());
 								config.setOsUri(URI.linux);

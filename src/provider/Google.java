@@ -74,12 +74,12 @@ public class Google extends Provider {
 		    	config.setConfigName(key);
 		    	String cpu = (String) jConfig.get("cores");
 		    	if(cpu.equals("shared")){
-		    		config.setCpu((int) 0.5); //TODO change to double
+		    		config.setCpu(0.5); 
 		    	}
 		    	else{
 		    		config.setCpu(Integer.parseInt(cpu));
 		    	}
-		    	config.setRam((int)(Double.parseDouble(""+jConfig.get("memory"))));
+		    	config.setRam((Double.parseDouble(""+jConfig.get("memory"))));
 		    	config.setOsUri(URI.linux);
 		    	config.setComment(this.getComment());
 		    	config.setPrice(Double.parseDouble(""+jConfig.get("europe")) * 24 * (365.0/12.0));
@@ -92,7 +92,7 @@ public class Google extends Provider {
 		    		Configuration ssdConfig = new Configuration(config);
 		    		ssdConfig.setProvider(this);
 		    		
-		    		ssdConfig.setSsd((int) ssdNumber * this.ssdSize); 
+		    		ssdConfig.setSsd( ssdNumber * this.ssdSize); 
 		    		ssdConfig.setPrice(ssdConfig.price + ssdNumber*this.getSsdPrice());
 		    		
 		    		Configuration windowsConfig = new Configuration(ssdConfig);

@@ -97,13 +97,13 @@ public class SecureRack extends Provider {
 								+ (ramNumber - this.baseRamNumber)*ramPrice
 								+ (diskNumber - this.baseDiskNumber)*diskPrice
 								+ (ipNumber - this.baseIpNumber)*ipPrice;
-						price = ((int)(price*100))/100; //Arrondi au centième
+						price = ((price*100))/100; //Arrondi au centième
 						Configuration config = new Configuration();
 						config.setProvider(this);
 						config.setPrice(price);
-						config.setCpu((int)cpuNumber);
-						config.setRam((int)ramNumber);
-						config.setSsd((int)diskNumber);
+						config.setCpu(cpuNumber);
+						config.setRam(ramNumber);
+						config.setSsd(diskNumber);
 						config.setComment(this.getComment());
 						//TODO add Ip
 						this.configurations.add(config);

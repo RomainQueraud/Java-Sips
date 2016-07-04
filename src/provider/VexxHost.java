@@ -43,10 +43,10 @@ public class VexxHost extends Provider {
 				config.setProvider(this);
 				
 				config.setConfigName(tds.get(0).getText());
-				config.setCpu((int)this.extractNumber(tds.get(1).getText()));
-				config.setRam((int)this.extractNumber(tds.get(2).getText()));
-				config.setSsd((int)this.extractNumber(tds.get(3).getText()));
-				config.setTransferSpeed((int)this.extractNumber(tds.get(4).getText()));
+				config.setCpu(this.extractNumber(tds.get(1).getText()));
+				config.setRam(this.extractNumber(tds.get(2).getText()));
+				config.setSsd(this.extractNumber(tds.get(3).getText()));
+				config.setTransferSpeed(this.extractNumber(tds.get(4).getText()));
 				if(windows){
 					config.setOsUri(URI.windows);
 					config.setPrice(this.extractNumber(tds.get(5).getText())*24*30 + this.getWindowsPrice()); //Given hourly

@@ -41,16 +41,16 @@ public class Gigenet extends Provider {
 			
 			List<WebElement> tds = tr.findElements(By.tagName("td"));
 			config.setConfigName(tds.get(0).getText());
-			config.setCpu((int)this.extractNumber(tds.get(2).getText()));
-			config.setRam((int)this.extractNumber(tds.get(3).getText()));
+			config.setCpu(this.extractNumber(tds.get(2).getText()));
+			config.setRam(this.extractNumber(tds.get(3).getText()));
 			if(tds.get(4).getText().contains("TB")){
-				config.setHdd((int)this.extractNumber(tds.get(4).getText())*1000); //Given in TB
+				config.setHdd(this.extractNumber(tds.get(4).getText())*1000); //Given in TB
 			}
 			else{
-				config.setHdd((int)this.extractNumber(tds.get(4).getText()));
+				config.setHdd(this.extractNumber(tds.get(4).getText()));
 			}
-			config.setTransferSpeed((int)this.extractNumber(tds.get(5).getText()));
-			config.setPrice((int)this.extractNumber(tds.get(6).getText()));
+			config.setTransferSpeed(this.extractNumber(tds.get(5).getText()));
+			config.setPrice(this.extractNumber(tds.get(6).getText()));
 			
 			this.configurations.add(config);
 			System.out.println(config);

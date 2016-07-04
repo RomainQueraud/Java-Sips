@@ -1,119 +1,116 @@
-"Storm","1GB","1","0","75","-1","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","1GB","1.0","0.9","75.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","35.0"
-"Storm","2GB","1","1","150","-1","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","2GB","1.0","1.7","150.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","50.0"
-"Storm","4GB","2","3","300","-1","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","4GB","2.0","3.5","300.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","100.0"
-"Storm","8GB","4","6","600","-1","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","8GB","4.0","6.9","600.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","200.0"
-"Storm","16GB","4","15","750","-1","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","16GB","4.0","15.1","750.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","250.0"
-"Storm","32GB","8","30","1500","-1","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","32GB","8.0","30.3","1500.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","350.0"
-"Storm","1GB - SSD","1","1","-1","50","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","1GB - SSD","1.0","1.0","-1.0","50.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","35.0"
-"Storm","2GB - SSD","1","2","-1","100","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","2GB - SSD","1.0","2.0","-1.0","100.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","50.0"
-"Storm","4GB - SSD","2","3","-1","150","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","4GB - SSD","2.0","3.9","-1.0","150.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","100.0"
-"Storm","8GB - SSD","4","7","-1","300","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","8GB - SSD","4.0","7.8","-1.0","300.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","200.0"
-"Storm","32GB - SSD","6","31","-1","175","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","32GB - SSD","6.0","31.1","-1.0","175.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","325.0"
-"Storm","16GB - SSD","4","15","-1","600","-1","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
+"Storm","16GB - SSD","4.0","15.6","-1.0","600.0","-1.0","http://dbpedia.org/page/Linux","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","350.0"
-"Storm","Intel Core i5-760","4","3","919","-1","-1","http://dbpedia.org/page/Linux","","","","100.0"
-"Storm","Intel Core i5-760","4","3","1851","-1","-1","http://dbpedia.org/page/Linux","","","","110.0"
-"Storm","Intel Core i5-750","4","3","452","-1","-1","http://dbpedia.org/page/Linux","","","","130.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","-1","220","-1","http://dbpedia.org/page/Linux","","","","159.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","-1","220","-1","http://dbpedia.org/page/Linux","","","","159.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","918","-1","-1","http://dbpedia.org/page/Linux","","","","179.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","918","-1","-1","http://dbpedia.org/page/Linux","","","","179.0"
-"Storm","Intel Xeon E3-1271 v3","4","15","-1","220","-1","http://dbpedia.org/page/Linux","","","","209.0"
-"Storm","Intel Xeon E3-1271 v3","4","15","-1","220","-1","http://dbpedia.org/page/Linux","","","","209.0"
-"Storm","Intel Xeon E3-1270 V2","4","15","-1","99","-1","http://dbpedia.org/page/Linux","","","","210.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","1847","-1","-1","http://dbpedia.org/page/Linux","","","","229.0"
-"Storm","Intel Xeon E3-1271 v3","4","15","-1","452","-1","http://dbpedia.org/page/Linux","","","","239.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","-1","220","-1","http://dbpedia.org/page/Linux","","","","279.0"
-"Storm","Intel Dual Xeon E5606","8","7","545","-1","-1","http://dbpedia.org/page/Linux","","","","305.0"
-"Storm","Intel Xeon E5-1650 v3","6","15","-1","453","-1","http://dbpedia.org/page/Linux","","","","329.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","1847","-1","-1","http://dbpedia.org/page/Linux","","","","389.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","-1","453","-1","http://dbpedia.org/page/Linux","","","","419.0"
-"Storm","Intel Dual Xeon E5-2620 v3","12","31","-1","452","-1","http://dbpedia.org/page/Linux","","","","439.0"
-"Storm","Intel Dual Xeon E5606","8","39","-1","940","-1","http://dbpedia.org/page/Linux","","","","480.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","-1","917","-1","http://dbpedia.org/page/Linux","","","","539.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","-1","918","-1","http://dbpedia.org/page/Linux","","","","539.0"
-"Storm","Intel Dual Xeon E5-2620 v3","12","31","-1","917","-1","http://dbpedia.org/page/Linux","","","","569.0"
-"Storm","Intel Dual Xeon E5-2650 v3","20","31","-1","453","-1","http://dbpedia.org/page/Linux","","","","599.0"
-"Storm","Intel Xeon E5-2603","8","63","-1","2669","-1","http://dbpedia.org/page/Linux","","","","800.0"
-"Storm","Intel Dual Xeon E5-2650 v3","20","62","-1","917","-1","http://dbpedia.org/page/Linux","","","","869.0"
-"Storm","Intel Dual Xeon E5-2690 v3","24","94","-1","917","-1","http://dbpedia.org/page/Linux","","","","1289.0"
-"Storm","Intel Dual Xeon E5-2697 v3","28","125","-1","1847","-1","http://dbpedia.org/page/Linux","","","","1699.0"
-"Storm","2GB","1","1","150","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","Intel Core i5-760","4.0","2.0","453.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","","95.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","-1.0","220.0","-1.0","http://dbpedia.org/page/Linux","","","","159.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","-1.0","220.0","-1.0","http://dbpedia.org/page/Linux","","","","159.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","918.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","","179.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","918.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","","179.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","15.6","-1.0","220.0","-1.0","http://dbpedia.org/page/Linux","","","","209.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","15.6","-1.0","220.0","-1.0","http://dbpedia.org/page/Linux","","","","209.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","1847.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","","229.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","15.6","-1.0","452.0","-1.0","http://dbpedia.org/page/Linux","","","","239.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","220.0","-1.0","http://dbpedia.org/page/Linux","","","","279.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","220.0","-1.0","http://dbpedia.org/page/Linux","","","","279.0"
+"Storm","Intel Xeon E3-1240 V2","4.0","31.5","-1.0","463.0","-1.0","http://dbpedia.org/page/Linux","","","","300.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","15.6","-1.0","453.0","-1.0","http://dbpedia.org/page/Linux","","","","329.0"
+"Storm","Intel Xeon E5-2603","8.0","31.5","1849.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","","350.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","1847.0","-1.0","-1.0","http://dbpedia.org/page/Linux","","","","389.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","453.0","-1.0","http://dbpedia.org/page/Linux","","","","419.0"
+"Storm","Intel Dual Xeon E5-2620 v3","12.0","31.3","-1.0","452.0","-1.0","http://dbpedia.org/page/Linux","","","","439.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","917.0","-1.0","http://dbpedia.org/page/Linux","","","","539.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","918.0","-1.0","http://dbpedia.org/page/Linux","","","","539.0"
+"Storm","Intel Dual Xeon E5-2620 v3","12.0","31.3","-1.0","917.0","-1.0","http://dbpedia.org/page/Linux","","","","569.0"
+"Storm","Intel Dual Xeon E5-2650 v3","20.0","31.3","-1.0","453.0","-1.0","http://dbpedia.org/page/Linux","","","","599.0"
+"Storm","Intel Dual Xeon E5-2650 v3","20.0","31.3","-1.0","453.0","-1.0","http://dbpedia.org/page/Linux","","","","599.0"
+"Storm","Intel Dual Xeon E5-2650 v3","20.0","62.8","-1.0","917.0","-1.0","http://dbpedia.org/page/Linux","","","","869.0"
+"Storm","Intel Dual Xeon E5-2690 v3","24.0","94.3","-1.0","917.0","-1.0","http://dbpedia.org/page/Linux","","","","1289.0"
+"Storm","Intel Dual Xeon E5-2697 v3","28.0","125.8","-1.0","1847.0","-1.0","http://dbpedia.org/page/Linux","","","","1699.0"
+"Storm","2GB","1.0","1.7","150.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","80.0"
-"Storm","4GB","2","3","300","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","4GB","2.0","3.5","300.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","130.0"
-"Storm","8GB","4","6","600","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","8GB","4.0","6.9","600.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","230.0"
-"Storm","16GB","4","15","750","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","16GB","4.0","15.1","750.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","310.0"
-"Storm","32GB","8","30","1500","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","32GB","8.0","30.3","1500.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>HDD</b>
 ","410.0"
-"Storm","2GB - SSD","1","2","-1","100","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","2GB - SSD","1.0","2.0","-1.0","100.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","80.0"
-"Storm","4GB - SSD","2","3","-1","150","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","4GB - SSD","2.0","3.9","-1.0","150.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","130.0"
-"Storm","8GB - SSD","4","7","-1","300","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","8GB - SSD","4.0","7.8","-1.0","300.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","230.0"
-"Storm","32GB - SSD","6","31","-1","175","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","32GB - SSD","6.0","31.1","-1.0","175.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","375.0"
-"Storm","16GB - SSD","4","15","-1","600","-1","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
+"Storm","16GB - SSD","4.0","15.6","-1.0","600.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","Transfer <b>0.05 / GB</b>
 Disk <b>SSD</b>
 ","380.0"
-"Storm","Intel Core i5-760","4","3","919","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","","150.0"
-"Storm","Intel Core i5-760","4","3","1851","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","","160.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","-1","220","-1","http://dbpedia.org/page/Microsoft_Windows","","","","179.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","-1","220","-1","http://dbpedia.org/page/Microsoft_Windows","","","","179.0"
-"Storm","Intel Core i5-750","4","3","452","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","","180.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","918","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","","199.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","918","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","","199.0"
-"Storm","Intel Xeon E3-1271 v3","4","15","-1","220","-1","http://dbpedia.org/page/Microsoft_Windows","","","","229.0"
-"Storm","Intel Xeon E3-1271 v3","4","15","-1","220","-1","http://dbpedia.org/page/Microsoft_Windows","","","","229.0"
-"Storm","Intel Xeon E3-1271 v3","4","7","1847","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","","249.0"
-"Storm","Intel Xeon E3-1271 v3","4","15","-1","452","-1","http://dbpedia.org/page/Microsoft_Windows","","","","259.0"
-"Storm","Intel Xeon E3-1270 V2","4","15","-1","99","-1","http://dbpedia.org/page/Microsoft_Windows","","","","260.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","-1","220","-1","http://dbpedia.org/page/Microsoft_Windows","","","","299.0"
-"Storm","Intel Xeon E5-1650 v3","6","15","-1","453","-1","http://dbpedia.org/page/Microsoft_Windows","","","","349.0"
-"Storm","Intel Dual Xeon E5606","8","7","545","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","","405.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","1847","-1","-1","http://dbpedia.org/page/Microsoft_Windows","","","","409.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","-1","453","-1","http://dbpedia.org/page/Microsoft_Windows","","","","439.0"
-"Storm","Intel Dual Xeon E5-2620 v3","12","31","-1","452","-1","http://dbpedia.org/page/Microsoft_Windows","","","","459.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","-1","917","-1","http://dbpedia.org/page/Microsoft_Windows","","","","559.0"
-"Storm","Intel Xeon E5-1650 v3","6","31","-1","918","-1","http://dbpedia.org/page/Microsoft_Windows","","","","559.0"
-"Storm","Intel Dual Xeon E5606","8","39","-1","940","-1","http://dbpedia.org/page/Microsoft_Windows","","","","580.0"
-"Storm","Intel Dual Xeon E5-2620 v3","12","31","-1","917","-1","http://dbpedia.org/page/Microsoft_Windows","","","","589.0"
-"Storm","Intel Dual Xeon E5-2650 v3","20","31","-1","453","-1","http://dbpedia.org/page/Microsoft_Windows","","","","619.0"
-"Storm","Intel Dual Xeon E5-2650 v3","20","62","-1","917","-1","http://dbpedia.org/page/Microsoft_Windows","","","","889.0"
-"Storm","Intel Dual Xeon E5-2690 v3","24","94","-1","917","-1","http://dbpedia.org/page/Microsoft_Windows","","","","1309.0"
-"Storm","Intel Dual Xeon E5-2697 v3","28","125","-1","1847","-1","http://dbpedia.org/page/Microsoft_Windows","","","","1719.0"
+"Storm","Intel Core i5-760","4.0","2.0","453.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","145.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","-1.0","220.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","179.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","-1.0","220.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","179.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","918.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","199.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","918.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","199.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","15.6","-1.0","220.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","229.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","15.6","-1.0","220.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","229.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","7.8","1847.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","249.0"
+"Storm","Intel Xeon E3-1271 v3","4.0","15.6","-1.0","452.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","259.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","220.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","299.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","220.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","299.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","15.6","-1.0","453.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","349.0"
+"Storm","Intel Xeon E3-1240 V2","4.0","31.5","-1.0","463.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","350.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","1847.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","409.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","453.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","439.0"
+"Storm","Intel Xeon E5-2603","8.0","31.5","1849.0","-1.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","450.0"
+"Storm","Intel Dual Xeon E5-2620 v3","12.0","31.3","-1.0","452.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","459.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","918.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","559.0"
+"Storm","Intel Xeon E5-1650 v3","6.0","31.3","-1.0","917.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","559.0"
+"Storm","Intel Dual Xeon E5-2620 v3","12.0","31.3","-1.0","917.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","589.0"
+"Storm","Intel Dual Xeon E5-2650 v3","20.0","31.3","-1.0","453.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","619.0"
+"Storm","Intel Dual Xeon E5-2650 v3","20.0","31.3","-1.0","453.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","619.0"
+"Storm","Intel Dual Xeon E5-2650 v3","20.0","62.8","-1.0","917.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","889.0"
+"Storm","Intel Dual Xeon E5-2690 v3","24.0","94.3","-1.0","917.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","1309.0"
+"Storm","Intel Dual Xeon E5-2697 v3","28.0","125.8","-1.0","1847.0","-1.0","http://dbpedia.org/page/Microsoft_Windows","","","","1719.0"

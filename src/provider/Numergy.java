@@ -28,17 +28,17 @@ public class Numergy extends Provider {
 		this.currency = new Euro();
 	}
 	
-	public int getCpu() throws Exception{
+	public double getCpu() throws Exception{
 		WebElement cpu = driver.findElement(By.className("js-server-size-detail"));
 		String cpuText = cpu.getText().split("-")[0];
-		int cpuValue = (int)this.extractNumber(cpuText);
+		double cpuValue = this.extractNumber(cpuText);
 		return cpuValue;
 	}
 	
-	public int getRam() throws Exception{
+	public double getRam() throws Exception{
 		WebElement ram = driver.findElement(By.className("js-server-size-detail"));
 		String ramText = ram.getText().split("-")[1];
-		int ramValue = (int)this.extractNumber(ramText);
+		double ramValue = this.extractNumber(ramText);
 		return ramValue;
 	}
 	

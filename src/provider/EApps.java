@@ -39,15 +39,15 @@ public class EApps extends Provider{
 		List<WebElement> ps = block.findElements(By.tagName("p"));
 		for(WebElement p : ps){
 			if (p.getText().contains("Cores")){
-				config.setCpu((int)this.extractNumber(p.getText()));
+				config.setCpu(this.extractNumber(p.getText()));
 				System.out.println("cpu : "+config.cpu);
 			}
 			else if(p.getText().contains("RAM")){
-				config.setRam((int)(this.extractNumber(p.getText())/1000)); // divide 1000 because of MB
+				config.setRam((this.extractNumber(p.getText())/1000)); // divide 1000 because of MB
 				System.out.println("ram : "+config.ram);
 			}
 			else if(p.getText().contains("Disk")){
-				config.setSsd((int)this.extractNumber(p.getText()));
+				config.setSsd(this.extractNumber(p.getText()));
 				System.out.println("disk : "+config.ssd);
 			}
 		}

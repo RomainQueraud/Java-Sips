@@ -76,9 +76,9 @@ public class MicrosoftAzure extends Provider {
 
 				List<WebElement> tds = tr.findElements(By.tagName("td"));
 				config.setConfigName(tds.get(0).getText());
-				config.setCpu((int)this.extractNumber(tds.get(1).getText()));
-				config.setRam((int)this.extractNumber(tds.get(2).getText()));
-				config.setSsd((int)this.extractNumber(tds.get(3).getText()));
+				config.setCpu(this.extractNumber(tds.get(1).getText()));
+				config.setRam(this.extractNumber(tds.get(2).getText()));
+				config.setSsd(this.extractNumber(tds.get(3).getText()));
 				if(windows){
 					config.setOsUri(URI.windows);
 				}

@@ -39,13 +39,13 @@ public class Joyent extends Provider {
 			List<WebElement> lis = modal.findElements(By.tagName("li"));
 			for(WebElement li : lis){
 				if(li.getText().contains("RAM")){
-					config.setRam((int)this.extractNumber(li.getText()));
+					config.setRam(this.extractNumber(li.getText()));
 				}
 				else if(li.getText().contains("CPU")){
-					config.setCpu((int)this.extractNumber(li.getText()));
+					config.setCpu(this.extractNumber(li.getText()));
 				}
 				else if(li.getText().contains("Disk")){
-					config.setHdd((int)this.extractNumber(li.getText())); //Not precised
+					config.setHdd(this.extractNumber(li.getText())); //Not precised
 				}
 				else if(li.getText().contains("API Name")){
 					config.setConfigName(li.getText());

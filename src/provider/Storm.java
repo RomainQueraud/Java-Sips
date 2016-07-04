@@ -77,13 +77,13 @@ public class Storm extends Provider {
 							config.setPrice(this.extractNumber(td.getText()));
 						}
 						else if(td.getText().contains("GB")){
-							config.setRam((int)this.extractNumber(td.getText()));
+							config.setRam(this.extractNumber(td.getText()));
 						}
 						else if(td.getText().contains("CPU")){
-							config.setCpu((int)this.extractNumber(td.getText()));
+							config.setCpu(this.extractNumber(td.getText()));
 						}
 						else{
-							config.setSsd((int)this.extractNumber(td.getText()));
+							config.setSsd(this.extractNumber(td.getText()));
 						}
 					}
 					System.out.println(config);
@@ -120,13 +120,13 @@ public class Storm extends Provider {
 							config.setPrice(this.extractNumber(td.getText()));
 						}
 						else if(td.getText().contains("GB")){
-							config.setRam((int)this.extractNumber(td.getText()));
+							config.setRam(this.extractNumber(td.getText()));
 						}
 						else if(td.getText().contains("CPU")){
-							config.setCpu((int)this.extractNumber(td.getText()));
+							config.setCpu(this.extractNumber(td.getText()));
 						}
 						else{
-							config.setHdd((int)this.extractNumber(td.getText()));
+							config.setHdd(this.extractNumber(td.getText()));
 						}
 					}
 					System.out.println(config);
@@ -158,13 +158,13 @@ public class Storm extends Provider {
 						}
 						
 						List<WebElement> tds = tr.findElements(By.tagName("td"));
-						config.setCpu((int)this.extractNumber(tds.get(3).getText()));
-						config.setRam((int)this.extractNumber(tds.get(4).getText()));
+						config.setCpu(this.extractNumber(tds.get(3).getText()));
+						config.setRam(this.extractNumber(tds.get(4).getText()));
 						if(tds.get(7).getText().equals("SSD")){
-							config.setSsd((int)this.extractNumber(tds.get(6).getText()));
+							config.setSsd(this.extractNumber(tds.get(6).getText()));
 						}
 						else{
-							config.setHdd((int)this.extractNumber(tds.get(6).getText()));
+							config.setHdd(this.extractNumber(tds.get(6).getText()));
 						}
 						config.setPrice(this.extractNumber(tds.get(9).getText()));
 						

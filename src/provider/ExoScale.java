@@ -76,13 +76,13 @@ public class ExoScale extends Provider {
 		config.setProvider(this);
 		config.setConfigName(configName);
 		config.setCpu(cpuValue);
-		config.setRam((int)ramValue);
+		config.setRam(ramValue);
 		
 		WebElement disk = driver.findElement(By.className("summary")).findElement(By.className("hdd")).findElement(By.className("spec-value"));
 		double diskValue = this.extractNumber(disk.getText());
 		//System.out.println("disk : "+diskValue);
 		
-		config.setSsd((int) diskValue);
+		config.setSsd( diskValue);
 		if(windows){
 			config.setOsUri(URI.windows);
 		}

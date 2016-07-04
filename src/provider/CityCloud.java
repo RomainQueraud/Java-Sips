@@ -60,19 +60,19 @@ public class CityCloud extends Provider {
 				for(WebElement li : lis){
 					//System.out.println("<-- "+li.getText());
 					if(li.getText().contains("core")){
-						config.setCpu((int)this.extractNumber(li.getText()));
+						config.setCpu(this.extractNumber(li.getText()));
 						//System.out.println(config.cpu+" cpu -->");
 					}
 					else if(li.getText().contains("RAM")){
-						config.setRam((int)this.extractNumber(li.getText()));
+						config.setRam(this.extractNumber(li.getText()));
 						//System.out.println(config.ram+" ram -->");
 					}
 					else if(li.getText().contains("disk")){
-						config.setHdd((int)this.extractNumber(li.getText()));
+						config.setHdd(this.extractNumber(li.getText()));
 						//System.out.println(config.hdd+" hdd -->");
 					}
 					else if(li.getText().contains("transfer")){
-						config.setTransferSpeed((int)this.extractNumber(li.getText()));
+						config.setTransferSpeed(this.extractNumber(li.getText()));
 						//System.out.println(config.transferSpeed+" transfer -->");
 					}
 				}

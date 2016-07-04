@@ -46,31 +46,31 @@ public class LiquidWeb extends Provider {
 			config.setProvider(this);
 			List<WebElement> lis = div.findElement(By.tagName("ul")).findElements(By.tagName("li"));
 			config.setConfigName(this.lisGetText(lis, 0));
-			config.setCpu((int)this.extractNumber(this.lisGetText(lis, 1)));
-			config.setRam((int)this.extractNumber(this.lisGetText(lis, 2)));
-			config.setSsd((int)this.extractNumber(this.lisGetText(lis, 3)));
+			config.setCpu(this.extractNumber(this.lisGetText(lis, 1)));
+			config.setRam(this.extractNumber(this.lisGetText(lis, 2)));
+			config.setSsd(this.extractNumber(this.lisGetText(lis, 3)));
 			if(this.lisGetText(lis, 3).contains("TB")){
 				config.setSsd(config.ssd*1000); //Given in TB
 			}
 			if(this.lisGetText(lis, 4).contains("Bandwidth")){
-				config.setTransferSpeed((int)this.extractNumber(this.lisGetText(lis, 4)));
+				config.setTransferSpeed(this.extractNumber(this.lisGetText(lis, 4)));
 			}
 			else{
-				config.setHdd((int)this.extractNumber(this.lisGetText(lis, 4)));
+				config.setHdd(this.extractNumber(this.lisGetText(lis, 4)));
 				if(this.lisGetText(lis, 4).contains("TB")){
 					config.setHdd(config.hdd*1000); //Given in TB
 				}
 				if(this.lisGetText(lis, 5).contains("Backups")){
 					if(this.lisGetText(lis, 5).contains("TB")){
-						config.setHdd(config.hdd + 1000*(int)this.extractNumber(this.lisGetText(lis, 5)));
+						config.setHdd(config.hdd + 1000*this.extractNumber(this.lisGetText(lis, 5)));
 					}
 					else{
-						config.setHdd(config.hdd + (int)this.extractNumber(this.lisGetText(lis, 5)));
+						config.setHdd(config.hdd + this.extractNumber(this.lisGetText(lis, 5)));
 					}
-					config.setTransferSpeed((int)this.extractNumber(this.lisGetText(lis, 6)));
+					config.setTransferSpeed(this.extractNumber(this.lisGetText(lis, 6)));
 				}
 				else{
-					config.setTransferSpeed((int)this.extractNumber(this.lisGetText(lis, 5)));
+					config.setTransferSpeed(this.extractNumber(this.lisGetText(lis, 5)));
 				}
 			}
 			WebElement price = div.findElement(By.className("regular-price"));

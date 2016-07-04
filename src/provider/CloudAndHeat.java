@@ -36,19 +36,19 @@ public class CloudAndHeat extends Provider {
 			List<WebElement> spans = div.findElements(By.tagName("span"));
 			for(WebElement span : spans){
 				if(span.getText().contains("CPU")){
-					config.setCpu((int)this.extractNumber(span.getText()));
+					config.setCpu(this.extractNumber(span.getText()));
 				}
 				else if(span.getText().contains("RAM")){
-					config.setRam((int)this.extractNumber(span.getText()));
+					config.setRam(this.extractNumber(span.getText()));
 				}
 				else if(span.getText().contains("HDD")){
-					config.setHdd((int)this.extractNumber(span.getText()));
+					config.setHdd(this.extractNumber(span.getText()));
 				}
 				else if(span.getText().contains("SSD")){
-					config.setSsd((int)this.extractNumber(span.getText()));
+					config.setSsd(this.extractNumber(span.getText()));
 				}
 				else if(span.getText().contains("Traffic")){
-					config.setTransferSpeed((int)this.extractNumber(span.getText()));
+					config.setTransferSpeed(this.extractNumber(span.getText()));
 					//TODO be carefull because it can take the upper 3...
 				}
 				else if(span.getText().contains("Month")){

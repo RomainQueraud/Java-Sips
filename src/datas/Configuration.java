@@ -11,12 +11,12 @@ public class Configuration {
 	public int id;
 	public String configName;
 	public Provider provider;
-	public int cpu;
+	public double cpu;
 	public double cpuSpeed;
-	public int ram; /* Gb */
-	public int hdd;
-	public int ssd; /* Gb */
-	public int transferSpeed; /* Tb */
+	public double ram; /* Gb */
+	public double hdd;
+	public double ssd; /* Gb */
+	public double transferSpeed; /* Tb */
 	public String osUri;
 	public String currencyUri;
 	public String countryUri;
@@ -31,7 +31,7 @@ public class Configuration {
 		this.configName = configName;
 	}
 
-	public void setCpu(int cpu) {
+	public void setCpu(double cpu) {
 		this.cpu = cpu;
 	}
 	
@@ -39,19 +39,19 @@ public class Configuration {
 		this.cpuSpeed = cpuSpeed;
 	}
 
-	public void setRam(int ram) {
+	public void setRam(double ram) {
 		this.ram = ram;
 	}
 
-	public void setHdd(int hdd) {
+	public void setHdd(double hdd) {
 		this.hdd = hdd;
 	}
 
-	public void setSsd(int ssd) {
+	public void setSsd(double ssd) {
 		this.ssd = ssd;
 	}
 
-	public void setTransferSpeed(int transferSpeed) {
+	public void setTransferSpeed(double transferSpeed) {
 		this.transferSpeed = transferSpeed;
 	}
 
@@ -84,7 +84,7 @@ public class Configuration {
 		this.setProvider(config.provider);
 	}
 
-	public Configuration(String configName, int cpu, int ram, int hdd, int ssd, int transferSpeed,
+	public Configuration(String configName, double cpu, double ram, double hdd, double ssd, double transferSpeed,
 			String osUri, String currencyUri, String countryUri, String comment, double price) {
 		super();
 		switch(osUri){
@@ -122,8 +122,8 @@ public class Configuration {
 	
 	public Configuration(String[] line){
 		//line[0] is the name of the provider
-		this(line[1],Integer.parseInt(line[2]),Integer.parseInt(line[3]),
-				Integer.parseInt(line[4]),Integer.parseInt(line[5]), Integer.parseInt(line[6]),
+		this(line[1],Double.parseDouble(line[2]),Double.parseDouble(line[3]),
+				Double.parseDouble(line[4]),Double.parseDouble(line[5]), Double.parseDouble(line[6]),
 				line[7],line[8],line[9],line[10],Double.parseDouble(line[11]));
 	}
 	
@@ -146,13 +146,11 @@ public class Configuration {
 		Resource configurationResource = model.createResource(URI.baseURI+this.provider.name+"/"+this.id+"/")
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "id"), ""+this.id)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "providerName"), ""+this.provider.name)
-				.addProperty(ResourceFactory.createProperty(URI.baseURI, "configName"), ""+this.configName)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "cpu"), ""+this.cpu)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "ram"), ""+this.ram)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "hdd"), ""+this.hdd)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "ssd"), ""+this.ssd)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "transferSpeed"), ""+this.transferSpeed)
-				.addProperty(ResourceFactory.createProperty(URI.baseURI, "currency"), ""+this.currencyUri)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "comment"), ""+this.comment)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "priceEuro"), ""+this.roundPrice(this.provider.currency.toEuro(this.price)))
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "price"), ""+this.roundPrice(this.provider.currency.toDollar(this.price)));

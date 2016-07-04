@@ -86,24 +86,24 @@ public class DimensionData extends Provider {
 	/*
 	 * if n is negative, will perform n mooves for decreasing the number.
 	 */
-	public void mooveElement(int n, String sliderId) throws InterruptedException{
+	public void mooveElement(double d, String sliderId) throws InterruptedException{
 		WebElement slider = driver.findElement(By.id(sliderId)).findElement(By.className("ui-slider-handle"));
-		if(n>=0){
-			for(int i=0 ; i<n ; i++){
+		if(d>=0){
+			for(int i=0 ; i<d ; i++){
 				slider.sendKeys(Keys.ARROW_RIGHT);
 			}
 		}
 		else{
-			for(int i=0 ; i>n ; i--){
+			for(int i=0 ; i>d ; i--){
 				slider.sendKeys(Keys.ARROW_LEFT);
 			}
 		}
 		Thread.sleep(1000);
 	}
 	
-	public void mooveCpu(int n) throws InterruptedException{
-		this.mooveElement(n, "cpu-slider");
-		this.cpuActual += n;
+	public void mooveCpu(double d) throws InterruptedException{
+		this.mooveElement(d, "cpu-slider");
+		this.cpuActual += d;
 		if(this.cpuActual>this.cpuMax){
 			this.cpuActual=this.cpuMax;
 		}
@@ -112,9 +112,9 @@ public class DimensionData extends Provider {
 		}
 	}
 	
-	public void mooveRam(int n) throws InterruptedException{
-		this.mooveElement(n, "ram-slider");
-		this.ramActual += n;
+	public void mooveRam(double d) throws InterruptedException{
+		this.mooveElement(d, "ram-slider");
+		this.ramActual += d;
 		if(this.ramActual>this.ramMax){
 			this.ramActual=this.ramMax;
 		}
@@ -123,9 +123,9 @@ public class DimensionData extends Provider {
 		}
 	}
 	
-	public void mooveDisk(int n) throws InterruptedException{
-		this.mooveElement(n, "storage-slider2");
-		this.diskActual += n;
+	public void mooveDisk(double d) throws InterruptedException{
+		this.mooveElement(d, "storage-slider2");
+		this.diskActual += d;
 		if(this.diskActual>this.diskMax){
 			this.diskActual=this.diskMax;
 		}
@@ -156,7 +156,7 @@ public class DimensionData extends Provider {
 					config.setProvider(this);
 					config.setComment(this.getComment());
 					config.setCpu(this.getCpu());
-					config.setRam((int)this.getRam());
+					config.setRam(this.getRam());
 					config.setHdd(this.getDisk());
 					config.setPrice(this.getPrice());
 					this.configurations.add(config);
@@ -165,19 +165,19 @@ public class DimensionData extends Provider {
 					if(this.cpuActual>=this.cpuMax){
 						break; //Break after the last turn
 					}
-					this.mooveCpu((int)(this.cpuClick*this.crawlSpeed));
+					this.mooveCpu((this.cpuClick*this.crawlSpeed));
 				}
 				this.mooveCpu(-this.cpuClick);
 				if(this.ramActual>=this.ramMax){
 					break;
 				}
-				this.mooveRam((int)(this.ramClick*this.crawlSpeed)); 
+				this.mooveRam((this.ramClick*this.crawlSpeed)); 
 			}
 			this.mooveRam(-this.ramClick); 
 			if(this.diskActual>=this.diskMax){
 				break;
 			}
-			this.mooveDisk((int)(this.diskClick*this.crawlSpeed));
+			this.mooveDisk((this.diskClick*this.crawlSpeed));
 		}
 		
 		this.closeFirefox();

@@ -62,7 +62,7 @@ public class ZippyCloud extends Provider {
 				if(li.getText().contains("Core")){
 					double cpu = this.extractNumber(li.getText());
 					System.out.println("cpu : "+cpu);
-					config.setCpu((int)cpu);
+					config.setCpu(cpu);
 				}
 				else if(li.getText().contains("month")){
 					double price = this.extractNumber(li.getText());
@@ -72,12 +72,12 @@ public class ZippyCloud extends Provider {
 				else if(li.getText().contains("RAM")){
 					double ram = this.extractNumber(li.getText());
 					System.out.println("ram : "+ram);
-					config.setRam((int)ram);
+					config.setRam(ram);
 				}
 				else if(li.getText().contains("Storage")){
 					double disk = this.extractNumber(li.getText());
 					System.out.println("disk : "+disk);
-					config.setSsd((int)disk);
+					config.setSsd(disk);
 				}
 			}
 			this.configurations.add(config);

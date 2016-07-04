@@ -32,10 +32,10 @@ public class ZettaGrid extends Provider {
 		this.currency = new Dollar();
 	}
 	
-	public int getCpu() throws Exception{
+	public double getCpu() throws Exception{
 		WebElement cpu = driver.findElement(By.id("option_820_zg-cs-processor"));
 		double number = this.extractNumber(cpu.getAttribute("value"));
-		return (int) number;
+		return  number;
 	}
 	
 	public double getRam() throws Exception{
@@ -44,10 +44,10 @@ public class ZettaGrid extends Provider {
 		return number;
 	}
 	
-	public int getDisk() throws Exception{
+	public double getDisk() throws Exception{
 		WebElement disk = driver.findElement(By.id("option_820_zg-cs-ios250-storage"));
 		double number = this.extractNumber(disk.getAttribute("value"));
-		return ((int) number);
+		return ( number);
 	}
 	
 	public double getTransfer() throws Exception{
@@ -77,35 +77,35 @@ public class ZettaGrid extends Provider {
 	/*
 	 * if n is negative, will perform n mooves for decreasing the number.
 	 */
-	public void mooveElement(int n, String sliderId) throws InterruptedException{
+	public void mooveElement(double d, String sliderId) throws InterruptedException{
 		WebElement slider = driver.findElement(By.id(sliderId)).findElement(By.className("ui-slider-handle"));
-		if(n>=0){
-			for(int i=0 ; i<n ; i++){
+		if(d>=0){
+			for(int i=0 ; i<d ; i++){
 				slider.sendKeys(Keys.ARROW_RIGHT);
 			}
 		}
 		else{
-			for(int i=0 ; i>n ; i--){
+			for(int i=0 ; i>d ; i--){
 				slider.sendKeys(Keys.ARROW_LEFT);
 			}
 		}
 		Thread.sleep(1000);
 	}
 	
-	public void mooveCpu(int n) throws InterruptedException{
-		this.mooveElement(n, "slider_820_zg-cs-processor");
+	public void mooveCpu(double d) throws InterruptedException{
+		this.mooveElement(d, "slider_820_zg-cs-processor");
 	}
 	
-	public void mooveRam(int n) throws InterruptedException{
-		this.mooveElement(n, "slider_820_zg-cs-memory");
+	public void mooveRam(double d) throws InterruptedException{
+		this.mooveElement(d, "slider_820_zg-cs-memory");
 	}
 	
-	public void mooveDisk(int n) throws InterruptedException{
-		this.mooveElement(n, "slider_820_zg-cs-ios250-storage");
+	public void mooveDisk(double d) throws InterruptedException{
+		this.mooveElement(d, "slider_820_zg-cs-ios250-storage");
 	}
 	
-	public void mooveTransfer(int n) throws InterruptedException{
-		this.mooveElement(n, "slider_820_zg-cs-traffic");
+	public void mooveTransfer(double d) throws InterruptedException{
+		this.mooveElement(d, "slider_820_zg-cs-traffic");
 	}
 	
 	@Override
@@ -141,16 +141,16 @@ public class ZettaGrid extends Provider {
 		this.loadWebpage();
 		Thread.sleep(3000);
 		
-		for(int transferActual = 0 ; transferActual < this.transferClick ; transferActual+=(int)(this.transferClick*this.crawlSpeed)){
-			for(int diskActual = 0 ; diskActual < this.diskClick ; diskActual+=(int)(this.diskClick*this.crawlSpeed)){
-				for(int ramActual = 0 ; ramActual < this.ramClick ; ramActual+=(int)(this.ramClick*this.crawlSpeed)){
-					for(int cpuActual = 0 ; cpuActual < this.cpuClick ; cpuActual+=(int)(this.cpuClick*this.crawlSpeed)){
+		for(int transferActual = 0 ; transferActual < this.transferClick ; transferActual+=(this.transferClick*this.crawlSpeed)){
+			for(int diskActual = 0 ; diskActual < this.diskClick ; diskActual+=(this.diskClick*this.crawlSpeed)){
+				for(int ramActual = 0 ; ramActual < this.ramClick ; ramActual+=(this.ramClick*this.crawlSpeed)){
+					for(int cpuActual = 0 ; cpuActual < this.cpuClick ; cpuActual+=(this.cpuClick*this.crawlSpeed)){
 						Configuration config = new Configuration(); //For linux config
 						config.setProvider(this);
 						config.setCpu(this.getCpu());
-						config.setRam((int)this.getRam());
-						config.setSsd(this.getDisk());
-						config.setTransferSpeed((int)this.getTransfer());
+						config.setRam(this.getRam());
+						config.setHdd(this.getDisk());
+						config.setTransferSpeed(this.getTransfer());
 						config.setPrice(this.getPrice());
 						config.setOsUri(URI.linux);
 						this.configurations.add(config);
@@ -159,24 +159,24 @@ public class ZettaGrid extends Provider {
 						Configuration config2 = new Configuration(); //For windows config
 						config2.setProvider(this);
 						config2.setCpu(this.getCpu());
-						config2.setRam((int)this.getRam());
-						config2.setSsd(this.getDisk());
-						config2.setTransferSpeed((int)this.getTransfer());
+						config2.setRam(this.getRam());
+						config2.setHdd(this.getDisk());
+						config2.setTransferSpeed(this.getTransfer());
 						config2.setPrice(this.getPrice()+this.getWindowsPrice());
 						config2.setOsUri(URI.windows);
 						this.configurations.add(config2);
 						System.out.println(config2);
 						
-						this.mooveCpu((int)(this.cpuClick*this.crawlSpeed));
+						this.mooveCpu((this.cpuClick*this.crawlSpeed));
 					}
 					this.mooveCpu(-this.cpuClick);
-					this.mooveRam((int)(this.ramClick*this.crawlSpeed)); 
+					this.mooveRam((this.ramClick*this.crawlSpeed)); 
 				}
 				this.mooveRam(-this.ramClick); 
-				this.mooveDisk((int)(this.diskClick*this.crawlSpeed));
+				this.mooveDisk((this.diskClick*this.crawlSpeed));
 			}
 			this.mooveDisk(-this.diskClick);
-			this.mooveTransfer((int)(this.transferClick*this.crawlSpeed));
+			this.mooveTransfer((this.transferClick*this.crawlSpeed));
 		}
 		
 		Thread.sleep(3000);

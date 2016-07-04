@@ -16,7 +16,7 @@ public class VpsNet extends Provider {
 
 	private VpsNet() {
 		this.name = "VpsNet";
-		this.baseUrl = "https://www.vps.net/products/ssd-vps2#slider-ssd";
+		this.baseUrl = "https://www.vps.net/products/ssd-vps#slider-ssd";
 		this.continents.add(URI.asia);
 		this.continents.add(URI.europe);
 		this.continents.add(URI.australia);
@@ -40,15 +40,15 @@ public class VpsNet extends Provider {
 		
 		WebElement ram = driver.findElement(By.className("ram-field"));
 		double ramNumber = this.extractNumber(ram.getText())/1000;//Given in Mb
-		config.setRam((int) ramNumber);
+		config.setRam( ramNumber);
 		
 		WebElement disk = driver.findElement(By.className("disk-field"));
 		double diskNumber = this.extractNumber(disk.getText());
-		config.setSsd((int) diskNumber);
+		config.setSsd( diskNumber);
 		
 		WebElement transfer = driver.findElement(By.className("traffic-field"));
 		double transferNumber = this.extractNumber(transfer.getText());
-		config.setTransferSpeed((int) transferNumber);
+		config.setTransferSpeed( transferNumber);
 		
 		WebElement price = driver.findElement(By.className("price-val"));
 		double priceNumber = this.extractNumber(price.getText());

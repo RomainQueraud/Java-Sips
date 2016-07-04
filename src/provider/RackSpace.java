@@ -31,7 +31,6 @@ public class RackSpace extends Provider {
 	public void removeAnnoyingElement() throws InterruptedException{
 		WebElement link = driver.findElement(By.id("geoip-continue"));
 		link.click();
-		Thread.sleep(1000);
 	}
 	
 	/*
@@ -72,10 +71,11 @@ public class RackSpace extends Provider {
 						//System.out.println("tds Size : "+tds.size());
 						
 						config.setConfigName(this.getDisplayedElement(tds, 0).getText());
-						config.setRam((int)this.extractNumber(this.getDisplayedElement(tds, 1).getText()));
-						config.setCpu((int)this.extractNumber(this.getDisplayedElement(tds, 2).getText()));
-						config.setSsd((int) (this.extractNumber(this.getDisplayedElement(tds, 3).getText())+this.extractNumber(this.getDisplayedElement(tds, 4).getText())));
-						config.setTransferSpeed((int)this.extractNumber(this.getDisplayedElement(tds, 5).getText())/1000); //Given in GB
+						config.setRam(this.extractNumber(this.getDisplayedElement(tds, 1).getText()));
+						config.setCpu(this.extractNumber(this.getDisplayedElement(tds, 2).getText()));
+						config.setSsd( (this.extractNumber(this.getDisplayedElement(tds, 3).getText())));
+						config.setHdd(this.extractNumber(this.getDisplayedElement(tds, 4).getText()));
+						config.setTransferSpeed(this.extractNumber(this.getDisplayedElement(tds, 5).getText())/1000); //Given in GB
 						config.setPrice(this.extractNumber(this.getDisplayedElement(tds, 6).getText())+this.extractNumber(this.getDisplayedElement(tds, 8).getText())); //tds[7] is the +
 						if(windows){
 							config.setOsUri(URI.windows);
@@ -110,44 +110,47 @@ public class RackSpace extends Provider {
 		this.openFirefox();
 		this.loadWebpage();
 		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		Thread.sleep(1000);
 		
 		this.removeAnnoyingElement();
+		Thread.sleep(1000);
 		Select select = new Select(driver.findElement(By.className("pricing-table-select-time")));
 		select.selectByValue("monthly");
 		Select selectOs;
 		WebElement tab;
 		WebElement div;
+		Thread.sleep(1000);
 		
-		tab = driver.findElement(By.id("tab-general"));
+		tab = driver.findElement(By.cssSelector("a[href*='tab-0']"));
 		executor.executeScript("arguments[0].click();", tab);
-		div = driver.findElement(By.id("general"));
+		div = driver.findElement(By.id("tab-0"));
 		selectOs = new Select(div.findElement(By.className("pricing-table-select-os")));
 		selectOs.selectByValue("linux");
 		this.addConfigurationsRackSpace(div, false);
 		selectOs.selectByValue("windows");
 		this.addConfigurationsRackSpace(div, true);
 		
-		tab = driver.findElement(By.id("tab-compute"));
+		tab = driver.findElement(By.cssSelector("a[href*='tab-1']"));
 		executor.executeScript("arguments[0].click();", tab);
-		div = driver.findElement(By.id("compute"));
+		div = driver.findElement(By.id("tab-1"));
 		selectOs = new Select(div.findElement(By.className("pricing-table-select-os")));
 		selectOs.selectByValue("linux");
 		this.addConfigurationsRackSpace(div, false);
 		selectOs.selectByValue("windows");
 		this.addConfigurationsRackSpace(div, true);
 		
-		tab = driver.findElement(By.id("tab-io"));
+		tab = driver.findElement(By.cssSelector("a[href*='tab-2']"));
 		executor.executeScript("arguments[0].click();", tab);
-		div = driver.findElement(By.id("io"));
+		div = driver.findElement(By.id("tab-2"));
 		selectOs = new Select(div.findElement(By.className("pricing-table-select-os")));
 		selectOs.selectByValue("linux");
 		this.addConfigurationsRackSpace(div, false);
 		selectOs.selectByValue("windows");
 		this.addConfigurationsRackSpace(div, true);
 		
-		tab = driver.findElement(By.id("tab-memory"));
+		tab = driver.findElement(By.cssSelector("a[href*='tab-3']"));
 		executor.executeScript("arguments[0].click();", tab);
-		div = driver.findElement(By.id("memory"));
+		div = driver.findElement(By.id("tab-3"));
 		selectOs = new Select(div.findElement(By.className("pricing-table-select-os")));
 		selectOs.selectByValue("linux");
 		this.addConfigurationsRackSpace(div, false);

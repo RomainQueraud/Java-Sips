@@ -85,12 +85,12 @@ public class UnitedStack extends Provider {
 									Configuration config = new Configuration();
 									config.setProvider(this);
 									
-									config.setCpu((int)this.extractNumber(cpu.getText()));
+									config.setCpu(this.extractNumber(cpu.getText()));
 									if(ram.getText().contains("M")){
-										config.setRam((int)this.extractNumber(ram.getText())/1000); //Given in Mb
+										config.setRam(this.extractNumber(ram.getText())/1000); //Given in Mb
 									}
 									else{
-										config.setRam((int)this.extractNumber(ram.getText()));
+										config.setRam(this.extractNumber(ram.getText()));
 									}
 									config.setHdd(diskValue);
 									if(os.getText().contains("Windows")){

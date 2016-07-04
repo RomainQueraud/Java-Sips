@@ -42,10 +42,10 @@ public class Linode extends Provider {
 			Configuration config = new Configuration();
 			config.setProvider(this);
 			config.setConfigName(tds.get(0).getText());
-			config.setRam((int)this.extractNumber(tds.get(1).getText()));
-			config.setCpu((int)this.extractNumber(tds.get(2).getText()));
-			config.setSsd((int)this.extractNumber(tds.get(3).getText()));
-			config.setTransferSpeed((int)this.extractNumber(tds.get(4).getText()));
+			config.setRam(this.extractNumber(tds.get(1).getText()));
+			config.setCpu(this.extractNumber(tds.get(2).getText()));
+			config.setSsd(this.extractNumber(tds.get(3).getText()));
+			config.setTransferSpeed(this.extractNumber(tds.get(4).getText()));
 			WebElement price = tr.findElement(By.className("pricing-monthly"));
 			config.setPrice(this.extractNumber(price.getText()));
 			

@@ -32,13 +32,13 @@ public class VirtualServer extends Provider {
 		List<WebElement> lis = driver.findElement(By.id(id)).findElements(By.tagName("li"));
 		for(WebElement li : lis){
 			if(li.getText().contains("CPU")){
-				config.setCpu((int)this.extractNumber(li.getText()));
+				config.setCpu(this.extractNumber(li.getText()));
 			}
 			else if(li.getText().contains("RAM")){
-				config.setRam((int)this.extractNumber(li.getText()));
+				config.setRam(this.extractNumber(li.getText()));
 			}
 			else if(li.getText().contains("storage")){
-				config.setSsd((int)this.extractNumber(li.getText()));
+				config.setSsd(this.extractNumber(li.getText()));
 			}
 		}
 		

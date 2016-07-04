@@ -3,6 +3,7 @@ package provider;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -15,6 +16,7 @@ public class E24Cloud extends Provider {
 	public static E24Cloud singleton = new E24Cloud(); 
 	int cpuClick = 15;
 	int ramClick = 63;
+	int ramMax = 32;
 	int diskClick = 50;
 	int transferClick = 5000;
 	
@@ -29,10 +31,10 @@ public class E24Cloud extends Provider {
 		this.currency = new Euro();
 	}
 	
-	public int getCpu() throws Exception{
+	public double getCpu() throws Exception{
 		WebElement cpu = driver.findElement(By.id("cloud-cores-amount"));
 		double number = this.extractNumber(cpu.getText());
-		return (int) number;
+		return number;
 	}
 	
 	public double getRam() throws Exception{
@@ -44,10 +46,10 @@ public class E24Cloud extends Provider {
 	/*
 	 * Add 40 because of the base offer
 	 */
-	public int getDisk() throws Exception{
+	public double getDisk() throws Exception{
 		WebElement disk = driver.findElement(By.id("cloud-storage-amount"));
 		double number = this.extractNumber(disk.getText());
-		return ((int) number)+40;
+		return (number)+40;
 	}
 	
 	/*
@@ -76,36 +78,39 @@ public class E24Cloud extends Provider {
 	/*
 	 * if n is negative, will perform n clicks for decreasing the number.
 	 */
-	public void mooveElement(int n, String minusClass, String plusClass) throws InterruptedException{
+	public void mooveElement(double d, String minusClass, String plusClass) throws InterruptedException{
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
 		WebElement minus = driver.findElement(By.className(minusClass));
 		WebElement plus = driver.findElement(By.className(plusClass));
-		if(n>=0){
-			for(int i=0 ; i<n ; i++){
-				plus.click();
+		if(d>=0){
+			for(int i=0 ; i<d ; i++){
+				//plus.click();
+				executor.executeScript("arguments[0].click();", plus);
 			}
 		}
 		else{
-			for(int i=0 ; i>n ; i--){
-				minus.click();
+			for(int i=0 ; i>d ; i--){
+				//minus.click();
+				executor.executeScript("arguments[0].click();", minus);
 			}
 		}
 		Thread.sleep(1000);
 	}
 	
-	public void mooveCpu(int n) throws InterruptedException{
-		this.mooveElement(n, "core-minus", "core-plus");
+	public void mooveCpu(double d) throws InterruptedException{
+		this.mooveElement(d, "core-minus", "core-plus");
 	}
 	
-	public void mooveRam(int n) throws InterruptedException{
-		this.mooveElement(n, "ram-minus", "ram-plus");
+	public void mooveRam(double d) throws InterruptedException{
+		this.mooveElement(d, "ram-minus", "ram-plus");
 	}
 	
-	public void mooveDisk(int n) throws InterruptedException{
-		this.mooveElement(n, "hdd-minus", "hdd-plus");
+	public void mooveDisk(double d) throws InterruptedException{
+		this.mooveElement(d, "hdd-minus", "hdd-plus");
 	}
 	
-	public void mooveTransfer(int n) throws InterruptedException{
-		this.mooveElement(n, "b-minus", "b-plus");
+	public void mooveTransfer(double d) throws InterruptedException{
+		this.mooveElement(d, "b-minus", "b-plus");
 	}
 	
 	public void mooveOs(boolean selectWindows) throws InterruptedException{
@@ -132,33 +137,37 @@ public class E24Cloud extends Provider {
 		Thread.sleep(3000);
 		
 		//boolean[] windows = {true, false};
-		for(int transferActual = 0 ; transferActual < this.transferClick ; transferActual+=(int)(this.transferClick*this.crawlSpeed)){
-			for(int diskActual = 0 ; diskActual < this.diskClick ; diskActual+=(int)(this.diskClick*this.crawlSpeed)){
-				for(int cpuActual = 0 ; cpuActual < this.cpuClick ; cpuActual+=(int)(this.cpuClick*this.crawlSpeed)){
-					for(int ramActual = cpuActual ; ramActual < this.ramClick ; ramActual+=(int)(this.ramClick*this.crawlSpeed)){
-						if(cpuActual < (this.cpuClick-(int)(this.cpuClick*this.crawlSpeed))){
-							ramActual = this.ramClick; //This way, ram doesn't increase while cpu isn't at it's maximum
+		for(int transferActual = 0 ; transferActual <= this.transferClick ; transferActual+=(this.transferClick*this.crawlSpeed)){
+			for(int diskActual = 0 ; diskActual <= this.diskClick ; diskActual+=(this.diskClick*this.crawlSpeed)){
+				for(int cpuActual = 0 ; cpuActual <= this.cpuClick ; cpuActual+=(this.cpuClick*this.crawlSpeed)){
+					int ramActual = 0;
+					while(ramActual <= this.ramClick && this.getRam()<this.ramMax){
+					//for(int ramActual = 0 ; ramActual <= this.ramClick ; ramActual+=(this.ramClick*this.crawlSpeed)){
+						if(cpuActual <= (this.cpuClick-(this.cpuClick*this.crawlSpeed))){
+							ramActual = this.ramClick + 1; //This way, ram doesn't increase while cpu isn't at it's maximum
 						}
 						else{
-							this.mooveRam((int)(this.ramClick*this.crawlSpeed));
+							this.mooveRam((this.ramClick*this.crawlSpeed));
 						}
+						System.out.println("ramActual : "+ramActual);
 						Configuration config = new Configuration();
 						config.setProvider(this);
 						config.setCpu(this.getCpu());
-						config.setRam((int)this.getRam());
+						config.setRam(this.getRam());
 						config.setSsd(this.getDisk());
-						config.setTransferSpeed((int)this.getTransfer());
+						config.setTransferSpeed(this.getTransfer());
 						config.setComment(this.getComment());
 						config.setPrice(this.getPrice());
 						this.configurations.add(config);
+						System.out.println(config);
 					}
-					this.mooveCpu((int)(this.cpuClick*this.crawlSpeed)); //Ram follow
+					this.mooveCpu((this.cpuClick*this.crawlSpeed)); //Ram follow
 				}
 				this.mooveCpu(-this.cpuClick); //Ram follow
-				this.mooveDisk((int)(this.diskClick*this.crawlSpeed));
+				this.mooveDisk((this.diskClick*this.crawlSpeed));
 			}
 			this.mooveDisk(-this.diskClick);
-			this.mooveTransfer((int)(this.transferClick*this.crawlSpeed));
+			this.mooveTransfer((this.transferClick*this.crawlSpeed));
 		}
 		
 		Thread.sleep(3000);
