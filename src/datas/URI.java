@@ -1,5 +1,8 @@
 package datas;
 
+/**
+ * List of URI
+ */
 public class URI {
 	
 	/* Url of the website */

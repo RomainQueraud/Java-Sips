@@ -24,22 +24,59 @@ import datas.Currency;
 import datas.Offset;
 import datas.URI;
 
+/**
+ * Abstract class that needs to implements the basics for every providers
+ */
 public abstract class Provider implements IProvider {
+	/**
+	 * Will be used by both URI, csv and FrontEnd to identify the provider.
+	 */
 	public String name = "Provider";
+	/**
+	 * No longer used, except for some providers
+	 */
 	public boolean crawl = false;
+	/**
+	 * Specify which currency is used by the provider, it will automatically convert to USD
+	 */
 	public Currency currency;
+	/**
+	 * Once filled, will be written in csv and/or converted into rdf format
+	 */
 	ArrayList<Configuration> configurations = new ArrayList<Configuration>();
+	/**
+	 * List of URIs 
+	 */
 	ArrayList<String> continents = new ArrayList<String>();
-	String billing = URI.nothing; /* minimum time required to purchase the service */
+	/**
+	 * minimum time required to purchase the service (usually URI.month)
+	 */
+	String billing = URI.nothing; 
 	
+	/**
+	 * from Selenium
+	 */
 	WebDriver driver;
+	
+	/**
+	 * No longer used
+	 */
 	Offset offset = new Offset(0,0,0,0); //step, cpu, ram, disk, transfer
 
+	/**
+	 * Used by the crawler to go on to the pricing page
+	 */
 	String baseUrl = "";
+	
+	/**
+	 * No longer used
+	 */
 	int maxOffset = 0;
 	
 	/***********Selenium**************/
-	/* Open Firefox*/
+	/**
+	 * Open Firefox
+	 */
 	public void openFirefox(){
 		System.out.print("Opening Firefox for "+this.name+"...");
 		driver = new FirefoxDriver();
@@ -75,7 +112,7 @@ public abstract class Provider implements IProvider {
 		this.configurations.add(configuration);
 	}
 	
-	/*
+	/**
 	 * @Deprecated Use the toResource function instead.
 	 */
 	@Deprecated public Bag toBag(Model model){
@@ -91,6 +128,11 @@ public abstract class Provider implements IProvider {
 		return providerBag;
 	}
 	
+	/**
+	 * 
+	 * @return Resource for provider that also contains the configurations resource	
+	 * @throws Exception
+	 */
 	public Resource toResource(Model model) throws Exception{
 		Resource providerResource = model.createResource(URI.baseURI+this.name+"/");
 		System.out.print(this.name+" to resource : ("+this.configurations.size()+") ");

@@ -13,7 +13,19 @@ public interface IProvider {
 	public void closeFirefox();
 	public void loadWebpage();
 	
+	/**
+	 * Will extract informations from the provider website.
+	 * Then it will append eveything to the configurations ArrayList.
+	 * Then it will write everything to the csv file.
+	 */
 	public void crawlFillWriteConfigurations() throws InterruptedException, IOException, Exception;
+	
+	/**
+	 * 
+	 * @param text from the WebElement.getText()
+	 * @return the first double found in the String
+	 * @throws Exception
+	 */
 	public double extractNumber(String text) throws Exception;
 	
 	public void addConfiguration(Configuration configuration);

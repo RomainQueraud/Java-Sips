@@ -120,6 +120,10 @@ public class Configuration {
 		this.price = price; //Monthly
 	}
 	
+	/*
+	 * Aim is to create a Configuration object from the reading of the csv file
+	 * @param line comes from the csv file
+	 */
 	public Configuration(String[] line){
 		//line[0] is the name of the provider
 		this(line[1],Double.parseDouble(line[2]),Double.parseDouble(line[3]),
@@ -127,6 +131,9 @@ public class Configuration {
 				line[7],line[8],line[9],line[10],Double.parseDouble(line[11]));
 	}
 	
+	/*
+	 * @return line to be written in the csv file
+	 */
 	public String[] getLine(){
 		String[] line = {this.provider.name, this.configName, ""+this.cpu, ""+this.ram, 
 				""+this.hdd, ""+this.ssd,""+this.transferSpeed,this.osUri, 
@@ -141,15 +148,10 @@ public class Configuration {
 	public double roundPrice(double price){
 		return ((int)(price*100))/100.0;
 	}
-	
-	/*
-	public void addCommentProperty(Resource resource){
-		if(this.comment!=""){
-			resource.addProperty(ResourceFactory.createProperty(URI.baseURI, "comment"), ""+this.comment);
-		}
-	}
-	*/
 
+	/*
+	 * @return a Resource object that can be written in the rdf file
+	 */
 	public Resource toResource(Model model){
 		Resource configurationResource = model.createResource(URI.baseURI+this.provider.name+"/"+this.id+"/")
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "id"), ""+this.id)
@@ -191,6 +193,9 @@ public class Configuration {
 		return ret;
 	}
 	
+	/*
+	 * test function
+	 */
 	public static void main(String[] args) {
 		Model model = ModelFactory.createDefaultModel();
 		Configuration config = new Configuration("S server Linux", 1, 1, 40, -1, 3000, URI.linux, URI.euro, "", "", 9.93);

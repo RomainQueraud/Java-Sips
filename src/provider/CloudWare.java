@@ -155,7 +155,7 @@ public class CloudWare extends Provider{
 				while(this.offset.ram<this.maxOffset){
 					while(this.offset.cpu<this.maxOffset){
 						Thread.sleep(1000);
-						Configuration configuration = new Configuration("", this.getCpu(), this.getRam(), -1, this.getDisk(), -1, this.getOs(os), "bgn","", this.getComment(), this.getPrice());
+						Configuration configuration = new Configuration("", this.getCpu(), this.getRam(), this.getDisk(), -1, -1, this.getOs(os), "bgn","", this.getComment(), this.getPrice());
 						configuration.setProvider(this);
 						this.configurations.add(configuration);
 						this.mooveCpu(this.offset.step);

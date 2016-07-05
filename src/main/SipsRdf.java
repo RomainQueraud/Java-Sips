@@ -41,6 +41,10 @@ import provider.VpsNet;
 import provider.ZettaGrid;
 import provider.ZippyCloud;
 
+/**
+ * Main class of the SIPS program.
+ * Crawl if needed and write/read the csv files. Then transform everything into an RDF and push to fuseki.
+ */
 public class SipsRdf {
 	public static SipsRdf singleton = new SipsRdf();
 	ArrayList<Provider> providers = new ArrayList<Provider>();
@@ -62,7 +66,7 @@ public class SipsRdf {
 		return sipsBag;
 	}
 	
-	/*
+	/**
 	 * Push the RDF format model into the Fuseki server.
 	 * Server needs to be running in order to push the model into.
 	 */
@@ -72,7 +76,7 @@ public class SipsRdf {
 		accessor.putModel(model);
 	}
 	
-	/*
+	/**
 	 * Add the providers in the providerList
 	 */
 	public void loadProvidersInSipsRdf(){
@@ -111,7 +115,7 @@ public class SipsRdf {
 		this.providers.add(provider);
 	}
 	
-	/*
+	/**
 	 * Fill the providers singletons with configurations from the given CSV file
 	 */
 	public void loadConfigurationsFromCsv() throws Exception{
@@ -120,17 +124,22 @@ public class SipsRdf {
 		}
 	}
 	
-	/* Erase the csv and write configurations in it
-	 * If crawlOnly is selected, only Providers with crawl boolean will be written */
+	/** 
+	 * Erase the csv and write configurations in it
+	 */
 	public void writeConfigurationsInCsv() throws IOException{
 		for(Provider provider:this.providers){
 				provider.writeConfigurationsInCsv();
 		}
 	}
 	
-	/*
-	 * args[0] : boolean to know if we want to crawl
-	 * args[1] : double to know the speed of the crawl (1 = fast and un-precise, 0.10 = slow and precise) 
+
+	/**
+	 * Main function of the SIPS project
+	 * Based on the config.properties file, will crawl the required providers.
+	 *   The crawled data are then written in csv files.
+	 * The csv files are loaded into providers configurations.
+	 * The providers configurations are turned into rdf and then pushed into the fuseki server.
 	 */
 	public static void main(String[] args) throws Exception {
 
