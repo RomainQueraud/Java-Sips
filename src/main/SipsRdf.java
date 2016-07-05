@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.jena.query.DatasetAccessor;
 import org.apache.jena.query.DatasetAccessorFactory;
@@ -142,14 +145,24 @@ public class SipsRdf {
 	 * The providers configurations are turned into rdf and then pushed into the fuseki server.
 	 */
 	public static void main(String[] args) throws Exception {
+		
+		System.out.println("Starting SIPS...");
 
 		Model model = ModelFactory.createDefaultModel();
 		SipsRdf.singleton.loadProvidersInSipsRdf();
 		ArrayList<Provider> failed = new ArrayList<Provider>();
 		
+		Options options = new Options();
+		options.addOption("all", false, "crawl all Providers");
+		for(Provider provider:SipsRdf.singleton.providers){
+			options.addOption(provider.name, false, "crawl "+provider.name);
+		}
+		CommandLineParser parser = new DefaultParser();
+		CommandLine cmd = parser.parse( options, args);
+		
 		System.out.println("Start Crawling and loading configurations");
 		for(Provider provider:SipsRdf.singleton.providers){
-			if(provider.crawl){
+			if(provider.crawl || cmd.hasOption(provider.name) || cmd.hasOption("all")){ //from config.properties or from cmd line
 				try{
 					provider.crawlFillWriteConfigurations();
 				}

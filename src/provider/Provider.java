@@ -1,8 +1,14 @@
 package provider;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -160,7 +166,9 @@ public abstract class Provider implements IProvider {
 	}
 	
 	public void loadConfigurationsFromCsv() throws IOException{
-		CSVReader reader = new CSVReader(new FileReader("resources/csv/"+this.name+".csv"));
+		//ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		//InputStream is = classloader.getResourceAsStream(this.name+".csv");
+		CSVReader reader = new CSVReader(new FileReader("csv/"+this.name+".csv"));
 	    List<String[]> myEntries = reader.readAll();
 	    
 	    for(String[] line : myEntries){
@@ -174,7 +182,8 @@ public abstract class Provider implements IProvider {
 	}
 	
 	public void writeConfigurationsInCsv() throws IOException{
-		CSVWriter writer = new CSVWriter(new FileWriter("resources/csv/"+this.name+".csv"), ',');
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		CSVWriter writer = new CSVWriter(new FileWriter(this.name+".csv"), ',');
 		for(Configuration configuration:this.configurations){
 			String[] line = configuration.getLine();
 	    	writer.writeNext(line);
