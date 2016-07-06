@@ -153,6 +153,7 @@ public class SipsRdf {
 		ArrayList<Provider> failed = new ArrayList<Provider>();
 		
 		Options options = new Options();
+		options.addOption("dns", true, "fuseki-server DNS, connect to localHost if not given");
 		options.addOption("all", false, "crawl all Providers");
 		for(Provider provider:SipsRdf.singleton.providers){
 			options.addOption(provider.name, false, "crawl "+provider.name);
@@ -199,8 +200,14 @@ public class SipsRdf {
 		Bag bag = SipsRdf.singleton.toBag(model);
 		
 		/* Push to the server */
-		System.out.println("Sending rdf to server");
-		SipsRdf.singleton.pushModelToServer(model, "http://localhost:3030/ds/data");
+		if(cmd.hasOption("dns")){
+			System.out.println("Sending rdf to "+cmd.getOptionValue("dns"));
+			SipsRdf.singleton.pushModelToServer(model, cmd.getOptionValue("dns")+":3030/ds/data");
+		}
+		else{
+			System.out.println("Sending rdf to localHost");
+			SipsRdf.singleton.pushModelToServer(model, "http://localhost:3030/ds/data");
+		}
 		
 		//model.write(System.out);
 	}
