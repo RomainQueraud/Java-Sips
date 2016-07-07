@@ -1,6 +1,9 @@
 package main;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -13,6 +16,9 @@ import org.apache.jena.query.DatasetAccessorFactory;
 import org.apache.jena.rdf.model.Bag;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFWriter;
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
 
 import provider.Atlantic;
 import provider.CityCloud;
@@ -153,7 +159,8 @@ public class SipsRdf {
 		ArrayList<Provider> failed = new ArrayList<Provider>();
 		
 		Options options = new Options();
-		options.addOption("dns", true, "fuseki-server DNS, connect to localHost if not given");
+		options.addOption("localhost", false, "fuseki-server connect to localhost");
+		options.addOption("dns", true, "fuseki-server connect to given DNS");
 		options.addOption("all", false, "crawl all Providers");
 		for(Provider provider:SipsRdf.singleton.providers){
 			options.addOption(provider.name, false, "crawl "+provider.name);
@@ -202,13 +209,17 @@ public class SipsRdf {
 		/* Push to the server */
 		if(cmd.hasOption("dns")){
 			System.out.println("Sending rdf to "+cmd.getOptionValue("dns"));
-			SipsRdf.singleton.pushModelToServer(model, cmd.getOptionValue("dns")+":3030/ds/data");
+			SipsRdf.singleton.pushModelToServer(model, "http://"+cmd.getOptionValue("dns")+":3030/ds/data");
 		}
-		else{
+		else if(cmd.hasOption("localhost")){
 			System.out.println("Sending rdf to localHost");
 			SipsRdf.singleton.pushModelToServer(model, "http://localhost:3030/ds/data");
 		}
-		
+
+		System.out.println("Writing model to ontology.owl");
+		OutputStream out = new FileOutputStream("ontology.owl");
+		RDFDataMgr.write(out, model, Lang.RDFXML) ;
+		out.close();
 		//model.write(System.out);
 	}
 }
