@@ -183,7 +183,7 @@ public abstract class Provider implements IProvider {
 	
 	public void writeConfigurationsInCsv() throws IOException{
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-		CSVWriter writer = new CSVWriter(new FileWriter(this.name+".csv"), ',');
+		CSVWriter writer = new CSVWriter(new FileWriter("csv/"+this.name+".csv"), ',');
 		for(Configuration configuration:this.configurations){
 			String[] line = configuration.getLine();
 	    	writer.writeNext(line);
