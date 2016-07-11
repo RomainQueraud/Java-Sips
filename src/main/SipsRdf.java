@@ -176,8 +176,10 @@ public class SipsRdf {
 				}
 				catch(Exception e){
 					System.err.print("Failed to crawl "+provider.name);
+					e.printStackTrace();
+					System.out.println("Closing Firefox...");
 					provider.closeFirefox();
-					System.out.println("... Trying another time");
+					System.out.println("...and trying another time");
 					try{
 						provider.crawlFillWriteConfigurations();
 					}
@@ -216,8 +218,15 @@ public class SipsRdf {
 			SipsRdf.singleton.pushModelToServer(model, "http://localhost:3030/ds/data");
 		}
 
-		System.out.println("Writing model to ontology.owl");
-		OutputStream out = new FileOutputStream("ontology.owl");
+		OutputStream out;
+		try{
+			System.out.println("Writing model to ../Fuseki-server/ontology.owl");
+			out = new FileOutputStream("../Fuseki-server/ontology.owl");
+		}
+		catch(java.io.FileNotFoundException e){
+			System.out.println("Fuseki folder not found, writing model to ontology.owl");
+			out = new FileOutputStream("ontology.owl");
+		}
 		RDFDataMgr.write(out, model, Lang.RDFXML) ;
 		out.close();
 		//model.write(System.out);
