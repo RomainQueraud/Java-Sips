@@ -1,14 +1,8 @@
 package provider;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -19,7 +13,6 @@ import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
-import org.apache.jena.sparql.pfunction.library.str;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import com.opencsv.CSVReader;
@@ -182,7 +175,6 @@ public abstract class Provider implements IProvider {
 	}
 	
 	public void writeConfigurationsInCsv() throws IOException{
-		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		CSVWriter writer = new CSVWriter(new FileWriter("csv/"+this.name+".csv"), ',');
 		for(Configuration configuration:this.configurations){
 			String[] line = configuration.getLine();

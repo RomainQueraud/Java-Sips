@@ -63,7 +63,8 @@ public class Google extends Provider {
         
         JSONObject priceObject = (JSONObject) jsonObject.get("gcp_price_list");
 
-		for(Iterator iterator = priceObject.keySet().iterator(); iterator.hasNext();) {
+		for(@SuppressWarnings("rawtypes")
+		Iterator iterator = priceObject.keySet().iterator(); iterator.hasNext();) {
 		    String key = (String) iterator.next();
 		    if(key.contains("CP-COMPUTEENGINE-VMIMAGE")){
 		    	JSONObject jConfig = (JSONObject) priceObject.get(key);

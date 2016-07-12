@@ -2,13 +2,8 @@ package provider;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;

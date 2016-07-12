@@ -56,7 +56,6 @@ public class CloudWare extends Provider{
 		else{
 			this.offset.cpu += offset;
 		}
-		System.out.println(this.offset.cpu);
 	}
 	
 	public void mooveRam(int offset) throws InterruptedException{
@@ -158,6 +157,7 @@ public class CloudWare extends Provider{
 						Configuration configuration = new Configuration("", this.getCpu(), this.getRam(), this.getDisk(), -1, -1, this.getOs(os), "bgn","", this.getComment(), this.getPrice());
 						configuration.setProvider(this);
 						this.configurations.add(configuration);
+						System.out.println(configuration);
 						this.mooveCpu(this.offset.step);
 					}
 					this.mooveCpu(-this.maxOffset); //To come back to the origin

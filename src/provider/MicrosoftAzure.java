@@ -11,7 +11,6 @@ import org.openqa.selenium.WebElement;
 
 import datas.Configuration;
 import datas.Dollar;
-import datas.Euro;
 import datas.URI;
 
 public class MicrosoftAzure extends Provider {

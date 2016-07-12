@@ -3,20 +3,19 @@ package main;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.jena.query.DatasetAccessor;
 import org.apache.jena.query.DatasetAccessorFactory;
 import org.apache.jena.rdf.model.Bag;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.RDFWriter;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
@@ -151,84 +150,100 @@ public class SipsRdf {
 	 * The providers configurations are turned into rdf and then pushed into the fuseki server.
 	 */
 	public static void main(String[] args) throws Exception {
-		
-		System.out.println("Starting SIPS...");
-
+		System.out.println("Starting SIPS... use -help for documentation");
 		Model model = ModelFactory.createDefaultModel();
 		SipsRdf.singleton.loadProvidersInSipsRdf();
 		ArrayList<Provider> failed = new ArrayList<Provider>();
 		
 		Options options = new Options();
+		Options providerOptions = new Options();
+		
+		options.addOption("help", false, "display the help");
+		options.addOption("providers", false, "display the list of providers crawl cmd");
+		options.addOption("all", false, "crawl all Providers");
 		options.addOption("localhost", false, "fuseki-server connect to localhost");
 		options.addOption("dns", true, "fuseki-server connect to given DNS");
-		options.addOption("all", false, "crawl all Providers");
 		for(Provider provider:SipsRdf.singleton.providers){
-			options.addOption(provider.name, false, "crawl "+provider.name);
+			providerOptions.addOption(provider.name, false, "crawl "+provider.name);
 		}
 		CommandLineParser parser = new DefaultParser();
-		CommandLine cmd = parser.parse( options, args);
+		CommandLine cmd = parser.parse( options, args, true);
+		CommandLineParser providerParser = new DefaultParser();
+		CommandLine providerCmd = providerParser.parse(providerOptions, args, true);
 		
-		System.out.println("Start Crawling and loading configurations");
-		for(Provider provider:SipsRdf.singleton.providers){
-			if(provider.crawl || cmd.hasOption(provider.name) || cmd.hasOption("all")){ //from config.properties or from cmd line
-				try{
-					provider.crawlFillWriteConfigurations();
-				}
-				catch(Exception e){
-					System.err.print("Failed to crawl "+provider.name);
-					e.printStackTrace();
-					System.out.println("Closing Firefox...");
-					provider.closeFirefox();
-					System.out.println("...and trying another time");
+		if(cmd.hasOption("help") || cmd.hasOption("providers")){
+			if(cmd.hasOption("help")){
+				HelpFormatter formatter = new HelpFormatter();
+				formatter.printHelp("SIPS", options);
+			}
+			if(cmd.hasOption("providers")){
+				HelpFormatter formatter = new HelpFormatter();
+				formatter.printHelp("Crawler", providerOptions);
+			}
+		}
+		else{
+			System.out.println("Starting crawl/fill...");
+			for(Provider provider:SipsRdf.singleton.providers){
+				if(provider.crawl || providerCmd.hasOption(provider.name) || cmd.hasOption("all")){ //from config.properties or from cmd line
 					try{
 						provider.crawlFillWriteConfigurations();
 					}
-					catch(Exception e2){
-						e2.printStackTrace();
-						failed.add(provider);
+					catch(Exception e){
+						System.err.print("Failed to crawl "+provider.name);
+						e.printStackTrace();
+						System.out.println("Closing Firefox...");
 						provider.closeFirefox();
-						System.err.println("Error in crawler for "+provider.name);
-						System.out.println("Going to next provider");
+						System.out.println("...and trying another time");
+						try{
+							provider.crawlFillWriteConfigurations();
+						}
+						catch(Exception e2){
+							e2.printStackTrace();
+							failed.add(provider);
+							provider.closeFirefox();
+							System.err.println("Error in crawler for "+provider.name);
+							System.out.println("Going to next provider");
+						}
 					}
 				}
+				else{
+					provider.loadConfigurationsFromCsv();
+				}
+			}
+			
+			if(failed.size()>0){
+				System.out.println("Crawl finished with "+failed.size()+" errors : "+failed);
 			}
 			else{
-				provider.loadConfigurationsFromCsv();
+				System.out.println("Crawl finished without errors");
 			}
+			
+			System.out.println("Creating bag");
+			@SuppressWarnings("unused")
+			Bag bag = SipsRdf.singleton.toBag(model);
+			
+			/* Push to the server */
+			if(cmd.hasOption("dns")){
+				System.out.println("Sending rdf to "+cmd.getOptionValue("dns"));
+				SipsRdf.singleton.pushModelToServer(model, "http://"+cmd.getOptionValue("dns")+":3030/ds/data");
+			}
+			else if(cmd.hasOption("localhost")){
+				System.out.println("Sending rdf to localHost");
+				SipsRdf.singleton.pushModelToServer(model, "http://localhost:3030/ds/data");
+			}
+	
+			OutputStream out;
+			try{
+				System.out.println("Writing model to ../Fuseki-server/ontology.owl");
+				out = new FileOutputStream("../Fuseki-server/ontology.owl");
+			}
+			catch(java.io.FileNotFoundException e){
+				System.out.println("Fuseki folder not found, writing model to ontology.owl");
+				out = new FileOutputStream("ontology.owl");
+			}
+			RDFDataMgr.write(out, model, Lang.RDFXML);
+			out.close();
+			//model.write(System.out);
 		}
-		
-		if(failed.size()>0){
-			System.out.println("Crawl finished with "+failed.size()+" errors : "+failed);
-		}
-		else{
-			System.out.println("Crawl finished without errors");
-		}
-		
-		System.out.println("Creating bag");
-		@SuppressWarnings("unused")
-		Bag bag = SipsRdf.singleton.toBag(model);
-		
-		/* Push to the server */
-		if(cmd.hasOption("dns")){
-			System.out.println("Sending rdf to "+cmd.getOptionValue("dns"));
-			SipsRdf.singleton.pushModelToServer(model, "http://"+cmd.getOptionValue("dns")+":3030/ds/data");
-		}
-		else if(cmd.hasOption("localhost")){
-			System.out.println("Sending rdf to localHost");
-			SipsRdf.singleton.pushModelToServer(model, "http://localhost:3030/ds/data");
-		}
-
-		OutputStream out;
-		try{
-			System.out.println("Writing model to ../Fuseki-server/ontology.owl");
-			out = new FileOutputStream("../Fuseki-server/ontology.owl");
-		}
-		catch(java.io.FileNotFoundException e){
-			System.out.println("Fuseki folder not found, writing model to ontology.owl");
-			out = new FileOutputStream("ontology.owl");
-		}
-		RDFDataMgr.write(out, model, Lang.RDFXML) ;
-		out.close();
-		//model.write(System.out);
 	}
 }
