@@ -158,6 +158,21 @@ public class SipsRdf {
 		Options options = new Options();
 		Options providerOptions = new Options();
 		
+		ArrayList<String> cmdList = new ArrayList<String>();
+		ArrayList<String> providerCmdList = new ArrayList<String>();
+		for(String a : args){
+			if(Character.isUpperCase(a.charAt(1))){
+				providerCmdList.add(a);
+			}
+			else{
+				cmdList.add(a);
+			}
+		}
+		String[] cmdArgs = new String[0];
+		cmdArgs = cmdList.toArray(cmdArgs);
+		String[] providerCmdArgs = new String[0];
+		providerCmdArgs = providerCmdList.toArray(providerCmdArgs);
+		
 		options.addOption("help", false, "display the help");
 		options.addOption("providers", false, "display the list of providers crawl cmd");
 		options.addOption("all", false, "crawl all Providers");
@@ -166,10 +181,17 @@ public class SipsRdf {
 		for(Provider provider:SipsRdf.singleton.providers){
 			providerOptions.addOption(provider.name, false, "crawl "+provider.name);
 		}
-		CommandLineParser parser = new DefaultParser();
-		CommandLine cmd = parser.parse( options, args, true);
-		CommandLineParser providerParser = new DefaultParser();
-		CommandLine providerCmd = providerParser.parse(providerOptions, args, true);
+		CommandLine cmd = null;
+		CommandLine providerCmd = null;
+		try{
+			CommandLineParser parser = new DefaultParser();
+			cmd = parser.parse(options, cmdArgs);
+			providerCmd = parser.parse(providerOptions, providerCmdArgs);
+		}
+		catch(Exception e){
+			System.err.println("Error : Unknown option\nuse -help for general information\nuse -providers for information about available providers");
+			System.exit(1);
+		}
 		
 		if(cmd.hasOption("help") || cmd.hasOption("providers")){
 			if(cmd.hasOption("help")){
