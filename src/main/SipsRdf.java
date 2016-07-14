@@ -19,6 +19,7 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
+import provider.Amazon;
 import provider.Atlantic;
 import provider.CityCloud;
 import provider.CloudAndHeat;
@@ -116,6 +117,8 @@ public class SipsRdf {
 		this.loadProviderInSipsRdf(UnitedStack.singleton, Boolean.parseBoolean(bundle.getString("crawler.UnitedStack")));
 		this.loadProviderInSipsRdf(Numergy.singleton, Boolean.parseBoolean(bundle.getString("crawler.Numergy")));
 		this.loadProviderInSipsRdf(Google.singleton, Boolean.parseBoolean(bundle.getString("crawler.Google")));
+		this.loadProviderInSipsRdf(Amazon.singleton, Boolean.parseBoolean(bundle.getString("crawler.Amazon")));
+	
 	}
 	
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
