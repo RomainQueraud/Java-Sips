@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
@@ -16,7 +17,20 @@ import datas.URI;
 
 public class CloudWare extends Provider{
 	public static CloudWare singleton = new CloudWare();
-
+	int cpuClick = 15;
+	int ramClick = 31;
+	int diskClick = 49;
+	int cpuMin = 1;
+	int cpuMax = 16;
+	int ramMin = 0;
+	int ramMax = 16;
+	int diskMin = 10;
+	int diskMax = 500;
+	int cpuActualClick = 0;
+	int ramActualClick = 0;
+	int diskActualClick = 0;
+	double crawlSpeed = 0.1;
+	
 	private CloudWare() {
 		this.name = "CloudWare";
 		this.baseUrl = "https://client.cloudware.bg/index.php?/cart/"
@@ -24,7 +38,6 @@ public class CloudWare extends Provider{
 		this.crawl = true;
 		this.maxOffset = 320;
 		this.offset = new Offset(0,0,0,0); //step, cpu, ram, disk, transfer
-		double crawlSpeed = 0.3;
 		int step = (int) (this.maxOffset*crawlSpeed);
 		this.offset.setStep(step);
 		this.billing = URI.month;
@@ -42,52 +55,37 @@ public class CloudWare extends Provider{
 		return priceDouble;
 	}
 	
-	public void mooveCpu(int offset) throws InterruptedException{
-		WebElement slider = driver.findElement(By.id("custom_slider_3375")).findElement(By.tagName("a"));
-		Actions move = new Actions(driver);
-		Action action = move.dragAndDropBy(slider, offset, 0).build();
-		action.perform();
-		if(offset==this.maxOffset){
-			this.offset.cpu = this.maxOffset;
-		}
-		else if(offset==-this.maxOffset){
-			this.offset.cpu = 0;
+	/*
+	 * if n is negative, will perform n mooves for decreasing the number.
+	 */
+	public void mooveElement(int d, String sliderId) throws InterruptedException{
+		WebElement slider = driver.findElement(By.id(sliderId)).findElement(By.className("ui-slider-handle"));
+		if(d>=0){
+			for(int i=0 ; i<d ; i++){
+				slider.sendKeys(Keys.ARROW_RIGHT);
+			}
 		}
 		else{
-			this.offset.cpu += offset;
+			for(int i=0 ; i>d ; i--){
+				slider.sendKeys(Keys.ARROW_LEFT);
+			}
 		}
+		Thread.sleep(1000);
 	}
 	
-	public void mooveRam(int offset) throws InterruptedException{
-		WebElement slider = driver.findElement(By.id("custom_slider_3376")).findElement(By.tagName("a"));
-		Actions move = new Actions(driver);
-		Action action = move.dragAndDropBy(slider, offset, 0).build();
-		action.perform();
-		if(offset==this.maxOffset){
-			this.offset.ram = this.maxOffset;
-		}
-		else if(offset==-this.maxOffset){
-			this.offset.ram = 0;
-		}
-		else{
-			this.offset.ram += offset;
-		}
+	public void mooveCpu(int d) throws InterruptedException{
+		this.mooveElement(d, "custom_slider_3375");
+		this.cpuActualClick += d;
 	}
 	
-	public void mooveDisk(int offset) throws InterruptedException{
-		WebElement slider = driver.findElement(By.id("custom_slider_3377")).findElement(By.tagName("a"));
-		Actions move = new Actions(driver);
-		Action action = move.dragAndDropBy(slider, offset, 0).build();
-		action.perform();
-		if(offset==this.maxOffset){
-			this.offset.disk = this.maxOffset;
-		}
-		else if(offset==-this.maxOffset){
-			this.offset.disk = 0;
-		}
-		else{
-			this.offset.disk += offset;
-		}
+	public void mooveRam(int d) throws InterruptedException{
+		this.mooveElement(d, "custom_slider_3376");
+		this.ramActualClick += d;
+	}
+	
+	public void mooveDisk(int d) throws InterruptedException{
+		this.mooveElement(d, "custom_slider_3377");
+		this.diskActualClick += d;
 	}
 	
 	/*
@@ -150,23 +148,23 @@ public class CloudWare extends Provider{
 		boolean windows[] = {true, false}; //windows, linux
 		for(Boolean os : windows){
 			this.mooveOs(os);
-			while(this.offset.disk<this.maxOffset){
-				while(this.offset.ram<this.maxOffset){
-					while(this.offset.cpu<this.maxOffset){
-						Thread.sleep(1000);
-						Configuration configuration = new Configuration("", this.getCpu(), this.getRam(), this.getDisk(), -1, -1, this.getOs(os), "bgn","", this.getComment(), this.getPrice());
-						configuration.setProvider(this);
-						this.configurations.add(configuration);
-						System.out.println(configuration);
-						this.mooveCpu(this.offset.step);
-					}
-					this.mooveCpu(-this.maxOffset); //To come back to the origin
-					this.mooveRam(this.offset.step);
+			for(diskActualClick = 0 ; diskActualClick <= this.diskClick ;){
+				for(cpuActualClick = 0 ; cpuActualClick <= this.cpuClick || ramActualClick <= this.ramClick;){
+					Thread.sleep(1000);
+					System.out.println("cpuActual : "+this.cpuActualClick+" / "+this.cpuClick);
+					System.out.println("ramActual : "+this.ramActualClick+" / "+this.ramClick);
+					Configuration configuration = new Configuration("", this.getCpu(), this.getRam(), this.getDisk(), -1, -1, this.getOs(os), "bgn","", this.getComment(), this.getPrice());
+					configuration.setProvider(this);
+					this.configurations.add(configuration);
+					System.out.println(configuration);
+					this.mooveCpu((int)(this.crawlSpeed*this.cpuClick));
+					this.mooveRam((int)(this.crawlSpeed*this.ramClick));
 				}
-				this.mooveRam(-this.maxOffset);
-				this.mooveDisk(this.offset.step);
+				this.mooveCpu(-this.cpuClick); //To come back to the origin
+				this.mooveRam(-this.ramClick);
+				this.mooveDisk((int)(this.crawlSpeed*this.diskClick));
 			}
-			this.mooveDisk(-this.maxOffset);
+			this.mooveDisk(-this.diskClick);
 		}
 		
 		this.closeFirefox();
