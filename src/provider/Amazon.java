@@ -43,9 +43,12 @@ public class Amazon extends Provider {
 		}
 	}
 	
-	public String getComment(){
+	public String getComment(boolean ebs){
 		String ret = "";
 		ret += "All prices are given for US East";
+		if(ebs){
+			ret+="<br/><br/>Scalable <b>EBS</b> disk";
+		}
 		return ret;
 	}
 
@@ -66,39 +69,55 @@ public class Amazon extends Provider {
         	JSONObject jConfig = (JSONObject) jDessus.get("attributes");
         	String continent = ""+jConfig.get("location");
         	if(continent.contains("US East")){
-        		String sku = ""+jDessus.get("sku");
-        		JSONObject jSku = (JSONObject) priceObject.get(sku);
-        		//TODO still need to get one or two level down in order to access the price
-        		
-        		Configuration config = new Configuration();
-        		config.setProvider(this);
-        		
-        		config.setCpu((this.extractNumber(""+jConfig.get("vcpu"))));
-        		config.setCpuSpeed((this.extractNumber(""+jConfig.get("clockSpeed"))));
-        		config.setRam((this.extractNumber(""+jConfig.get("memory"))));
-        		String storage = ""+jConfig.get("storage");
-        		if(!storage.contains("EBS") && !storage.equals("null")){
-        			String[] parts = storage.split("x");
-        			double part0 = this.extractNumber(parts[0]);
-        			double part1 = this.extractNumber(parts[1]);
-        			if(storage.contains("SSD")){
-        				config.setSsd(part0 * part1);
-        			}
-        			else{
-        				config.setHdd(part0 * part1);
-        			}
+        		String family = ""+jDessus.get("productFamily");
+        		if(family.equals("Compute Instance")){
+	        		String sku = ""+jDessus.get("sku");
+	        		JSONObject jTerms = (JSONObject) jsonObject.get("terms");
+	        		JSONObject jOnDemand = (JSONObject) jTerms.get("OnDemand");
+	        		JSONObject jSku = (JSONObject) jOnDemand.get(sku);
+	        		JSONObject jSkuDown = (JSONObject) jSku.get(sku+".JRTCKXETXF");
+	        		JSONObject jDimension = (JSONObject) jSkuDown.get("priceDimensions");
+	        		JSONObject jDimensionDown = (JSONObject) jDimension.get(sku+".JRTCKXETXF.6YS6EN2CT7");
+	        		JSONObject jPricePerUnit = (JSONObject) jDimensionDown.get("pricePerUnit");
+	        		double priceHour = Double.parseDouble(""+jPricePerUnit.get("USD")); 
+	        		
+	        		if(priceHour>0){
+		        		Configuration config = new Configuration();
+		        		config.setProvider(this);
+		        		
+		        		config.setCpu((this.extractNumber(""+jConfig.get("vcpu"))));
+		        		config.setCpuSpeed((this.extractNumber(""+jConfig.get("clockSpeed"))));
+		        		config.setRam((this.extractNumber(""+jConfig.get("memory"))));
+		        		String storage = ""+jConfig.get("storage");
+		        		if(!storage.contains("EBS") && !storage.equals("null")){
+		        			String[] parts = storage.split("x");
+		        			double part0 = this.extractNumber(parts[0]);
+		        			double part1 = this.extractNumber(parts[1]);
+		        			if(storage.contains("SSD")){
+		        				config.setSsd(part0 * part1);
+		        			}
+		        			else{
+		        				config.setHdd(part0 * part1);
+		        			}
+		        			config.setComment(this.getComment(false));
+		        		}
+		        		if(storage.contains("EBS")){
+		        			config.setComment(this.getComment(true));
+		        		}
+		        		String os = ""+jConfig.get("operatingSystem");
+		        		if(os.contains("Windows")){
+		        			config.setOsUri(URI.windows);
+		        		}
+		        		else{
+		        			config.setOsUri(URI.linux);
+		        		}
+		        		config.setConfigName(""+jConfig.get("instanceFamily"));
+		        		config.setPrice(priceHour * 24 * 365/12);
+		        		
+		        		this.configurations.add(config);
+		        		System.out.println(config);
+	        		}
         		}
-        		String os = ""+jConfig.get("operatingSystem");
-        		if(os.contains("Windows")){
-        			config.setOsUri(URI.windows);
-        		}
-        		else{
-        			config.setOsUri(URI.linux);
-        		}
-        		config.setConfigName(""+jConfig.get("instanceFamily"));
-        		
-        		this.configurations.add(config);
-        		System.out.println(config);
         	}
         }
 		

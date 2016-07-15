@@ -214,21 +214,15 @@ public class SipsRdf {
 						provider.crawlFillWriteConfigurations();
 					}
 					catch(Exception e){
-						System.err.print("Failed to crawl "+provider.name);
 						e.printStackTrace();
-						System.out.println("Closing Firefox...");
-						provider.closeFirefox();
-						System.out.println("...and trying another time");
 						try{
-							provider.crawlFillWriteConfigurations();
+							provider.closeFirefox(); //Error can occur for Google/Amazon (no Selenium)
 						}
 						catch(Exception e2){
-							e2.printStackTrace();
-							failed.add(provider);
-							provider.closeFirefox();
-							System.err.println("Error in crawler for "+provider.name);
-							System.out.println("Going to next provider");
 						}
+						failed.add(provider);
+						System.err.println("Error in crawler for "+provider.name);
+						System.out.println("Going to next provider");
 					}
 				}
 				else{
