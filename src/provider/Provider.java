@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +23,7 @@ import datas.Configuration;
 import datas.Currency;
 import datas.Offset;
 import datas.URI;
+import main.SipsRdf;
 
 /**
  * Abstract class that needs to implements the basics for every providers
@@ -88,6 +90,7 @@ public abstract class Provider implements IProvider {
 	
 	public void loadWebpage(){
 		System.out.print("Loading Webpage...");
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.MINUTES); //10 minutes Timeout
 		driver.get(baseUrl);
 		System.out.println("Ok");
 	}
@@ -161,7 +164,14 @@ public abstract class Provider implements IProvider {
 	public void loadConfigurationsFromCsv() throws IOException{
 		//ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		//InputStream is = classloader.getResourceAsStream(this.name+".csv");
-		CSVReader reader = new CSVReader(new FileReader("csv/"+this.name+".csv"));
+		
+		CSVReader reader = null;
+		try{
+			reader = new CSVReader(new FileReader(SipsRdf.dir+"/csv/"+this.name+".csv"));
+		}
+		catch(Exception e){
+			reader = new CSVReader(new FileReader("csv/"+this.name+".csv"));
+		}
 	    List<String[]> myEntries = reader.readAll();
 	    
 	    for(String[] line : myEntries){
@@ -175,7 +185,7 @@ public abstract class Provider implements IProvider {
 	}
 	
 	public void writeConfigurationsInCsv() throws IOException{
-		CSVWriter writer = new CSVWriter(new FileWriter("csv/"+this.name+".csv"), ',');
+		CSVWriter writer = new CSVWriter(new FileWriter(SipsRdf.dir+"/csv/"+this.name+".csv"), ',');
 		for(Configuration configuration:this.configurations){
 			String[] line = configuration.getLine();
 	    	writer.writeNext(line);

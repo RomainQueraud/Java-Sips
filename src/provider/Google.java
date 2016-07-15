@@ -116,6 +116,7 @@ public class Google extends Provider {
 		    }
 		}
         
+		in.close();
 		this.writeConfigurationsInCsv();
 	}
 

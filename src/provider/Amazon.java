@@ -121,7 +121,7 @@ public class Amazon extends Provider {
         	}
         }
 		
-        
+        in.close();
 		this.writeConfigurationsInCsv();
 	}
 }

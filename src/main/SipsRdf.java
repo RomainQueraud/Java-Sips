@@ -1,5 +1,6 @@
 package main;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -59,6 +60,8 @@ public class SipsRdf {
 	ArrayList<Provider> providers = new ArrayList<Provider>();
 	Options options = new Options();
 	ResourceBundle bundle = ResourceBundle.getBundle("properties.config");
+	
+	public static File dir = new File(System.getProperty("java.class.path")).getAbsoluteFile().getParentFile();
 	
 	private SipsRdf(){
 	}
@@ -208,8 +211,16 @@ public class SipsRdf {
 		}
 		else{
 			System.out.println("Starting crawl/fill...");
+			int iProvider = 0;
+			int nProvider = SipsRdf.singleton.providers.size();
 			for(Provider provider:SipsRdf.singleton.providers){
 				if(provider.crawl || providerCmd.hasOption(provider.name) || cmd.hasOption("all")){ //from config.properties or from cmd line
+					if(cmd.hasOption("all")){
+						iProvider++;
+						System.out.println("=========================");
+						System.out.println(" Provider : "+iProvider+" / "+nProvider+" ");
+						System.out.println("=========================");
+					}
 					try{
 						provider.crawlFillWriteConfigurations();
 					}
@@ -254,11 +265,11 @@ public class SipsRdf {
 			OutputStream out;
 			try{
 				System.out.println("Writing model to ../Fuseki-server/ontology.owl");
-				out = new FileOutputStream("../Fuseki-server/ontology.owl");
+				out = new FileOutputStream(SipsRdf.dir+"/../Fuseki-server/ontology.owl");
 			}
 			catch(java.io.FileNotFoundException e){
 				System.out.println("Fuseki folder not found, writing model to ontology.owl");
-				out = new FileOutputStream("ontology.owl");
+				out = new FileOutputStream(SipsRdf.dir+"/ontology.owl");
 			}
 			RDFDataMgr.write(out, model, Lang.RDFXML);
 			out.close();
