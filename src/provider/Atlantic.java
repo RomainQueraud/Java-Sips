@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class Atlantic extends Provider {
 	
@@ -52,7 +53,8 @@ public class Atlantic extends Provider {
 			}
 		}
 		
-		System.out.println(config);
+		config.println();
+		config.setDate(this.getDate());
 		return config;
 	}
 
@@ -79,6 +81,9 @@ public class Atlantic extends Provider {
 		this.configurations.add(this.getConfiguration("WXXL", true));
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 }

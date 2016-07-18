@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Euro;
 import datas.URI;
+import main.SipsRdf;
 
 public class CloudWatt extends Provider {
 	
@@ -51,16 +52,18 @@ public class CloudWatt extends Provider {
 							configLinux.setProvider(this);
 							configLinux.setOsUri(URI.linux);
 							configLinux.setPrice(this.extractNumber(tds.get(6).getText()));
+							configLinux.setDate(this.getDate());
 							this.configurations.add(configLinux);
-							System.out.println(configLinux);
+							configLinux.println();
 						}
 						if(tds.get(7).getText()!=""){
 							Configuration configWindows = new Configuration(config);
 							configWindows.setProvider(this);
 							configWindows.setOsUri(URI.windows);
 							configWindows.setPrice(this.extractNumber(tds.get(7).getText()));
+							configWindows.setDate(this.getDate());
 							this.configurations.add(configWindows);
-							System.out.println(configWindows);
+							configWindows.println();
 						}
 						//System.out.println("--------------");
 					}
@@ -69,6 +72,9 @@ public class CloudWatt extends Provider {
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

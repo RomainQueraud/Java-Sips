@@ -3,7 +3,10 @@ package provider;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -102,7 +105,6 @@ public abstract class Provider implements IProvider {
 			return Double.parseDouble(m.group().replace(',', '.'));
 		}
 		else{
-			//System.out.println("No number found on text : "+text);
 			return 0;
 		}
 	}
@@ -199,6 +201,12 @@ public abstract class Provider implements IProvider {
 			lines.add(configuration.getLine());
 		}
 		return lines;
+	}
+	
+	public String getDate(){
+		Date date = Calendar.getInstance().getTime();
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+	    return sdf.format(date);
 	}
 	
 	@Override

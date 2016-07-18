@@ -12,6 +12,7 @@ import datas.BulgarianLev;
 import datas.Configuration;
 import datas.Offset;
 import datas.URI;
+import main.SipsRdf;
 
 public class CloudWare extends Provider{
 	public static CloudWare singleton = new CloudWare();
@@ -93,11 +94,9 @@ public class CloudWare extends Provider{
 	public void mooveOs(boolean selectWindows){
 		Select select = new Select(driver.findElement(By.id("custom_field_619")));
 		if(selectWindows){
-			System.out.println("Selecting Windows");
 			select.selectByVisibleText("Windows 2012 x64 STD R2 ( 33.86 BGN Monthly )");
 		}
 		else{
-			System.out.println("Selecting Linux");
 			select.selectByVisibleText("Ubuntu 15.04 x64");
 		}
 	}
@@ -149,12 +148,11 @@ public class CloudWare extends Provider{
 			for(diskActualClick = 0 ; diskActualClick <= this.diskClick ;){
 				for(cpuActualClick = 0 ; cpuActualClick <= this.cpuClick || ramActualClick <= this.ramClick;){
 					Thread.sleep(1000);
-					System.out.println("cpuActual : "+this.cpuActualClick+" / "+this.cpuClick);
-					System.out.println("ramActual : "+this.ramActualClick+" / "+this.ramClick);
 					Configuration configuration = new Configuration("", this.getCpu(), this.getRam(), this.getDisk(), -1, -1, this.getOs(os), "bgn","", this.getComment(), this.getPrice());
 					configuration.setProvider(this);
+					configuration.setDate(this.getDate());
 					this.configurations.add(configuration);
-					System.out.println(configuration);
+					configuration.println();
 					this.mooveCpu((int)(this.crawlSpeed*this.cpuClick));
 					this.mooveRam((int)(this.crawlSpeed*this.ramClick));
 				}
@@ -166,11 +164,13 @@ public class CloudWare extends Provider{
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 	
 	public void waitForPriceChange(double oldPrice) throws InterruptedException{
-		System.out.print("Wait...");
 		//Thread.sleep(2000); //TODO There is a better way of doing this
 		boolean wait=true;
 		while(wait){
@@ -182,6 +182,5 @@ public class CloudWare extends Provider{
 				Thread.sleep(100);
 			}
 		}
-		System.out.println("Ok");
 	}
 }

@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Euro;
 import datas.URI;
+import main.SipsRdf;
 
 public class CityCloud extends Provider {
 	
@@ -77,8 +78,9 @@ public class CityCloud extends Provider {
 					}
 				}
 				config.setComment(this.getComment());
+				config.setDate(this.getDate());
 				this.configurations.add(config);
-				System.out.println(config);
+				config.println();
 			}
 		}
 	}
@@ -93,6 +95,9 @@ public class CityCloud extends Provider {
 		this.addConfigurationsCityCloud(false);
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

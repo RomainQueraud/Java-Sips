@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class Gigenet extends Provider {
 
@@ -52,11 +53,15 @@ public class Gigenet extends Provider {
 			config.setTransferSpeed(this.extractNumber(tds.get(5).getText()));
 			config.setPrice(this.extractNumber(tds.get(6).getText()));
 			
+			config.setDate(this.getDate());
 			this.configurations.add(config);
-			System.out.println(config);
+			config.println();
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

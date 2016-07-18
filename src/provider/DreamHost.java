@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class DreamHost extends Provider {
 	
@@ -81,8 +82,9 @@ public class DreamHost extends Provider {
 								config.setComment(this.getComment());
 								config.setOsUri(URI.linux);
 								config.setPrice(this.getPrice());
+								config.setDate(this.getDate());
 								this.configurations.add(config);
-								System.out.println(config);
+								config.println();
 							}
 						}
 					}
@@ -91,6 +93,9 @@ public class DreamHost extends Provider {
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

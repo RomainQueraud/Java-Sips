@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Euro;
 import datas.URI;
+import main.SipsRdf;
 
 public class VirtualServer extends Provider {
 
@@ -51,6 +52,8 @@ public class VirtualServer extends Provider {
 		List<WebElement> price = driver.findElement(By.id(id)).findElements(By.className("value"));
 		config.setPrice(Double.parseDouble(price.get(1).getText())); //The 0th is the cost, the 1st is the value
 		
+		config.setDate(this.getDate());
+		config.println();
 		return config;
 	}
 	
@@ -58,7 +61,6 @@ public class VirtualServer extends Provider {
 	public void crawlFillWriteConfigurations() throws InterruptedException, IOException{
 		this.openFirefox();
 		this.loadWebpage();
-		System.out.print("Starting VirtualServer crawl...");
 		try {
 			this.configurations.add(this.getConfiguration("c2088"));
 			this.configurations.add(this.getConfiguration("c2090"));
@@ -70,7 +72,9 @@ public class VirtualServer extends Provider {
 			e.printStackTrace();
 		}
 		this.closeFirefox();
-		System.out.println("Ok");
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 }

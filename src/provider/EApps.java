@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class EApps extends Provider{
 	
@@ -28,29 +29,26 @@ public class EApps extends Provider{
 		WebElement block = driver.findElement(By.className(className));
 		block.click();
 		Thread.sleep(3000);
-		System.out.println("configName : "+block.findElement(By.tagName("b")));
 		config.setConfigName(block.findElement(By.tagName("b")).getText());
 		
 		List<WebElement> ps = block.findElements(By.tagName("p"));
 		for(WebElement p : ps){
 			if (p.getText().contains("Cores")){
 				config.setCpu(this.extractNumber(p.getText()));
-				System.out.println("cpu : "+config.cpu);
 			}
 			else if(p.getText().contains("RAM")){
 				config.setRam((this.extractNumber(p.getText())/1000)); // divide 1000 because of MB
-				System.out.println("ram : "+config.ram);
 			}
 			else if(p.getText().contains("Disk")){
 				config.setSsd(this.extractNumber(p.getText()));
-				System.out.println("disk : "+config.ssd);
 			}
 		}
 		
 		WebElement price = driver.findElement(By.className("totaldue"));
 		config.setPrice(this.extractNumber(price.getText()));
 		
-		
+		config.setDate(this.getDate());
+		config.println();
 		return config;
 	}
 
@@ -60,9 +58,7 @@ public class EApps extends Provider{
 		Thread.sleep(3000);
 		this.loadWebpage();
 		
-		System.out.print("Wait 20 seconds...");
 		Thread.sleep(20000);
-		System.out.println("Ok");
 		
 		this.configurations.add(this.getConfiguration("predef-0"));
 		this.configurations.add(this.getConfiguration("predef-1"));
@@ -71,6 +67,9 @@ public class EApps extends Provider{
 		this.configurations.add(this.getConfiguration("predef-4"));
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 }

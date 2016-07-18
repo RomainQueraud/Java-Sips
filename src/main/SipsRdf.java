@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import org.apache.commons.cli.CommandLine;
@@ -57,6 +60,7 @@ import provider.ZippyCloud;
  */
 public class SipsRdf {
 	public static SipsRdf singleton = new SipsRdf();
+	public static boolean verbose = false;
 	ArrayList<Provider> providers = new ArrayList<Provider>();
 	Options options = new Options();
 	ResourceBundle bundle = ResourceBundle.getBundle("properties.config");
@@ -157,6 +161,7 @@ public class SipsRdf {
 	 */
 	public static void main(String[] args) throws Exception {
 		System.out.println("Starting SIPS... use -help for documentation");
+		
 		Model model = ModelFactory.createDefaultModel();
 		SipsRdf.singleton.loadProvidersInSipsRdf();
 		ArrayList<Provider> failed = new ArrayList<Provider>();
@@ -184,6 +189,7 @@ public class SipsRdf {
 		options.addOption("all", false, "crawl all Providers");
 		options.addOption("localhost", false, "fuseki-server connect to localhost");
 		options.addOption("dns", true, "fuseki-server connect to given DNS");
+		options.addOption("v", false, "verbose");
 		for(Provider provider:SipsRdf.singleton.providers){
 			providerOptions.addOption(provider.name, false, "crawl "+provider.name);
 		}
@@ -210,6 +216,9 @@ public class SipsRdf {
 			}
 		}
 		else{
+			if(cmd.hasOption("v")){
+				SipsRdf.verbose = true;
+			}
 			System.out.println("Starting crawl/fill...");
 			int iProvider = 0;
 			int nProvider = SipsRdf.singleton.providers.size();

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Euro;
 import datas.URI;
+import main.SipsRdf;
 
 /*
  * Crawl the Cpu, Ram and Disk price. The IP price is entered manually in the getIpPrice() function.
@@ -74,13 +75,11 @@ public class SecureRack extends Provider {
 		this.openFirefox();
 		this.loadWebpage();
 		
-		System.out.print("Crawling SecureRack...");
 		double cpuPrice = this.getCpuPrice();
 		double ramPrice = this.getRamPrice();
 		double diskPrice = this.getDiskPrice();
 		double ipPrice = this.getIpPrice();
 		this.closeFirefox();
-		System.out.println("Ok");
 		
 		System.out.print("Calculating SecureRack configurations...");
 		for(double cpuNumber = this.availableCpu[0] ; cpuNumber <= this.availableCpu[1] ; cpuNumber += (this.availableCpu[1] - this.availableCpu[0])*this.speed){
@@ -104,12 +103,16 @@ public class SecureRack extends Provider {
 						config.setSsd(diskNumber);
 						config.setComment(this.getComment());
 						//TODO add Ip
+						config.setDate(this.getDate());
+						config.println();
 						this.configurations.add(config);
 					}
 				}
 			}
 		}
-		System.out.println("Ok");
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

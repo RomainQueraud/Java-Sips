@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class LiquidWeb extends Provider {
 	
@@ -75,8 +76,9 @@ public class LiquidWeb extends Provider {
 			WebElement price = div.findElement(By.className("regular-price"));
 			config.setPrice(this.extractNumber(price.getText()));
 			
+			config.setDate(this.getDate());
 			this.configurations.add(config);
-			System.out.println(config);
+			config.println();
 		}
 	}
 
@@ -89,7 +91,10 @@ public class LiquidWeb extends Provider {
 		this.addConfigurationsLiquidWeb("dedi-plans-smaller");
 		this.addConfigurationsLiquidWeb("dedi-plans-larger");
 		
-		//this.closeFirefox();
+		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

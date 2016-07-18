@@ -16,6 +16,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class Amazon extends Provider {
 	
@@ -114,14 +115,18 @@ public class Amazon extends Provider {
 		        		config.setConfigName(""+jConfig.get("instanceFamily"));
 		        		config.setPrice(priceHour * 24 * 365/12);
 		        		
+		        		config.setDate(this.getDate());
 		        		this.configurations.add(config);
-		        		System.out.println(config);
+		        		config.println();
 	        		}
         		}
         	}
         }
 		
         in.close();
+        if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 }

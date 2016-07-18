@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class DimensionData extends Provider {
 	
@@ -159,8 +160,9 @@ public class DimensionData extends Provider {
 					config.setRam(this.getRam());
 					config.setHdd(this.getDisk());
 					config.setPrice(this.getPrice());
+					config.setDate(this.getDate());
 					this.configurations.add(config);
-					System.out.println(config);
+					config.println();
 					
 					if(this.cpuActual>=this.cpuMax){
 						break; //Break after the last turn
@@ -181,6 +183,9 @@ public class DimensionData extends Provider {
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import datas.ChineseYuan;
 import datas.Configuration;
 import datas.URI;
+import main.SipsRdf;
 
 public class UnitedStack extends Provider {
 	
@@ -103,8 +104,9 @@ public class UnitedStack extends Provider {
 									}
 									config.setPrice(this.getPrice());
 									
+									config.setDate(this.getDate());
 									this.configurations.add(config);
-									System.out.println(config);
+									config.println();
 								}
 							}
 						}
@@ -114,6 +116,9 @@ public class UnitedStack extends Provider {
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

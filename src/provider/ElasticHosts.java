@@ -11,6 +11,7 @@ import org.openqa.selenium.interactions.Actions;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class ElasticHosts extends Provider {
 	public static ElasticHosts singleton = new ElasticHosts();
@@ -69,8 +70,9 @@ public class ElasticHosts extends Provider {
 					config.setSsd(disk);
 					config.setPrice(cpuPrice + ramPrice + diskPrice);
 					config.setOsUri(URI.linux);
+					config.setDate(this.getDate());
 					this.configurations.add(config);
-					System.out.println(config);
+					config.println();
 					
 					Configuration config2 = new Configuration();
 					config2.setProvider(this);
@@ -79,13 +81,17 @@ public class ElasticHosts extends Provider {
 					config2.setSsd(disk);
 					config2.setPrice(cpuPrice + ramPrice + diskPrice + this.windowsPrice);
 					config2.setOsUri(URI.windows);
+					config2.setDate(this.getDate());
 					this.configurations.add(config2);
-					System.out.println(config2);
+					config2.println();
 				}
 			}
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

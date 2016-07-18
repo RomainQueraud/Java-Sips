@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class ZippyCloud extends Provider {
 	public static ZippyCloud singleton = new ZippyCloud();
@@ -55,34 +56,34 @@ public class ZippyCloud extends Provider {
 			box.click(); //otherwise, elements don't load
 			List<WebElement> lis = box.findElements(By.tagName("li"));
 			//System.out.println("lis Size : "+lis.size());
-			System.out.println("------------------------");
+			//System.out.println("------------------------");
 			for(WebElement li : lis){
 				//System.out.println("li text : "+li.getText());
 				if(li.getText().contains("Core")){
 					double cpu = this.extractNumber(li.getText());
-					System.out.println("cpu : "+cpu);
 					config.setCpu(cpu);
 				}
 				else if(li.getText().contains("month")){
 					double price = this.extractNumber(li.getText());
-					System.out.println("price : "+price);
 					config.setPrice(price);
 				}
 				else if(li.getText().contains("RAM")){
 					double ram = this.extractNumber(li.getText());
-					System.out.println("ram : "+ram);
 					config.setRam(ram);
 				}
 				else if(li.getText().contains("Storage")){
 					double disk = this.extractNumber(li.getText());
-					System.out.println("disk : "+disk);
 					config.setSsd(disk);
 				}
 			}
+			config.setDate(this.getDate());
 			this.configurations.add(config);
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class RackSpace extends Provider {
 	public static RackSpace singleton = new RackSpace();
@@ -83,7 +84,8 @@ public class RackSpace extends Provider {
 							config.setOsUri(URI.linux);
 						}
 						
-						System.out.println(config);
+						config.println();
+						config.setDate(this.getDate());
 						this.configurations.add(config);
 					}
 				}
@@ -99,7 +101,6 @@ public class RackSpace extends Provider {
 			return Double.parseDouble(m.group().replace(",", ""));
 		}
 		else{
-			System.out.println("No number found on text : "+text);
 			return 0;
 		}
 	}
@@ -157,6 +158,9 @@ public class RackSpace extends Provider {
 		this.addConfigurationsRackSpace(div, true);
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

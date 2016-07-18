@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Euro;
 import datas.URI;
+import main.SipsRdf;
 
 public class ExoScale extends Provider {
 	
@@ -96,6 +97,8 @@ public class ExoScale extends Provider {
 		//System.out.println("price : "+priceValue);
 		config.setPrice(priceValue);
 		
+		config.setDate(this.getDate());
+		config.println();
 		this.configurations.add(config);
 	}
 
@@ -128,6 +131,9 @@ public class ExoScale extends Provider {
 		this.addConfigurationsExoScale("Huge", true);
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 }

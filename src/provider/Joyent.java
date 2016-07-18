@@ -10,6 +10,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class Joyent extends Provider {
 	
@@ -60,8 +61,9 @@ public class Joyent extends Provider {
 					Configuration configLinux = new Configuration(config);
 					configLinux.setOsUri(URI.linux);
 					configLinux.setPrice(this.extractNumber(priceLinux.getText()));
+					configLinux.setDate(this.getDate());
 					this.configurations.add(configLinux);
-					System.out.println(configLinux);
+					configLinux.println();
 				}
 			}
 			List<WebElement> pricesWindows = modal.findElements(By.cssSelector("li.ws")); 
@@ -72,13 +74,17 @@ public class Joyent extends Provider {
 					Configuration configWindows = new Configuration(config);
 					configWindows.setOsUri(URI.windows);
 					configWindows.setPrice(this.extractNumber(priceWindows.getText()));
+					configWindows.setDate(this.getDate());
 					this.configurations.add(configWindows);
-					System.out.println(configWindows);
+					configWindows.println();
 				}
 			}
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

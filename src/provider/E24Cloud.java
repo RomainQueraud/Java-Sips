@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import datas.Configuration;
 import datas.Euro;
 import datas.URI;
+import main.SipsRdf;
 
 public class E24Cloud extends Provider {
 	public static E24Cloud singleton = new E24Cloud(); 
@@ -115,11 +116,9 @@ public class E24Cloud extends Provider {
 	public void mooveOs(boolean selectWindows) throws InterruptedException{
 		Select select = new Select(driver.findElement(By.id("sys")));
 		if(selectWindows){
-			System.out.println("Selecting Windows");
 			select.selectByVisibleText("Windows 2012 R2");
 		}
 		else{
-			System.out.println("Selecting Linux");
 			select.selectByVisibleText("Ubuntu 15.04");
 		}
 	}
@@ -148,7 +147,6 @@ public class E24Cloud extends Provider {
 						else{
 							this.mooveRam((this.ramClick*this.crawlSpeed));
 						}
-						System.out.println("ramActual : "+ramActual);
 						Configuration config = new Configuration();
 						config.setProvider(this);
 						config.setCpu(this.getCpu());
@@ -157,8 +155,9 @@ public class E24Cloud extends Provider {
 						config.setTransferSpeed(this.getTransfer());
 						config.setComment(this.getComment());
 						config.setPrice(this.getPrice());
+						config.setDate(this.getDate());
 						this.configurations.add(config);
-						System.out.println(config);
+						config.println();
 					}
 					this.mooveCpu((this.cpuClick*this.crawlSpeed)); //Ram follow
 				}
@@ -171,6 +170,9 @@ public class E24Cloud extends Provider {
 		
 		Thread.sleep(3000);
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class VpsNet extends Provider {
 	
@@ -61,6 +62,8 @@ public class VpsNet extends Provider {
 		}
 		config.setPrice(priceNumber);
 		
+		config.setDate(this.getDate());
+		config.println();
 		return config;
 	}
 
@@ -94,6 +97,9 @@ public class VpsNet extends Provider {
 		this.configurations.add(this.getConfiguration(click, true));
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 	

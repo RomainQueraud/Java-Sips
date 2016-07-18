@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Euro;
 import datas.URI;
+import main.SipsRdf;
 
 public class CloudAndHeat extends Provider {
 	
@@ -57,11 +58,15 @@ public class CloudAndHeat extends Provider {
 				}
 			}
 			config.setOsUri(URI.linux);
+			config.setDate(this.getDate());
 			this.configurations.add(config);
-			System.out.println(config);
+			config.println();
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

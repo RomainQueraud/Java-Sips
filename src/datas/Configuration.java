@@ -5,6 +5,7 @@ import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.rdf.model.ResourceFactory;
 
+import main.SipsRdf;
 import provider.Provider;
 
 public class Configuration {
@@ -22,6 +23,7 @@ public class Configuration {
 	public String countryUri;
 	public String comment;
 	public double price; /* Monthly */ /* $Dollar */
+	public String date;
 	
 	public Configuration(){
 		this("", -1, -1, -1, -1, -1, "", "", "", "", -1);
@@ -73,6 +75,10 @@ public class Configuration {
 
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	
+	public void setDate(String date){
+		this.date = date;
 	}
 	
 	/*
@@ -162,6 +168,7 @@ public class Configuration {
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "ssd"), ""+this.ssd)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "transferSpeed"), ""+this.transferSpeed)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "comment"), ""+this.comment)
+				.addProperty(ResourceFactory.createProperty(URI.baseURI, "date"), ""+this.date)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "priceEuro"), ""+this.roundPrice(this.provider.currency.toEuro(this.price)))
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "price"), ""+this.roundPrice(this.provider.currency.toDollar(this.price)));
 		if(this.osUri!=""){
@@ -191,6 +198,15 @@ public class Configuration {
 		}
 		ret+="Price : "+this.price+" --- ";
 		return ret;
+	}
+	
+	public void println(){
+		if(SipsRdf.verbose){
+			System.out.println(this);
+		}
+		else{
+			System.out.print(".");
+		}
 	}
 	
 	/*

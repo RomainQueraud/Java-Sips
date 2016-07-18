@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class Storm extends Provider {
 	
@@ -86,7 +87,8 @@ public class Storm extends Provider {
 							config.setSsd(this.extractNumber(td.getText()));
 						}
 					}
-					System.out.println(config);
+					config.println();
+					config.setDate(this.getDate());
 					this.configurations.add(config);
 				}
 			}
@@ -129,7 +131,8 @@ public class Storm extends Provider {
 							config.setHdd(this.extractNumber(td.getText()));
 						}
 					}
-					System.out.println(config);
+					config.println();
+					config.setDate(this.getDate());
 					this.configurations.add(config);
 				}
 			}
@@ -168,7 +171,8 @@ public class Storm extends Provider {
 						}
 						config.setPrice(this.extractNumber(tds.get(9).getText()));
 						
-						System.out.println(config);
+						config.println();
+						config.setDate(this.getDate());
 						this.configurations.add(config);
 					}
 				}
@@ -183,22 +187,19 @@ public class Storm extends Provider {
 		Thread.sleep(3000);
 		
 		this.mooveOs(false);
-		System.out.println("Storm Linux");
 		this.addConfigurationsStorm(false);
-		System.out.println("Ssd Linux");
 		this.addConfigurationsSsd(false);
-		System.out.println("BareMetal Linux");
 		this.addConfigurationsBareMetal(false);
 		
 		this.mooveOs(true);
-		System.out.println("Storm Windows");
 		this.addConfigurationsStorm(true);
-		System.out.println("Ssd Windows");
 		this.addConfigurationsSsd(true);
-		System.out.println("BareMetal Windows");
 		this.addConfigurationsBareMetal(true);
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class MicrosoftAzure extends Provider {
 	
@@ -53,12 +54,10 @@ public class MicrosoftAzure extends Provider {
 		List<WebElement> osLinks = driver.findElements(By.cssSelector("a.wa-tab"));
 		for(WebElement osLink : osLinks){
 			if(windows && osLink.getText().equals("Windows")){
-				System.out.println("Click Windows");
 				//osLink.click();
 				executor.executeScript("arguments[0].click();", osLink);
 			}
 			else if(!windows && osLink.getText().equals("Linux")){
-				System.out.println("Click Linux");
 				//osLink.click();
 				executor.executeScript("arguments[0].click();", osLink);
 			}
@@ -87,8 +86,9 @@ public class MicrosoftAzure extends Provider {
 				List<WebElement> prices = tds.get(4).findElements(By.className("price-data "));
 				config.setPrice(this.extractNumber(prices.get(1).getText()));
 
+				config.setDate(this.getDate());
 				this.configurations.add(config);
-				System.out.println(config);
+				config.println();
 			}
 		}
 	}
@@ -103,6 +103,9 @@ public class MicrosoftAzure extends Provider {
 		this.addConfigurationsMicrosoftAzure(false);
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

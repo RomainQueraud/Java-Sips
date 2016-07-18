@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class VexxHost extends Provider {
 	
@@ -55,8 +56,9 @@ public class VexxHost extends Provider {
 					config.setOsUri(URI.linux);
 					config.setPrice(this.extractNumber(tds.get(5).getText())*24*30); //Given hourly
 				}
+				config.setDate(this.getDate());
 				this.configurations.add(config);
-				System.out.println(config);
+				config.println();
 			}
 		}
 	}
@@ -71,6 +73,9 @@ public class VexxHost extends Provider {
 		this.addConfigurationsVexxHost(true);
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

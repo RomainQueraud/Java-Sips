@@ -11,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class Google extends Provider {
 	
@@ -86,7 +87,6 @@ public class Google extends Provider {
 		    	config.setPrice(Double.parseDouble(""+jConfig.get("europe")) * 24 * (365.0/12.0));
 		    	
 		    	JSONArray ssdArray = (JSONArray) jConfig.get("ssd");
-		    	System.out.println("ssdArray : "+ssdArray);
 		    	for(int i=0 ; i<ssdArray.size() ; i++){
 		    		long ssdNumber = (long) ssdArray.get(i);
 		    		//System.out.println("ssdNumber : "+ssdNumber);
@@ -108,15 +108,20 @@ public class Google extends Provider {
 		    					(this.getWindowsPrice(priceObject, true) * 24 * (365.0/12.0)));
 		    		}
 		    		
+		    		ssdConfig.setDate(this.getDate());
 		    		this.configurations.add(ssdConfig);
-			    	System.out.println(ssdConfig);
+		    		ssdConfig.println();
+			    	windowsConfig.setDate(this.getDate());
 			    	this.configurations.add(windowsConfig);
-		    		System.out.println(windowsConfig);
+			    	windowsConfig.println();
 		    	}
 		    }
 		}
         
 		in.close();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 

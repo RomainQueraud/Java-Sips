@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class ZettaGrid extends Provider {
 	public static ZettaGrid singleton = new ZettaGrid(); 
@@ -153,8 +154,9 @@ public class ZettaGrid extends Provider {
 						config.setTransferSpeed(this.getTransfer());
 						config.setPrice(this.getPrice());
 						config.setOsUri(URI.linux);
+						config.setDate(this.getDate());
 						this.configurations.add(config);
-						System.out.println(config);
+						config.println();
 						
 						Configuration config2 = new Configuration(); //For windows config
 						config2.setProvider(this);
@@ -164,8 +166,9 @@ public class ZettaGrid extends Provider {
 						config2.setTransferSpeed(this.getTransfer());
 						config2.setPrice(this.getPrice()+this.getWindowsPrice());
 						config2.setOsUri(URI.windows);
+						config2.setDate(this.getDate());
 						this.configurations.add(config2);
-						System.out.println(config2);
+						config2.println();
 						
 						this.mooveCpu((this.cpuClick*this.crawlSpeed));
 					}
@@ -181,6 +184,9 @@ public class ZettaGrid extends Provider {
 		
 		Thread.sleep(3000);
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 }

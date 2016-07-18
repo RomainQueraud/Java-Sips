@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class Linode extends Provider {
 	
@@ -49,11 +50,15 @@ public class Linode extends Provider {
 			WebElement price = tr.findElement(By.className("pricing-monthly"));
 			config.setPrice(this.extractNumber(price.getText()));
 			
+			config.setDate(this.getDate());
 			this.configurations.add(config);
-			System.out.println(config);
+			config.println();
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 }

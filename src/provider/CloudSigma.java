@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import datas.Configuration;
 import datas.Dollar;
 import datas.URI;
+import main.SipsRdf;
 
 public class CloudSigma extends Provider{
 	public static CloudSigma singleton = new CloudSigma(); 
@@ -59,11 +60,15 @@ public class CloudSigma extends Provider{
 				}
 			}
 			
+			config.setDate(this.getDate());
 			this.configurations.add(config);
-			System.out.println(config);
+			config.println();
 		}
 		
 		this.closeFirefox();
+		if(!SipsRdf.verbose){
+			System.out.println("");
+		}
 		this.writeConfigurationsInCsv();
 	}
 }
