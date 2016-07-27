@@ -58,9 +58,15 @@ public class Google extends Provider {
 	public void crawlFillWriteConfigurations() throws InterruptedException, IOException, Exception {
 		URL url = new URL(this.baseUrl);
         BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-        
+        String l;
+        String json = "";
+        while((l=in.readLine()) != null){
+        	System.out.print(l);
+        	json+=l;
+        }
+        System.out.println();
         JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) parser.parse(in);
+        JSONObject jsonObject = (JSONObject) parser.parse(json);
         
         JSONObject priceObject = (JSONObject) jsonObject.get("gcp_price_list");
 

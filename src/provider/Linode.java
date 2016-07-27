@@ -2,8 +2,11 @@ package provider;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 
 import datas.Configuration;
@@ -24,15 +27,37 @@ public class Linode extends Provider {
 		this.billing = URI.hour; 
 		this.currency = new Dollar();
 	}
+	
+	@Override
+	public double extractNumber(String text) throws Exception{
+		Pattern p = Pattern.compile("\\.?\\d+((\\.|\\,)\\d+)?");
+		Matcher m = p.matcher(text);
+		if(m.find()){
+			String tmp = m.group();
+			if(tmp.charAt(0) == '.'){
+				tmp = "0"+tmp;
+			}
+			return Double.parseDouble(tmp.replace(',', '.'));
+		}
+		else{
+			return 0;
+		}
+	}
 
+	/**
+	 * This website is responsive, so when it is headless it doesn't show all 
+	 *   the informations that we can see usually.
+	 */
 	@Override
 	public void crawlFillWriteConfigurations() throws InterruptedException, IOException, Exception {
 		this.openFirefox();
 		this.loadWebpage();
 		Thread.sleep(3000);
 		
+		JavascriptExecutor executor = (JavascriptExecutor)driver;
+		
 		WebElement button = driver.findElement(By.id("show-larger-plans"));
-		button.click();
+		executor.executeScript("arguments[0].click();", button);
 		Thread.sleep(2000);
 		
 		WebElement table = driver.findElement(By.id("pricing-larger-plans-table"));
@@ -47,8 +72,8 @@ public class Linode extends Provider {
 			config.setCpu(this.extractNumber(tds.get(2).getText()));
 			config.setSsd(this.extractNumber(tds.get(3).getText()));
 			config.setTransferSpeed(this.extractNumber(tds.get(4).getText()));
-			WebElement price = tr.findElement(By.className("pricing-monthly"));
-			config.setPrice(this.extractNumber(price.getText()));
+			String price = tds.get(7).getText();
+			config.setPrice(this.extractNumber(price)*24*30*0.925); //Given by hour (0.925 is a coeff, because otherwise it isn't the exact values)
 			
 			config.setDate(this.getDate());
 			this.configurations.add(config);

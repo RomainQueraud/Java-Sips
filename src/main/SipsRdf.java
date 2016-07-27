@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 import org.apache.commons.cli.CommandLine;
@@ -245,9 +242,7 @@ public class SipsRdf {
 						System.out.println("Going to next provider");
 					}
 				}
-				else{
-					provider.loadConfigurationsFromCsv();
-				}
+				provider.loadConfigurationsFromCsv();
 			}
 			
 			if(failed.size()>0){
@@ -258,6 +253,7 @@ public class SipsRdf {
 			}
 			
 			System.out.println("Creating bag");
+			System.gc();
 			@SuppressWarnings("unused")
 			Bag bag = SipsRdf.singleton.toBag(model);
 			
@@ -270,7 +266,8 @@ public class SipsRdf {
 				System.out.println("Sending rdf to localHost");
 				SipsRdf.singleton.pushModelToServer(model, "http://localhost:3030/ds/data");
 			}
-	
+			
+			System.gc();
 			OutputStream out;
 			try{
 				System.out.println("Writing model to ../Fuseki-server/ontology.owl");

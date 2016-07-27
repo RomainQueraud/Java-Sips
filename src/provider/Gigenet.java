@@ -62,6 +62,7 @@ public class Gigenet extends Provider {
 		if(!SipsRdf.verbose){
 			System.out.println("");
 		}
+		System.gc();
 		this.writeConfigurationsInCsv();
 	}
 

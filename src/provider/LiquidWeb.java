@@ -73,7 +73,7 @@ public class LiquidWeb extends Provider {
 					config.setTransferSpeed(this.extractNumber(this.lisGetText(lis, 5)));
 				}
 			}
-			WebElement price = div.findElement(By.className("regular-price"));
+			WebElement price = div.findElement(By.className("price-monthly"));
 			config.setPrice(this.extractNumber(price.getText()));
 			
 			config.setDate(this.getDate());

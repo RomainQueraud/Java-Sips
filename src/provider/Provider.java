@@ -89,6 +89,7 @@ public abstract class Provider implements IProvider {
 	
 	public void closeFirefox(){
 		driver.close();
+		System.gc();
 	}
 	
 	public void loadWebpage(){
@@ -166,7 +167,7 @@ public abstract class Provider implements IProvider {
 	public void loadConfigurationsFromCsv() throws IOException{
 		//ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		//InputStream is = classloader.getResourceAsStream(this.name+".csv");
-		
+		this.configurations.clear();
 		CSVReader reader = null;
 		try{
 			reader = new CSVReader(new FileReader(SipsRdf.dir+"/csv/"+this.name+".csv"));
@@ -193,6 +194,7 @@ public abstract class Provider implements IProvider {
 	    	writer.writeNext(line);
 		}
 		writer.close();
+		System.gc();
 	}
 	
 	public ArrayList<String[]> getConfigurationsLines(){
