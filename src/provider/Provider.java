@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -158,6 +159,13 @@ public abstract class Provider implements IProvider {
 			providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "continent"), "");
 		}
 		
+		if(this.configurations.size()>=1){
+			providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "date"), ""+this.configurations.get(0).date);
+		}
+		else{
+			providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "date"), "");
+		}
+		
 		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "billing"), model.createResource(this.billing));
 		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "billingDuration"), ""+URI.getBillingDuration(this.billing));
 		
@@ -207,7 +215,7 @@ public abstract class Provider implements IProvider {
 	
 	public String getDate(){
 		Date date = Calendar.getInstance().getTime();
-	    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
 	    return sdf.format(date);
 	}
 	

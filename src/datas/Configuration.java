@@ -27,6 +27,7 @@ public class Configuration {
 	
 	public Configuration(){
 		this("", -1, -1, -1, -1, -1, "", "", "", "", -1);
+		this.date = "";
 	}
 	
 	public void setConfigName(String configName) {
@@ -135,6 +136,12 @@ public class Configuration {
 		this(line[1],Double.parseDouble(line[2]),Double.parseDouble(line[3]),
 				Double.parseDouble(line[4]),Double.parseDouble(line[5]), Double.parseDouble(line[6]),
 				line[7],line[8],line[9],line[10],Double.parseDouble(line[11]));
+		if(line.length>12){ //Otherwise, date may not have been added yet
+			this.setDate(line[12]);
+		}
+		else{
+			this.setDate("7 June 2016"); //Anterior to all crawlers
+		}
 	}
 	
 	/*
@@ -143,7 +150,7 @@ public class Configuration {
 	public String[] getLine(){
 		String[] line = {this.provider.name, this.configName, ""+this.cpu, ""+this.ram, 
 				""+this.hdd, ""+this.ssd,""+this.transferSpeed,this.osUri, 
-				this.currencyUri, this.countryUri, this.comment, ""+this.price};
+				this.currencyUri, this.countryUri, this.comment, ""+this.price, this.date};
 		return line;
 	}
 
@@ -168,7 +175,6 @@ public class Configuration {
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "ssd"), ""+this.ssd)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "transferSpeed"), ""+this.transferSpeed)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "comment"), ""+this.comment)
-				.addProperty(ResourceFactory.createProperty(URI.baseURI, "date"), ""+this.date)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "priceEuro"), ""+this.roundPrice(this.provider.currency.toEuro(this.price)))
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "price"), ""+this.roundPrice(this.provider.currency.toDollar(this.price)));
 		if(this.osUri!=""){

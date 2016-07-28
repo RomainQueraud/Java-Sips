@@ -22,7 +22,7 @@ public class Google extends Provider {
 
 	private Google() {
 		this.name = "Google";
-		this.baseUrl = "https://cloudpricingcalculator.appspot.com/static/data/pricelist.json";
+		this.baseUrl = "http://www.cloudpricingcalculator.appspot.com/static/data/pricelist.json";
 		this.continents.add(URI.northAmerica);
 		this.continents.add(URI.europe);
 		this.continents.add(URI.asia);
@@ -59,14 +59,14 @@ public class Google extends Provider {
 		URL url = new URL(this.baseUrl);
         BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
         String l;
-        String json = "";
+        StringBuilder jsonBuilder = new StringBuilder();
+        System.out.println(url);
         while((l=in.readLine()) != null){
-        	System.out.print(l);
-        	json+=l;
+        	System.out.println(l);
+        	jsonBuilder.append(l);
         }
-        System.out.println();
         JSONParser parser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) parser.parse(json);
+        JSONObject jsonObject = (JSONObject) parser.parse(jsonBuilder.toString());
         
         JSONObject priceObject = (JSONObject) jsonObject.get("gcp_price_list");
 
