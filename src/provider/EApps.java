@@ -20,6 +20,10 @@ public class EApps extends Provider{
 		this.continents.add(URI.northAmerica);
 		this.billing = URI.month;
 		this.currency = new Dollar();
+		this.customizableConfiguration = true;
+		this.multipleIp = true;
+		this.paypal = true;
+		this.backup = true;
 	}
 	
 	public Configuration getConfiguration(String className) throws Exception{

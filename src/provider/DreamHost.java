@@ -21,6 +21,13 @@ public class DreamHost extends Provider {
 		this.baseUrl = "https://www.dreamhost.com/hosting/dedicated/#pricing";
 		this.billing = URI.month; 
 		this.currency = new Dollar();
+		this.phoneSupport = true;
+		this.detailledSecurity = true;
+		this.terminalAccess = true;
+		this.payAsYouGo = true;
+		this.multipleIp = true;
+		this.dedicatedServer = true;
+		this.uptimeGuarantee = true;
 	}
 	
 	public double getPrice() throws Exception{

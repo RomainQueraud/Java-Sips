@@ -35,6 +35,14 @@ public class SecureRack extends Provider {
 		this.crawl = true;
 		this.billing = URI.month;
 		this.currency = new Euro();
+		this.customizableConfiguration = true;
+		this.multipleIp = true;
+		this.backup = true;
+		this.phoneSupport = true;
+		this.dedicatedServer = true;
+		this.freeTrial = true;
+		this.alwaysSupport = true;
+		this.detailledSecurity = true;
 	}
 	
 	public double getCpuPrice() throws Exception{

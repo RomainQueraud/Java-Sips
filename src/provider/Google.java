@@ -26,8 +26,16 @@ public class Google extends Provider {
 		this.continents.add(URI.northAmerica);
 		this.continents.add(URI.europe);
 		this.continents.add(URI.asia);
-		this.billing = URI.day; 
+		this.billing = URI.minute; 
 		this.currency = new Dollar();
+		this.freeTrial = true;
+		this.detailledSecurity = true;
+		this.customizableConfiguration = true;
+		this.environment = true;
+		this.burstResource = true;
+		this.backup = true;
+		this.webAccess = true;
+		this.terminalAccess = true;
 	}
 	
 	public double getSsdPrice(){

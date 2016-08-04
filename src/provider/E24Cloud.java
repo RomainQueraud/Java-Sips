@@ -29,6 +29,11 @@ public class E24Cloud extends Provider {
 		this.continents.add(URI.europe);
 		this.billing = URI.hour;
 		this.currency = new Euro();
+		this.customizableConfiguration = true;
+		this.payAsYouGo = true;
+		this.burstResource = true;
+		this.paypal = true;
+		this.dedicatedServer = true;
 	}
 	
 	public double getCpu() throws Exception{

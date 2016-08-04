@@ -20,6 +20,15 @@ public class VexxHost extends Provider {
 		this.baseUrl = "https://vexxhost.com/public-cloud/servers/";
 		this.billing = URI.hour; 
 		this.currency = new Dollar();
+		this.alwaysSupport = true;
+		this.uptimeGuarantee = true;
+		this.backup = true;
+		this.api = true;
+		this.webAccess = true;
+		this.terminalAccess = true;
+		this.multipleIp = true;
+		this.dedicatedServer = true;
+		this.phoneSupport = true;
 	}
 	
 	public double getWindowsPrice() throws Exception{

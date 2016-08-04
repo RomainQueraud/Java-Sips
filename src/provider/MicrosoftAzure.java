@@ -28,6 +28,12 @@ public class MicrosoftAzure extends Provider {
 		this.continents.add(URI.southAmerica);
 		this.billing = URI.minute; 
 		this.currency = new Dollar();
+		this.freeTrial = true;
+		this.payAsYouGo = true;
+		this.burstResource = true;
+		this.multipleUsers = true;
+		this.detailledSecurity = true;
+		this.alwaysSupport = true;
 	}
 	
 	@Override

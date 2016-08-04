@@ -26,6 +26,7 @@ public class CityCloud extends Provider {
 		this.continents.add(URI.southAmerica);
 		this.billing = URI.hour; 
 		this.currency = new Euro();
+		this.phoneSupport = true;
 	}
 	
 	public String getComment(){

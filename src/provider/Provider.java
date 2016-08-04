@@ -56,7 +56,66 @@ public abstract class Provider implements IProvider {
 	/**
 	 * minimum time required to purchase the service (usually URI.month)
 	 */
-	String billing = URI.nothing; 
+	String billing = URI.nothing;
+	
+	/**
+	 * Complementary information
+	 */
+	boolean freeTrial = false;
+	/**
+	 * Is a number provider for, at least, configuration help. In the contact page for example.
+	 */
+	boolean phoneSupport = false;
+	boolean multipleIp = false;
+	/**
+	 * Does the provider provides a monitoring for his cloud from his website
+	 */
+	boolean webAccess = false;
+	/**
+	 * Do resources increase automatically
+	 */
+	boolean burstResource = false;
+	/**
+	 * Accessing the CPU speed, not only the CPU number
+	 */
+	boolean customizableCpu = false;
+	/**
+	 * Do the provider says that he has an api
+	 */
+	boolean api = false;
+	/**
+	 * Basically, using sliders
+	 */
+	boolean customizableConfiguration = false;
+	/**
+	 * The provider provide something to save VM datas
+	 */
+	boolean backup = false;
+	boolean payAsYouGo = false;
+	boolean prepaid = false;
+	/**
+	 * Multiple users per account, as for amazon
+	 */
+	boolean multipleUsers = false;
+	/**
+	 * Does the provider gives details about its security scheme
+	 */
+	boolean detailledSecurity = false;
+	boolean terminalAccess = false;
+	/**
+	 * Does the provider provide a 100% uptime guarantee on every plans
+	 */
+	boolean uptimeGuarantee = false;
+	/**
+	 * Does the provider provide a real computer for a whole use by the user. Physical server, not virtual
+	 */
+	boolean dedicatedServer = false;
+	boolean paypal = false;
+	/**
+	 * 24/7 support
+	 */
+	boolean alwaysSupport = false;
+	boolean environment = false;
 	
 	/**
 	 * from Selenium

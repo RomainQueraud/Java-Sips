@@ -27,6 +27,11 @@ public class Numergy extends Provider {
 		this.continents.add(URI.europe);
 		this.billing = URI.month; 
 		this.currency = new Euro();
+		this.backup = true;
+		this.phoneSupport = true;
+		this.payAsYouGo = true;
+		this.burstResource = true;
+		this.detailledSecurity = true;
 	}
 	
 	public double getCpu() throws Exception{

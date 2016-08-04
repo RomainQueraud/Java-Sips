@@ -41,6 +41,8 @@ public class CloudWare extends Provider{
 		this.offset.setStep(step);
 		this.billing = URI.month;
 		this.currency = new BulgarianLev();
+		this.multipleIp = true;
+		this.customizableConfiguration = true;
 	}
 	
 	public void removeAnnoyingElements(){

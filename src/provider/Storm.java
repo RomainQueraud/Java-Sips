@@ -22,6 +22,14 @@ public class Storm extends Provider {
 		this.continents.add(URI.northAmerica);
 		this.billing = URI.hour;
 		this.currency = new Dollar();
+		this.multipleIp = true;
+		this.dedicatedServer = true;
+		this.burstResource = true;
+		this.backup = true;
+		this.payAsYouGo = true;
+		this.uptimeGuarantee = true;
+		this.detailledSecurity = true;
+		this.api = true;
 	}
 	
 	public String getComment(boolean ssd){

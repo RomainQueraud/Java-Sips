@@ -31,6 +31,12 @@ public class Amazon extends Provider {
 		this.continents.add(URI.southAmerica);
 		this.billing = URI.hour; 
 		this.currency = new Dollar();
+		this.freeTrial = true;
+		this.phoneSupport = true;
+		this.multipleIp = true;
+		this.webAccess = true;
+		this.burstResource = true;
+		this.multipleUsers = true;
 	}
 	
 	public void setWindows(){

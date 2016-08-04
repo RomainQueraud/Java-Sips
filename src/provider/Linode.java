@@ -26,6 +26,13 @@ public class Linode extends Provider {
 		this.continents.add(URI.asia);
 		this.billing = URI.hour; 
 		this.currency = new Dollar();
+		this.freeTrial = true;
+		this.paypal = true;
+		this.phoneSupport = true;
+		this.webAccess = true;
+		this.terminalAccess = true;
+		this.multipleIp = true;
+		this.backup = true;
 	}
 	
 	@Override

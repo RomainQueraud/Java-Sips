@@ -42,8 +42,17 @@ public class DimensionData extends Provider {
 		this.continents.add(URI.australia);
 		this.continents.add(URI.southAmerica);
 		this.continents.add(URI.africa);
-		this.billing = URI.month; 
+		this.billing = URI.hour; 
 		this.currency = new Dollar();
+		this.api = true;
+		this.customizableConfiguration = true;
+		this.backup = true;
+		this.prepaid = true;
+		this.payAsYouGo = true;
+		this.phoneSupport = true;
+		this.multipleUsers = true;
+		this.detailledSecurity = true;
+		this.webAccess = true;
 	}
 	
 	public double extractNumber(String text) throws Exception{

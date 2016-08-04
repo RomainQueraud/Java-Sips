@@ -22,6 +22,9 @@ public class CloudSigma extends Provider{
 		this.continents.add(URI.australia);
 		this.billing = URI.month;
 		this.currency = new Dollar();
+		this.freeTrial = true;
+		this.multipleIp = true;
+		this.customizableCpu = true;
 	}
 	
 	public String getComment(){

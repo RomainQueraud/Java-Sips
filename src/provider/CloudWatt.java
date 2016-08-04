@@ -19,8 +19,11 @@ public class CloudWatt extends Provider {
 		this.name = "CloudWatt";
 		this.baseUrl = "https://www.cloudwatt.com/en/pricing.html";
 		this.continents.add(URI.europe);
-		this.billing = URI.hour; 
+		this.billing = URI.minute; 
 		this.currency = new Euro();
+		this.freeTrial = true;
+		this.multipleIp = true;
+		this.phoneSupport = true;
 	}
 
 	@Override

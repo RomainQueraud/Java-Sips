@@ -23,6 +23,12 @@ public class RackSpace extends Provider {
 		this.baseUrl = "https://www.rackspace.com/cloud/servers/pricing";
 		this.billing = URI.month;
 		this.currency = new Dollar();
+		this.alwaysSupport = true;
+		this.burstResource = true;
+		this.detailledSecurity = true;
+		this.backup = true;
+		this.api = true;
+		this.phoneSupport = true;
 	}
 	
 	/*

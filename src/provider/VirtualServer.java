@@ -21,6 +21,9 @@ public class VirtualServer extends Provider {
 		this.continents.add(URI.europe);
 		this.billing = URI.month;
 		this.currency = new Euro();
+		this.detailledSecurity = true;
+		this.paypal = true;
+		this.terminalAccess = true;
 	}
 	
 	public Configuration getConfiguration(String id) throws Exception{

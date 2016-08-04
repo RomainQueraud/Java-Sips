@@ -30,6 +30,14 @@ public class ElasticHosts extends Provider {
 		this.continents.add(URI.australia);
 		this.billing = URI.hour; //Verified
 		this.currency = new Dollar();
+		this.customizableConfiguration = true;
+		this.multipleIp = true;
+		this.burstResource = true;
+		this.phoneSupport = true;
+		this.freeTrial = true;
+		this.payAsYouGo = true;
+		this.detailledSecurity = true;
+		this.uptimeGuarantee = true;
 	}
 	
 	public double getMaxPrice(String s) throws Exception{

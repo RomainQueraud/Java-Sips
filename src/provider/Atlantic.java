@@ -21,8 +21,13 @@ public class Atlantic extends Provider {
 		this.continents.add(URI.northAmerica);
 		this.continents.add(URI.europe);
 		this.continents.add(URI.asia);
-		this.billing = URI.second;
+		this.billing = URI.hour;
 		this.currency = new Dollar();
+		this.multipleIp = true;
+		this.webAccess = true;
+		this.phoneSupport = true;
+		this.burstResource = true;
+		this.api = true;
 	}
 	
 	public Configuration getConfiguration(String id, boolean windows) throws Exception{

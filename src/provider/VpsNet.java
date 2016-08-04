@@ -25,6 +25,9 @@ public class VpsNet extends Provider {
 		this.continents.add(URI.southAmerica);
 		this.billing = URI.month;
 		this.currency = new Dollar();
+		this.alwaysSupport = true;
+		this.phoneSupport = true;
+		this.backup = true;
 	}
 	
 	public Configuration getConfiguration(WebElement click, boolean windows) throws Exception{

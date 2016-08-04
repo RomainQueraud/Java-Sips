@@ -22,6 +22,13 @@ public class Gigenet extends Provider {
 		this.continents.add(URI.northAmerica);
 		this.billing = URI.month; 
 		this.currency = new Dollar();
+		this.uptimeGuarantee = true;
+		this.dedicatedServer = true;
+		this.alwaysSupport = true;
+		this.detailledSecurity = true;
+		this.backup = true;
+		this.webAccess = true;
+		this.phoneSupport = true;
 	}
 	
 	@Override

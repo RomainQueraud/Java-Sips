@@ -21,6 +21,7 @@ public class Joyent extends Provider {
 		this.baseUrl = "https://www.joyent.com/pricing";
 		this.billing = URI.minute; 
 		this.currency = new Dollar();
+		this.phoneSupport = true;
 	}
 
 	@Override

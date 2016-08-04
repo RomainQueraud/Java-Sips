@@ -19,8 +19,16 @@ public class ExoScale extends Provider {
 		this.name = "ExoScale";
 		this.baseUrl = "https://www.exoscale.ch/pricing/";
 		this.continents.add(URI.europe);
-		this.billing = URI.hour;
+		this.billing = URI.minute;
 		this.currency = new Euro();
+		this.payAsYouGo = true;
+		this.freeTrial = true;
+		this.phoneSupport = true;
+		this.webAccess = true;
+		this.api = true;
+		this.detailledSecurity = true;
+		this.backup = true;
+		this.terminalAccess = true;
 	}
 	
 	/*

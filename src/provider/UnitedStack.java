@@ -25,6 +25,11 @@ public class UnitedStack extends Provider {
 		this.continents.add(URI.asia);
 		this.billing = URI.month; 
 		this.currency = new ChineseYuan();
+		this.multipleIp = true;
+		this.payAsYouGo = true;
+		this.backup = true;
+		this.webAccess = true;
+		this.api = true;
 	}
 	
 	public double getPrice() throws Exception{

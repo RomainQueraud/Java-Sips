@@ -22,6 +22,12 @@ public class LiquidWeb extends Provider {
 		this.continents.add(URI.europe);
 		this.billing = URI.month; 
 		this.currency = new Dollar();
+		this.phoneSupport = true;
+		this.dedicatedServer = true;
+		this.alwaysSupport = true;
+		this.uptimeGuarantee = true;
+		this.detailledSecurity = true;
+		this.backup = true;
 	}
 	
 	/*
