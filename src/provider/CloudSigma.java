@@ -25,6 +25,9 @@ public class CloudSigma extends Provider{
 		this.freeTrial = true;
 		this.multipleIp = true;
 		this.customizableCpu = true;
+		this.api = true;
+		this.alwaysSupport = true;
+		this.paypal = true;
 	}
 	
 	public String getComment(){

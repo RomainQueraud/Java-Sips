@@ -27,6 +27,11 @@ public class CityCloud extends Provider {
 		this.billing = URI.hour; 
 		this.currency = new Euro();
 		this.phoneSupport = true;
+		this.uptimeGuarantee = true;
+		this.webAccess = true;
+		this.api = true;
+		this.backup = true;
+		this.detailledSecurity = true;
 	}
 	
 	public String getComment(){

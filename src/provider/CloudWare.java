@@ -43,6 +43,8 @@ public class CloudWare extends Provider{
 		this.currency = new BulgarianLev();
 		this.multipleIp = true;
 		this.customizableConfiguration = true;
+		this.dedicatedServer = true; //new one, I crawled the cloud
+		this.alwaysSupport = true;
 	}
 	
 	public void removeAnnoyingElements(){

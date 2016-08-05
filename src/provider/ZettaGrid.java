@@ -31,6 +31,13 @@ public class ZettaGrid extends Provider {
 		this.continents.add(URI.australia);
 		this.billing = URI.month;
 		this.currency = new Dollar();
+		this.customizableConfiguration = true;
+		this.multipleIp = true;
+		this.freeTrial = true;
+		this.payAsYouGo = true;
+		this.phoneSupport = true;
+		this.alwaysSupport = true;
+		this.webAccess = true;
 	}
 	
 	public double getCpu() throws Exception{
@@ -48,7 +55,7 @@ public class ZettaGrid extends Provider {
 	public double getDisk() throws Exception{
 		WebElement disk = driver.findElement(By.id("option_820_zg-cs-ios250-storage"));
 		double number = this.extractNumber(disk.getAttribute("value"));
-		return ( number);
+		return (number);
 	}
 	
 	public double getTransfer() throws Exception{

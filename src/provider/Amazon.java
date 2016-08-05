@@ -37,6 +37,9 @@ public class Amazon extends Provider {
 		this.webAccess = true;
 		this.burstResource = true;
 		this.multipleUsers = true;
+		this.terminalAccess = true;
+		this.detailledSecurity = true;
+		this.backup = true;
 	}
 	
 	public void setWindows(){

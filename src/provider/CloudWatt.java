@@ -24,6 +24,12 @@ public class CloudWatt extends Provider {
 		this.freeTrial = true;
 		this.multipleIp = true;
 		this.phoneSupport = true;
+		this.payAsYouGo = true;
+		this.uptimeGuarantee = true;
+		this.webAccess = true;
+		this.api = true;
+		this.detailledSecurity = true;
+		this.terminalAccess = true;
 	}
 
 	@Override

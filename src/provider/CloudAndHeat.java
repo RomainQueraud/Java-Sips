@@ -21,6 +21,8 @@ public class CloudAndHeat extends Provider {
 		this.continents.add(URI.europe); //Germany
 		this.billing = URI.month; 
 		this.currency = new Euro();
+		this.environment = true;
+		this.phoneSupport = true;
 	}
 
 	@Override

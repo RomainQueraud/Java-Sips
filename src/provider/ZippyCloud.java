@@ -22,6 +22,8 @@ public class ZippyCloud extends Provider {
 		this.continents.add(URI.northAmerica);
 		this.billing = URI.month;
 		this.currency = new Dollar();
+		this.webAccess = true;
+		this.uptimeGuarantee = true;
 	}
 	
 	/*
