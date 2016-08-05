@@ -228,6 +228,45 @@ public abstract class Provider implements IProvider {
 		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "billing"), model.createResource(this.billing));
 		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "billingDuration"), ""+URI.getBillingDuration(this.billing));
 		
+		String freeTrial = this.freeTrial ? URI.freeTrial : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "freeTrial"), ""+freeTrial);
+		String phoneSupport = this.phoneSupport ? URI.phoneSupport : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "phoneSupport"), ""+phoneSupport);
+		String multipleIp = this.multipleIp ? URI.multipleIp : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "multipleIp"), ""+multipleIp);
+		String webAccess = this.webAccess ? URI.webAccess : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "webAccess"), ""+webAccess);
+		String burstResource = this.burstResource ? URI.burstResource : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "burstResource"), ""+burstResource);
+		String customizableCpu = this.customizableCpu ? URI.customizableCpu : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "customizableCpu"), ""+customizableCpu);
+		String api = this.api ? URI.api : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "api"), ""+api);
+		String customizableConfiguration = this.customizableConfiguration ? URI.customizableConfiguration : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "customizableConfiguration"), ""+customizableConfiguration);
+		String backup = this.backup ? URI.backup : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "backup"), ""+backup);
+		String payAsYouGo = this.payAsYouGo ? URI.payAsYouGo : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "payAsYouGo"), ""+payAsYouGo);
+		String prepaid = this.prepaid ? URI.prepaid : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "prepaid"), ""+prepaid);
+		String multipleUsers = this.multipleUsers ? URI.multipleUsers : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "multipleUsers"), ""+multipleUsers);
+		String detailledSecurity = this.detailledSecurity ? URI.detailledSecurity : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "detailledSecurity"), ""+detailledSecurity);
+		String terminalAccess = this.terminalAccess ? URI.terminalAccess : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "terminalAccess"), ""+terminalAccess);
+		String uptimeGuarantee = this.uptimeGuarantee ? URI.uptimeGuarantee : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "uptimeGuarantee"), ""+uptimeGuarantee);
+		String dedicatedServer = this.dedicatedServer ? URI.dedicatedServer : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "dedicatedServer"), ""+dedicatedServer);
+		String paypal = this.paypal ? URI.paypal : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "paypal"), ""+paypal);
+		String alwaysSupport = this.alwaysSupport ? URI.alwaysSupport : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "alwaysSupport"), ""+alwaysSupport);
+		String environment = this.environment ? URI.environment : "";
+		providerResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "environment"), ""+environment);
+		
 		return providerResource;
 	}
 	
