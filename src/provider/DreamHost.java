@@ -90,6 +90,7 @@ public class DreamHost extends Provider {
 								config.setOsUri(URI.linux);
 								config.setPrice(this.getPrice());
 								config.setDate(this.getDate());
+								config.setDedicated(true);
 								this.configurations.add(config);
 								config.println();
 							}

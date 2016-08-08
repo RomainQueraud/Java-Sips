@@ -24,6 +24,7 @@ public class Configuration {
 	public String comment;
 	public double price; /* Monthly */ /* $Dollar */
 	public String date;
+	public String dedicated = "";
 	
 	public Configuration(){
 		this("", -1, -1, -1, -1, -1, "", "", "", "", -1);
@@ -80,6 +81,15 @@ public class Configuration {
 	
 	public void setDate(String date){
 		this.date = date;
+	}
+	
+	public void setDedicated(boolean bool){
+		if(bool){
+			this.dedicated = URI.dedicatedServer;
+		}
+		else{
+			this.dedicated = "";
+		}
 	}
 	
 	/*
@@ -142,6 +152,14 @@ public class Configuration {
 		else{
 			this.setDate("7 June 2016"); //Anterior to all crawlers
 		}
+		if(line.length>13){ //Otherwise, dedicated may not have been added yet
+			if(line[13]!=""){
+				this.setDedicated(true);
+			}
+			else{
+				this.setDedicated(false);
+			}
+		}
 	}
 	
 	/*
@@ -150,7 +168,7 @@ public class Configuration {
 	public String[] getLine(){
 		String[] line = {this.provider.name, this.configName, ""+this.cpu, ""+this.ram, 
 				""+this.hdd, ""+this.ssd,""+this.transferSpeed,this.osUri, 
-				this.currencyUri, this.countryUri, this.comment, ""+this.price, this.date};
+				this.currencyUri, this.countryUri, this.comment, ""+this.price, this.date, this.dedicated};
 		return line;
 	}
 
@@ -176,7 +194,8 @@ public class Configuration {
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "transferSpeed"), ""+this.transferSpeed)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "comment"), ""+this.comment)
 				.addProperty(ResourceFactory.createProperty(URI.baseURI, "priceEuro"), ""+this.roundPrice(this.provider.currency.toEuro(this.price)))
-				.addProperty(ResourceFactory.createProperty(URI.baseURI, "price"), ""+this.roundPrice(this.provider.currency.toDollar(this.price)));
+				.addProperty(ResourceFactory.createProperty(URI.baseURI, "price"), ""+this.roundPrice(this.provider.currency.toDollar(this.price)))
+				.addProperty(ResourceFactory.createProperty(URI.baseURI, "dedicated"), ""+this.dedicated);
 		if(this.osUri!=""){
 			configurationResource.addProperty(ResourceFactory.createProperty(URI.baseURI, "os"), model.createResource(this.osUri));
 		}

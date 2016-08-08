@@ -61,6 +61,7 @@ public class Gigenet extends Provider {
 			config.setPrice(this.extractNumber(tds.get(6).getText()));
 			
 			config.setDate(this.getDate());
+			config.setDedicated(true);
 			this.configurations.add(config);
 			config.println();
 		}

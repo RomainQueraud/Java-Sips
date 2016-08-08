@@ -83,6 +83,7 @@ public class LiquidWeb extends Provider {
 			config.setPrice(this.extractNumber(price.getText()));
 			
 			config.setDate(this.getDate());
+			config.setDedicated(true);
 			this.configurations.add(config);
 			config.println();
 		}
