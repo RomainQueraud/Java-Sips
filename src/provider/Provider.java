@@ -159,6 +159,9 @@ public abstract class Provider implements IProvider {
 		System.out.println("Ok");
 	}
 	
+	/**
+	 * @return return the number from a String that contains one number.
+	 */
 	public double extractNumber(String text) throws Exception{
 		Pattern p = Pattern.compile("\\d+((\\.|\\,)\\d+)?");
 		Matcher m = p.matcher(text);
@@ -270,6 +273,10 @@ public abstract class Provider implements IProvider {
 		return providerResource;
 	}
 	
+	/**
+	 * Fill the configurations attribute with the values taken from the provider's csv file.
+	 * @throws IOException
+	 */
 	public void loadConfigurationsFromCsv() throws IOException{
 		//ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 		//InputStream is = classloader.getResourceAsStream(this.name+".csv");
@@ -293,6 +300,9 @@ public abstract class Provider implements IProvider {
 	    reader.close();
 	}
 	
+	/**
+	 * Write the configurations in a csv file with the same name as the provider's.
+	 */
 	public void writeConfigurationsInCsv() throws IOException{
 		CSVWriter writer = new CSVWriter(new FileWriter(SipsRdf.dir+"/csv/"+this.name+".csv"), ',');
 		for(Configuration configuration:this.configurations){
@@ -303,6 +313,10 @@ public abstract class Provider implements IProvider {
 		System.gc();
 	}
 	
+	/**
+	 * Return the configurations in an array of String. 
+	 * The array is aimed to be used to write the configurations in a csv.
+	 */
 	public ArrayList<String[]> getConfigurationsLines(){
 		ArrayList<String[]> lines = new ArrayList<String[]>();
 		for(Configuration configuration : this.configurations){
@@ -311,6 +325,10 @@ public abstract class Provider implements IProvider {
 		return lines;
 	}
 	
+	/**
+	 * 
+	 * @return the current date
+	 */
 	public String getDate(){
 		Date date = Calendar.getInstance().getTime();
 	    SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);

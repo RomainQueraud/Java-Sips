@@ -71,6 +71,12 @@ public class SipsRdf {
 		this.providers.add(provider);
 	}
 	
+	/**
+	 * Jena function to transform the list of providers to a bag
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	public Bag toBag(Model model) throws Exception{
 		Bag sipsBag = model.createBag();
 		for(Provider provider : providers){
@@ -125,6 +131,11 @@ public class SipsRdf {
 	
 	}
 	
+	/**
+	 * Add a provider to the provider list
+	 * @param provider
+	 * @param crawl no longer used
+	 */
 	public void loadProviderInSipsRdf(Provider provider, boolean crawl){
 		provider.crawl = crawl;
 		this.providers.add(provider);
@@ -151,7 +162,7 @@ public class SipsRdf {
 
 	/**
 	 * Main function of the SIPS project
-	 * Based on the config.properties file, will crawl the required providers.
+	 * Based on the config.properties file and the -options, will crawl the required providers.
 	 *   The crawled data are then written in csv files.
 	 * The csv files are loaded into providers configurations.
 	 * The providers configurations are turned into rdf and then pushed into the fuseki server.
@@ -163,6 +174,7 @@ public class SipsRdf {
 		SipsRdf.singleton.loadProvidersInSipsRdf();
 		ArrayList<Provider> failed = new ArrayList<Provider>();
 		
+		/* The -options when executed as a cmd line */
 		Options options = new Options();
 		Options providerOptions = new Options();
 		

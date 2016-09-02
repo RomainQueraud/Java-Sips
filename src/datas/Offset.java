@@ -1,5 +1,8 @@
 package datas;
 
+/**
+ * Class used in some of the first crawled providers.
+ */
 public class Offset {
 	public int step = 50;
 	

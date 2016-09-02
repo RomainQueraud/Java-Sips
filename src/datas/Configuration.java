@@ -8,6 +8,9 @@ import org.apache.jena.rdf.model.ResourceFactory;
 import main.SipsRdf;
 import provider.Provider;
 
+/**
+ * A configuration represents one particular set of cpu, ram, price,... for a given provider
+ */
 public class Configuration {
 	public int id;
 	public String configName;
@@ -92,7 +95,7 @@ public class Configuration {
 		}
 	}
 	
-	/*
+	/**
 	 * Deep copy
 	 */
 	public Configuration(Configuration config){
@@ -137,7 +140,7 @@ public class Configuration {
 		this.price = price; //Monthly
 	}
 	
-	/*
+	/**
 	 * Aim is to create a Configuration object from the reading of the csv file
 	 * @param line comes from the csv file
 	 */
@@ -162,7 +165,7 @@ public class Configuration {
 		}
 	}
 	
-	/*
+	/**
 	 * @return line to be written in the csv file
 	 */
 	public String[] getLine(){
@@ -180,7 +183,7 @@ public class Configuration {
 		return ((int)(price*100))/100.0;
 	}
 
-	/*
+	/**
 	 * @return a Resource object that can be written in the rdf file
 	 */
 	public Resource toResource(Model model){
@@ -225,6 +228,9 @@ public class Configuration {
 		return ret;
 	}
 	
+	/**
+	 * Custom print, to be managed by the -options
+	 */
 	public void println(){
 		if(SipsRdf.verbose){
 			System.out.println(this);
@@ -234,7 +240,7 @@ public class Configuration {
 		}
 	}
 	
-	/*
+	/**
 	 * test function
 	 */
 	public static void main(String[] args) {

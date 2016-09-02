@@ -65,6 +65,12 @@ public class URI {
 	public static String alwaysSupport ="http://dbpedia.org/page/Technical_support";
 	public static String environment ="http://dbpedia.org/page/Environmentalism";
 	
+	/**
+	 * Convert the string billingDuration in a number. Aim is to be able to order things regarding their billing.
+	 * @param billingUri
+	 * @return
+	 * @throws Exception
+	 */
 	public static double getBillingDuration(String billingUri) throws Exception{
 		if(billingUri == URI.second){
 			return URI.secondDuration;
